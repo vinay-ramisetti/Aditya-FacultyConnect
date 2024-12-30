@@ -96,7 +96,7 @@ const Welcome = () => {
           Welcome
         </h1>
         <div>
-          <Link to="/signup">
+          <Link to="/signin">
           <button 
             style={{
               padding: '10px 20px',

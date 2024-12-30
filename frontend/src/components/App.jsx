@@ -9,6 +9,7 @@ import Login from './Login';
 import Navbar from './Navbar';
 import Home from './Home';
 import Welcome from './Welcome';
+import Signup from './Signup';
 
 
 function App() {
@@ -22,8 +23,12 @@ function App() {
             element={<Welcome/>}
             />
           <Route
-             path="/login"
+             path="/signin"
             element={<Login/>}
+            />
+             <Route
+             path="/signup"
+            element={<Signup/>}
             />
             <Route
               path="/home"
