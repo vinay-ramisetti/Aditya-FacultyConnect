@@ -6,7 +6,7 @@ const Faculty = (props) => {
     return (
       <>
       {
-        teacher.designation==='HOD' &&
+        teacher.designation==="HOD" &&
         <div
         key={index}
         style={{
@@ -31,13 +31,13 @@ const Faculty = (props) => {
           {/* Placeholder for profile image */}
         </div>
         <div style={{ marginTop: '10px', fontWeight: 'bold', fontSize: '18px' }}>
-          {teacher.name}
+          {teacher.fullName}
         </div>
         <div style={{ color: '#555', fontSize: '14px' }}>
           {teacher.department}
         </div>
         <div>
-          <Link to={`/teacher/${id}`}>
+          <Link to={`/teacher/${teacher._id}`}>
           <button
             style={{
               marginTop: '10px',
@@ -75,7 +75,7 @@ const Faculty = (props) => {
           marginBottom: '20px',
         }}
       >
-        Faculty Members
+        HOD's
       </h2>
       <div
         style={{

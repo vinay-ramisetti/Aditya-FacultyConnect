@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Ensure hooks are imported
 import {  Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 import '../tailwind.css'; // Adjust the path if needed
 import Login from './Login';
 import Home from './Home';
@@ -13,32 +14,31 @@ function App() {
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    setFaculty([
-      { name: "vinay", department: "CSE" },
-      { name: "pranay", department: "ECE" },
-      { name: "venkat", department: "ECE" },
-      { name: "Ram", department: "Mech" }
-    ]);
+    // setFaculty([
+    //   { name: "vinay", department: "CSE" },
+    //   { name: "pranay", department: "ECE" },
+    //   { name: "venkat", department: "ECE" },
+    //   { name: "Ram", department: "Mech" }
+    // ]);
 
     setDepartments([
-      { name: "Computer Science", des: "Focuses on AI" },
-      { name: "Electronics and Communication", des: "Focuses on Chip design" },
-      { name: "Mechanical Engineering", des: "Focuses on Machines" }
+      { name: "Computer Science", description: "Focuses on AI" },
+      { name: "Electronics and Communication", description: "Focuses on Chip design" },
+      { name: "Mechanical Engineering", description: "Focuses on Machines" }
     ]);
 
-    // Uncomment the code below for API integration
-    // const fetchData = async () => {
-    //   try {
-    //     const facultyData = await axios.get('http://localhost:5000/api/faculty');
-    //     setFaculty(facultyData.data);
-
-    //     const departmentData = await axios.get('http://localhost:5000/api/departments');
-    //     setDepartments(departmentData.data);
-    //   } catch (error) {
-    //     console.log('Error occurred:', error);
-    //   }
-    // };
-    // fetchData();
+    const fetchData = async () => {
+      try {
+        const facultyData = await axios.get('http://localhost:5000/fetchData/faculty');
+        setFaculty(facultyData.data);
+        console.log(faculty);
+        // const departmentData = await axios.get('http://localhost:5000/fetchData/departments');
+        // setDepartments(departmentData.data);
+      } catch (error) {
+        console.log('Error occurred:', error);
+      }
+    };
+    fetchData();
   }, []);
 
   return (

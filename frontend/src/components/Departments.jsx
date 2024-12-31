@@ -33,7 +33,7 @@ const Departments = (props) => {
               marginBottom: '10px',
             }}
           >
-            {department.des}
+            {department.description}
           </div>
           <Link to={`/department/${department.name}`}>
           <button
