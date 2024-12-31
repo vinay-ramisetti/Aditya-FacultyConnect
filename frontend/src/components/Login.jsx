@@ -5,11 +5,11 @@ const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    // Add logic for handling signin
-    console.log('Email:', email);
-    console.log('Password:', password);
+  // const handleSubmit = async(e) => {
+  //   e.preventDefault();
+  //   // Add logic for handling signin
+  //   console.log('Email:', email);
+  //   console.log('Password:', password);
     
     // try{
     //    const response=await axios.post("http://localhost:5000/upload/signin",{
@@ -22,6 +22,28 @@ const Signin = () => {
     //   console.log("Error occured:",error);
     // }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await fetch('http://localhost:5000/login/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+            credentials: 'include',
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Success:', data);
+        // Handle success (e.g., redirect to dashboard)
+    } catch (error) {
+        console.error('Error:', error.message);
+        // Handle error (e.g., show an error message)
+    }
   };
 
   return (
