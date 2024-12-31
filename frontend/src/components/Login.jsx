@@ -1,26 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
+   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // const handleSubmit = async(e) => {
-  //   e.preventDefault();
-  //   // Add logic for handling signin
-  //   console.log('Email:', email);
-  //   console.log('Password:', password);
-    
-    // try{
-    //    const response=await axios.post("http://localhost:5000/upload/signin",{
-    //     email,
-    //     password
-    //    });
-    //    console.log("Successfully uploaded:",response.data);
-    // }
-    // catch(error){
-    //   console.log("Error occured:",error);
-    // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +24,7 @@ const Signin = () => {
 
         const data = await response.json();
         console.log('Success:', data);
+        navigate("/home");
         // Handle success (e.g., redirect to dashboard)
     } catch (error) {
         console.error('Error:', error.message);

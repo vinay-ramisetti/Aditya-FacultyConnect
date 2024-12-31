@@ -1,18 +1,12 @@
 const mongoose = require("mongoose");
 
-
-
-const userSchema = mongoose.Schema({
-    
-    branch:String,
-    
-     
-    fullName: String,
-    email: String,
-    
-    password: String,
-  
-
+const userSchema = new mongoose.Schema({ // Added `new` for consistency
+    fullName: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    designation: { type: String, required: true },
+    department: { type: String, required: true },
+    branch: { type: String, required: true },
 });
 
-module.exports = mongoose.model("users",userSchema); // users is the model .
+module.exports = mongoose.model("User", userSchema); // Correct model export

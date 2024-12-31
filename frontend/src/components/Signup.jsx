@@ -1,98 +1,83 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [fullname, setFullname] = useState('');
-  const [email, setEmail] = useState('');
-  const [year, setYear] = useState('');
-  const [designation, setDesignation] = useState('');
-  const [department,setDepartment]= useState('');
-  const [mobile, setMobile] = useState('');
-  const [profileImage, setProfileImage] = useState(null);
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    fullname: '',
+    email: '',
+    password: '',
+    designation: '',
+    department: '',
+    branch: '',
+  });
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    console.log({ fullname, email, year, designation, mobile });
+  const [errors, setErrors] = useState({});
 
-    const formData=new FormData();
-    formData.append('profileImage',profileImage);
-    formData.append('fullname',fullname);
-    formData.append('email',email);
-    formData.append('year',year);
-    formData.append('designation',designation);
-    formData.append('mobile',mobile);
-    formData.append('profileImage',profileImage);
-    formData.append('department',department);
-    try{
-      const response=await axios.post("http://localhost:5000/signup/register",formData,{
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log("Successfully uploaded:",response.data);
-    }
-    catch(error){
-      console.log("Error occurred:",error);
-    }
-
-  // const [formData, setFormData] = useState({
-  //   fullname: '',
-  //   email: '',
-  //   password: '',
-  //   designation: '',
-  //   branch: '',
-  // });
-
-  // const [errors, setErrors] = useState({});
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const validateForm = (data) => {
-  //   const errors = {};
-  //   if (!data.fullname) errors.fullname = 'Full Name is required';
-  //   if (!data.email) errors.email = 'Email is required';
-  //   if (!data.password) errors.password = 'Password is required';
-  //   if (!data.designation) errors.designation = 'Designation is required';
-  //   if (!data.branch) errors.branch = 'Branch is required';
-  //   return errors;
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const newErrors = validateForm(formData);
-  //   if (Object.keys(newErrors).length === 0) {
-  //     try {
-  //       const response = await fetch('http://localhost:5000/signup/register', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(formData),
-  //       });
-
-        // if (!response.ok) {
-        //   const errorData = await response.json();
-        //   console.error('Server Error:', errorData);
-        //   throw new Error('Network response was not ok');
-        // }
-
-    //     const data = await response.json();
-    //     console.log('Success:', data);
-    //     alert('Signup successful!');
-    //   } catch (error) {
-    //     console.error('Error:', error);
-    //     alert('An error occurred. Please try again.');
-    //   }
-    // } else {
-    //   setErrors(newErrors);
-    // }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+
+  const validateForm = (data) => {
+    const errors = {};
+    if (!data.fullname) errors.fullname = 'Full Name is required';
+    if (!data.email) errors.email = 'Email is required';
+    if (!data.password) errors.password = 'Password is required';
+    if (!data.designation) errors.designation = 'Designation is required';
+    if (!data.department) errors.department = 'Department is required';
+    if (!data.branch) errors.branch = 'Branch is required';
+    return errors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form Data:", formData); // Debugging
+  
+    const newErrors = validateForm(formData); // Just for finding the errors
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        const response = await fetch('http://localhost:5000/signup/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (!response.ok) {
+          console.error("Response Status:", response.status);
+          console.error("Response Message:", await response.text());
+          throw new Error("Network response was not ok");
+        }
+  
+        const data = await response.json();
+        console.log('Success:', data);
+        alert('Signup successful!');
+        navigate('/home');
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      }
+    } else {
+      setErrors(newErrors);
+      alert("Please fill out all required fields.");
+    }
+    // Removing the data 
+    setFormData({
+      fullname: '',
+      email: '',
+      password: '',
+      designation: '',
+      department: '',
+      branch: '',
+    });
+    
+  };
+  
 
   // Styles
   const containerStyle = {
@@ -116,6 +101,14 @@ const Signup = () => {
   };
 
   const inputStyle = {
+    width: '100%',
+    padding: '10px',
+    marginBottom: '10px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+  };
+
+  const selectStyle = {
     width: '100%',
     padding: '10px',
     marginBottom: '10px',
@@ -189,7 +182,7 @@ const Signup = () => {
               name="designation"
               value={formData.designation}
               onChange={handleChange}
-              style={inputStyle}
+              style={selectStyle}
             >
               <option value="" disabled>
                 Select your Designation
@@ -199,27 +192,29 @@ const Signup = () => {
               <option value="Assistant Professor">Assistant Professor</option>
               <option value="PHD">PHD</option>
             </select>
+            {errors.designation && <span style={errorStyle}>{errors.designation}</span>}
           </div>
+
           <div>
-            <label style={{ fontSize: '0.875rem', fontWeight: '500', color: '#4a5568' }}>Department:</label>
+            <label>Department:</label>
             <select
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
+              name="department"
+              value={formData.department}
+              onChange={handleChange}
               style={selectStyle}
-              required
             >
               <option value="" disabled>
                 Select your Department
               </option>
               <option value="CSE">Computer Science and Engineering</option>
               <option value="ECE">Electronics and Communication</option>
-              <option value="EE">Electical Enginnering</option>
+              <option value="EE">Electrical Engineering</option>
               <option value="MECH">Mechanical Engineering</option>
               <option value="CIVIL">Civil Engineering</option>
               <option value="CHE">Chemical Engineering</option>
               <option value="BIO">Bio Engineering</option>
             </select>
-            {errors.designation && <span style={errorStyle}>{errors.designation}</span>}
+            {errors.department && <span style={errorStyle}>{errors.department}</span>}
           </div>
 
           <div>

@@ -7,8 +7,8 @@ const { generatetoken } = require('../utils/generatetoken'); // Adjust based on 
 
 router.post('/register', async (req, res) => {
     try {
-        const { fullname, email, password, designation, branch } = req.body;
-
+        const { fullname, email, password, designation, department,branch } = req.body;
+        console.log(req.body);
         // Validate input fields
         if (!fullname || !email || !password || !designation || !branch) {
             return res.status(400).json({ message: 'All fields are required.' });
@@ -29,6 +29,7 @@ router.post('/register', async (req, res) => {
             email,
             password: hashedPassword,
             designation,
+            department,
             branch,
         });
 
@@ -44,6 +45,7 @@ router.post('/register', async (req, res) => {
         console.error('Error during user registration:', error);
         res.status(500).json({ message: 'Server error. Please try again later.' });
     }
+    res.status(200).json({ message: 'Signup successful!' });
 });
 
 module.exports = router;

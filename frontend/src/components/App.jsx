@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; // Ensure hooks are imported
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {  Routes, Route } from 'react-router-dom';
 import '../tailwind.css'; // Adjust the path if needed
 import Login from './Login';
 import Home from './Home';
@@ -42,7 +42,6 @@ function App() {
   }, []);
 
   return (
-    <Router>
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/signin" element={<Login />} />
@@ -60,7 +59,6 @@ function App() {
           element={<Teacher faculty={faculty} />}
         />
       </Routes>
-    </Router>
   );
 }
 
