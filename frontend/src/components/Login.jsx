@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Add logic for handling signin
     console.log('Email:', email);
     console.log('Password:', password);
-    // Back should be connected here;
+    
+    // try{
+    //    const response=await axios.post("http://localhost:5000/upload/signin",{
+    //     email,
+    //     password
+    //    });
+    //    console.log("Successfully uploaded:",response.data);
+    // }
+    // catch(error){
+    //   console.log("Error occured:",error);
+    // }
+
   };
 
   return (

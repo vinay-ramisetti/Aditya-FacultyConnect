@@ -10,7 +10,7 @@ import Slide5 from '../images/slide5.jpg';
 
 const Welcome = () => {
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', overflow: 'hidden',  }}>
       {/* Logo at the top-left corner */}
       <div 
         style={{
@@ -85,7 +85,6 @@ const Welcome = () => {
       <div 
         style={{
           textAlign: 'center',
-          marginTop: '20px',
           padding: '20px',
           backgroundColor: '#f8f9fa',
           borderRadius: '8px',

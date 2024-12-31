@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Signup = () => {
   const [fullname, setFullname] = useState('');
@@ -6,12 +7,32 @@ const Signup = () => {
   const [year, setYear] = useState('');
   const [designation, setDesignation] = useState('');
   const [mobile, setMobile] = useState('');
+  const [profileImage, setProfileImage] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log({ fullname, email, year, designation, mobile });
-    // Add logic for handling signup submission
-    // Connect with backend here..
+
+    // const formData=new FormData();
+    // formData.append('profileImage',profileImage);
+    // formData.append('fullname',fullname);
+    // formData.append('email',email);
+    // formData.append('year',year);
+    // formData.append('designation',designation);
+    // formData.append('mobile',mobile);
+    // formData.append('profileImage',profileImage);
+    // try{
+    //   const response=await axios.post("http://localhost:5000/upload/signup",formData,{
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   });
+    //   console.log("Successfully uploaded:",response.data);
+    // }
+    // catch(error){
+    //   console.log("Error occurred:",error);
+    // }
+
   };
 
   const containerStyle = {
@@ -138,7 +159,15 @@ const Signup = () => {
               required
             />
           </div>
-          
+          <div>
+            <label>Profile Image:</label>
+            <input
+              type="file"
+              onChange={(e) => setProfileImage(e.target.files[0])}
+              style={inputStyle}
+              required
+            />
+          </div>
           <button
             type="submit"
             style={buttonStyle}
