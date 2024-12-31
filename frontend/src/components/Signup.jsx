@@ -6,6 +6,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [year, setYear] = useState('');
   const [designation, setDesignation] = useState('');
+  const [department,setDepartment]= useState('');
   const [mobile, setMobile] = useState('');
   const [profileImage, setProfileImage] = useState(null);
 
@@ -21,6 +22,7 @@ const Signup = () => {
     // formData.append('designation',designation);
     // formData.append('mobile',mobile);
     // formData.append('profileImage',profileImage);
+    // formData.append('department',department);
     // try{
     //   const response=await axios.post("http://localhost:5000/upload/signup",formData,{
     //     headers: {
@@ -141,10 +143,30 @@ const Signup = () => {
               <option value="" disabled>
                 Select your Designation
               </option>
+              <option value="HOD">HOD</option>
               <option value="Professor">Professor</option>
-              <option value="Associate Professor">Associate Professor</option>
               <option value="Assistant Professor">Assistant Professor</option>
-              <option value="Lecturer">Lecturer</option>
+              <option value="PHD">PHD</option>
+            </select>
+          </div>
+          <div>
+            <label style={{ fontSize: '0.875rem', fontWeight: '500', color: '#4a5568' }}>Department:</label>
+            <select
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              style={selectStyle}
+              required
+            >
+              <option value="" disabled>
+                Select your Department
+              </option>
+              <option value="CSE">Computer Science and Engineering</option>
+              <option value="ECE">Electronics and Communication</option>
+              <option value="EE">Electical Enginnering</option>
+              <option value="MECH">Mechanical Engineering</option>
+              <option value="CIVIL">Civil Engineering</option>
+              <option value="CHE">Chemical Engineering</option>
+              <option value="BIO">Bio Engineering</option>
             </select>
           </div>
           

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Departments = (props) => {
   const renderDepartments = props.departments.map((department, index) => {
@@ -34,6 +35,7 @@ const Departments = (props) => {
           >
             {department.des}
           </div>
+          <Link to={`/department/${department.name}`}>
           <button
             style={{
               padding: '8px 16px',
@@ -49,6 +51,8 @@ const Departments = (props) => {
           >
             Learn More
           </button>
+          </Link>
+          
         </div>
 
         {/* Right Side - Department Image */}

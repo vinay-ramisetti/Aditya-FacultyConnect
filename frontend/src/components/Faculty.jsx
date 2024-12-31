@@ -1,9 +1,13 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Faculty = (props) => {
   const renderFaculty = props.faculty.map((teacher, index) => {
     return (
-      <div
+      <>
+      {
+        teacher.designation==='HOD' &&
+        <div
         key={index}
         style={{
           border: '1px solid #ddd',
@@ -33,6 +37,7 @@ const Faculty = (props) => {
           {teacher.department}
         </div>
         <div>
+          <Link to={`/teacher/${id}`}>
           <button
             style={{
               marginTop: '10px',
@@ -49,8 +54,14 @@ const Faculty = (props) => {
           >
             View Details
           </button>
+          </Link>
+          
         </div>
       </div>
+      }
+      
+      </>
+      
     );
   });
 
