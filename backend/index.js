@@ -5,7 +5,6 @@ const path = require("path");
 require("dotenv").config();
 const app = express();
 const cors = require("cors");
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,11 +13,28 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+//requie models
+const User = require(path.join(__dirname, "models", "user-model"));
+
+//requiring routes
+const index1 = require(path.join(__dirname, "routes", "index1"));
+const signup = require(path.join(__dirname, "routes", "signup"));
+const login = require(path.join(__dirname, "routes", "login"));
+
+//requiring MongoDb
+const user = require(path.join(__dirname, "models", "user-model"));
+
 const corsOptions = {
-    origin: "*",
-    credentials: true, // Fixed typo ("Credential" -> "credentials")
+    origin: 'http://localhost:5173', // Specify the frontend URL
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
 app.use(cors(corsOptions));
+
+
+//using routes
+app.use("/index",index1);
+app.use("/signup",signup);
+app.use("/login",login);
 
 // Database Connection
 const ConnectDB = async () => {
