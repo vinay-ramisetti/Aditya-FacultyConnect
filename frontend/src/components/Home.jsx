@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Faculty from './Faculty';
 import Departments from './Departments';
+import axios from 'axios';
 
 const Home = () => {
   const [faculty, setFaculty] = useState([]);
@@ -14,6 +15,19 @@ const Home = () => {
       { name: "Mechanical Engineering", des: "Focuses on Machines" }
 
     ]);
+    // const fetchData= async()=>{
+    // try{
+    //   const facultyData=await axios.get('http://localhost:5000/api/faculty');
+    //   setFaculty(facultyData.data);
+
+    //   const departmentData=await axios.get('http://localhost:5000/api/departments');
+    //   setDepartments(departmentData.data);
+    // }
+    // catch(error){
+    //   console.log("Error occurred:",error);
+    // }
+    // }
+    // fetchData();
   }, []); 
 
   return (

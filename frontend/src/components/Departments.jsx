@@ -6,14 +6,12 @@ const Departments = (props) => {
       <div
         key={index}
         style={{
-          flex: '1 0 30%', // This ensures 3 cards fit in a row
-          margin: '10px',
-          display: 'flex',
-          justifyContent: 'space-between',
           border: '1px solid #ddd',
           borderRadius: '8px',
           padding: '15px',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          display: 'flex',
+          justifyContent: 'space-between',
         }}
       >
         {/* Left Side - Department Details */}
@@ -27,7 +25,13 @@ const Departments = (props) => {
           >
             {department.name}
           </div>
-          <div style={{ color: '#555', fontSize: '14px', marginBottom: '10px' }}>
+          <div
+            style={{
+              color: '#555',
+              fontSize: '14px',
+              marginBottom: '10px',
+            }}
+          >
             {department.des}
           </div>
           <button
@@ -76,9 +80,10 @@ const Departments = (props) => {
       </h2>
       <div
         style={{
-          display: 'flex',
-          flexWrap: 'wrap', // Allow wrapping to the next line
-          justifyContent: 'center', // Center the items horizontally
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)', 
+          gap: '20px',
+          justifyContent: 'center',
         }}
       >
         {renderDepartments}
