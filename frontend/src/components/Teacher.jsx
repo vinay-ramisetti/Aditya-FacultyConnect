@@ -8,7 +8,19 @@ const Teacher = (props) => {
     return ;
   return (
     <div>
-      Teacher Details..
+      Teacher Information:
+      <div>
+        <label>Name:</label>
+        {teacher.fullName}
+      </div>
+      <div>
+        <label>Designation:</label>
+        {teacher.designation}
+      </div>
+      <div>
+        <label>Department: </label>
+        {teacher.department}
+      </div>
     </div>
   )
 }

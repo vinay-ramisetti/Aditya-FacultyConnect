@@ -3,12 +3,10 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async function (req, res, next) {
     try {
-        // Log all headers to check if the Authorization header is present
-       
-        // Check for token in cookies
+        // Log all headers to check if the Authorization header is present.
+        // Check for token in cookies.
         let token = req.cookies.token;
-      
-        // If not found in cookies, check in headers
+        // If not found in cookies, check in headers.
         if (!token) {
             token = req.headers['authorization'];
             console.log('Authorization Header:', token); // Log the authorization header

@@ -6,9 +6,17 @@ const Branch = (props) => {
   const { branchName } = useParams();
   console.log(branchName);
 
+  const designationPriority = {
+    "HOD": 1,
+    "Principal":2,
+    "Professor": 3,
+    "Assistant Professor": 4,
+    "PHD": 5, 
+  };
+
   const faculties = props.faculty.filter(
     (lecturer) => lecturer.department === branchName
-  );
+  ).sort((a,b)=> (designationPriority[a.designation] || 999)-(designationPriority[b.designation] || 999));
 
   if (!faculties || faculties.length === 0)
     return (
