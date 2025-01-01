@@ -65,7 +65,7 @@ const Branch = (props) => {
               {/* Placeholder for profile image */}
             </div>
             <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: '10px 0' }}>
-              {faculty.fullname}
+              {faculty.fullName}
             </h3>
             <p style={{ color: '#555', fontSize: '14px' }}>
               {faculty.designation}
