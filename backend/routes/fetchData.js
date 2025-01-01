@@ -22,7 +22,7 @@ router.get("/",isloggedin,async(req,res)=>{
 
 router.get('/faculty', async(req,res)=>{
   try{
-    const facultyData = await User.findOne({email:email});
+    const facultyData = await User.find({});
     res.status(200).json(facultyData);
   }
   catch(error){
