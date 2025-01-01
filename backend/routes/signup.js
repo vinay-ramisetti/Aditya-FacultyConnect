@@ -36,9 +36,8 @@ router.post('/register', async (req, res) => {
 
         // Set cookie with token
         res.cookie('token', token, { httpOnly: true });
-
         // Respond with success message
-        return res.status(201).json({ message: 'User registered successfully!' });
+        return res.status(201).json({ message: 'User registered successfully!',token });
 
     } catch (error) {
         console.error('Error during user registration:', error);

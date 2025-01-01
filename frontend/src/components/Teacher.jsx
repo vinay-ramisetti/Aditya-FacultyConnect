@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link,useParams } from 'react-router-dom'
+import Navbar from './Navbar';
 
 const Teacher = (props) => {
   const {id} =useParams();
@@ -8,6 +9,7 @@ const Teacher = (props) => {
     return ;
   return (
     <div>
+      <Navbar/>
       Teacher Information:
       <div>
         <label>Name:</label>
