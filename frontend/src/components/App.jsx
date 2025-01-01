@@ -27,7 +27,11 @@ function App() {
     setDepartments([
       { name: "CSE", description: "Focuses on AI" },
       { name: "ECE", description: "Focuses on Chip design" },
-      { name: "MECH", description: "Focuses on Machines" }
+      { name: "EE", description: "Focuses on Circuits" },
+      { name: "MECH", description: "Focuses on Machines" },
+      { name: "CIVIL", description: "Focuses on Designs" },
+      { name: "CHE", description: "Focuses on Chemicals" },
+      { name: "BIO", description: "Focuses on Organics" }
     ]);
 
     const fetchData = async () => {
