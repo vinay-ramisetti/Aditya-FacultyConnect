@@ -21,6 +21,7 @@ const index1 = require(path.join(__dirname, "routes", "index1"));
 const signup = require(path.join(__dirname, "routes", "signup"));
 const login = require(path.join(__dirname, "routes", "login"));
 const fetchData=require(path.join(__dirname,"routes","fetchData"));
+const protectedRoute=require(path.join(__dirname,"routes","protectedRoute"));
 
 //requiring MongoDb
 const user = require(path.join(__dirname, "models", "user-model"));
@@ -37,7 +38,7 @@ app.use("/index",index1);
 app.use("/signup",signup);
 app.use("/login",login);
 app.use("/fetchData",fetchData);
-
+app.use("/protectedroute", protectedRoute);
 // Database Connection
 const ConnectDB = async () => {
     try {
