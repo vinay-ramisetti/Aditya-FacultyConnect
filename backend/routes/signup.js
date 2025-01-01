@@ -9,7 +9,6 @@ router.post('/register', async (req, res) => {
     try {
         const { fullname, email, password, designation, department, branch } = req.body;
 
-        // Validate input fields
         if (!fullname || !email || !password || !designation || !branch) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
@@ -20,7 +19,6 @@ router.post('/register', async (req, res) => {
             return res.status(401).json({ message: 'You already have an account, please login.' });
         }
 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create a new user
