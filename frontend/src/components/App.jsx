@@ -9,7 +9,7 @@ import Signup from './Signup';
 import Branch from './Branch';
 import Teacher from './Teacher';
 import Profile from './Profile';
-import Logout from './Logout';
+import Logout from './logout';
 import UpdateUser from './UserUpdate';
 
 function App() {
