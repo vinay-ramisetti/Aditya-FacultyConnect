@@ -3,44 +3,67 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async function (req, res, next) {
     try {
-        // Log all headers to check if the Authorization header is present
-       
+        let token;
+
         // Check for token in cookies
-        let token = req.cookies.token;
-      
+        if (req.cookies && req.cookies.token) {
+            token = req.cookies.token;
+        }
+
         // If not found in cookies, check in headers
+        if (!token && req.headers.authorization) {
+            const authHeader = req.headers.authorization;
+
+            if (authHeader.startsWith('Bearer ')) {
+                token = authHeader.slice(7, authHeader.length); // Remove 'Bearer ' prefix
+            }
+        }
+
+        // If token is still not found, return an error
         if (!token) {
-            token = req.headers['authorization'];
-            console.log('Authorization Header:', token); // Log the authorization header
-
-            if (token && token.startsWith('Bearer ')) {
-                token = token.slice(7, token.length); // Remove 'Bearer ' prefix
-            } else {
-                token = null; // Ensure token is null if it doesn't start with 'Bearer '
-            }
-
-            if (!token) {
-                res.locals.error = "You need to Log In first";
-                console.log("Token is not being received");
-                return res.redirect("/");
-            }
+            console.error("Token is missing from cookies or headers");
+            return res.status(401).json({
+                success: false,
+                message: "Authentication failed: Token is missing",
+            });
         }
 
-        console.log('Token:', token); // Log the token after extraction
-
+        // Verify the token
         const decoded = jwt.verify(token, process.env.JWT_KEY);
-        const user = await userModel.findOne({ email: decoded.email }).select("-password");
 
+        // Find the user based on the decoded token
+        const user = await userModel.findOne({ email: decoded.email }).select("-password");
         if (!user) {
-            res.locals.error = "User not found";
-            return res.redirect("/");
+            console.error("User not found for the provided token");
+            return res.status(404).json({
+                success: false,
+                message: "Authentication failed: User not found",
+            });
         }
 
+        // Attach the user to the request object
         req.user = user;
         next();
     } catch (error) {
-        console.error("Authentication error:", error);
-        res.locals.error = "You need to Log In first";
-        return res.redirect("/");
+        // Handle specific JWT errors
+        if (error.name === "TokenExpiredError") {
+            console.error("Token expired");
+            return res.status(401).json({
+                success: false,
+                message: "Authentication failed: Token has expired",
+            });
+        } else if (error.name === "JsonWebTokenError") {
+            console.error("Malformed token:", error.message);
+            return res.status(400).json({
+                success: false,
+                message: `Authentication failed: ${error.message}`,
+            });
+        } else {
+            console.error("Unexpected authentication error:", error);
+            return res.status(500).json({
+                success: false,
+                message: "Authentication failed: An unexpected error occurred",
+            });
+        }
     }
 };

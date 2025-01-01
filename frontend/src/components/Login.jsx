@@ -24,8 +24,7 @@ const Signin = () => {
         const data = await response.json();
         console.log('Success:', data);
         
-        // Store token in local storage
-        localStorage.setItem('authToken', data.token);
+  
        
 
         // Set token in Authorization header for future requests
