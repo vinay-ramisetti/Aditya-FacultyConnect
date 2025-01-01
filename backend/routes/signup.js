@@ -34,6 +34,10 @@ router.post('/register', async (req, res) => {
         const token = generatetoken(user);
 
         // Set cookie with token
+        res.cookie('token', token);
+
+        // Set token in response headers
+        res.setHeader('Authorization', `Bearer ${token}`);
         res.cookie('token', token, { httpOnly: true });
 
         // Respond with success message

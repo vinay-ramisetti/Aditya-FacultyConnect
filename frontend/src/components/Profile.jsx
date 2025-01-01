@@ -10,9 +10,14 @@ const Profile = () => {
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
-        const response = await fetch('http://localhost:5000/fetchData', {
+        const token = localStorage.getItem('authToken'); // my
+        const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
           method: 'GET',
-          credentials: 'include',
+          credentials: 'include', // Include cookies in the request
+          headers: {
+            'Authorization': `Bearer ${token}`,// my
+            'Content-Type': 'application/json',
+          },
         });
         if (response.ok) {
           const data = await response.json();
