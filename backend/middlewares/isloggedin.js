@@ -3,15 +3,16 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async function (req, res, next) {
     try {
-        // Log all headers to check if the Authorization header is present
-       
+        let token;
+
         // Check for token in cookies
-        let token = req.cookies.token;
-      
+        if (req.cookies && req.cookies.token) {
+            token = req.cookies.token;
+        }
+
         // If not found in cookies, check in headers
-        if (!token) {
-            token = req.headers['authorization'];
-            console.log('Authorization Header:', token); // Log the authorization header
+        if (!token && req.headers.authorization) {
+            const authHeader = req.headers.authorization;
 
             if (authHeader.startsWith('Bearer ')) {
                 token = authHeader.slice(7, authHeader.length); // Remove 'Bearer ' prefix

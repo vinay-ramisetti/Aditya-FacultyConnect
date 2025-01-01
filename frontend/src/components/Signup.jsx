@@ -73,7 +73,6 @@ const Signup = () => {
       // .catch(error => {
       //     console.error('Error:', error);
       // });
-
         navigate('/home');
       } catch (error) {
         console.error('Error:', error);
