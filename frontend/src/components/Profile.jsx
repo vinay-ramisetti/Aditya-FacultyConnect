@@ -8,7 +8,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
-        const response = await fetch('http://your-backend-domain.com/fetchData', { // Adjust the endpoint as necessary
+        const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
           method: 'GET',
           credentials: 'include' // Include cookies in the request
         });
@@ -34,7 +34,7 @@ const Profile = () => {
       <div className='m-2 p-1'>
         <div>
           <h2>Lecturer Details</h2>
-          <p>Name: {lecturerDetails.fullname}</p>
+          <p>Name: {lecturerDetails.fullName}</p>
           <p>Email: {lecturerDetails.email}</p>
           <p>Department: {lecturerDetails.department}</p>
         </div>

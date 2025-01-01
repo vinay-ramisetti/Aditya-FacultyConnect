@@ -29,11 +29,9 @@ const Signin = () => {
        
 
         // Set token in Authorization header for future requests
-        console.log('Authorization Header:', `Bearer ${data.token}`);
+      
 
-        console.log('Token from data:', data.token);
-
-        fetch('http://localhost:5000/protectedroute', {
+        fetch('http://localhost:5000/protectedroute/some-protected-route', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
