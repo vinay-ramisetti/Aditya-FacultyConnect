@@ -51,7 +51,6 @@ const Signin = () => {
         navigate("/home");
     } catch (error) {
         console.error('fetching fail ra ungmaaa', error.message);
-        // Handle error (e.g., show an error message)
     }
   };
 

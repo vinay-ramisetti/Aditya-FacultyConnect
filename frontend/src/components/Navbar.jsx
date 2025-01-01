@@ -150,7 +150,7 @@ const Navbar = () => {
             cursor: 'pointer',
             transition: 'background-color 0.3s ease',
           }}
-          onClick={() => navigate('/profile')} // Use navigate to redirect
+          onClick={() => navigate('/profile')} 
           onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
         >
