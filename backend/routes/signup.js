@@ -7,9 +7,9 @@ const { generatetoken } = require('../utils/generatetoken'); // Adjust based on 
 
 router.post('/register', async (req, res) => {
     try {
-        const { fullname, email, password, designation, department, branch } = req.body;
+        const { fullname, email, password, designation, department } = req.body;
 
-        if (!fullname || !email || !password || !designation || !branch) {
+        if (!fullname || !email || !password || !designation || !department) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
 
@@ -28,7 +28,6 @@ router.post('/register', async (req, res) => {
             password: hashedPassword,
             designation,
             department,
-            branch,
         });
 
         // Generate token
@@ -36,6 +35,7 @@ router.post('/register', async (req, res) => {
 
         // Set cookie with token
         res.cookie('token', token, { httpOnly: true });
+
         // Respond with success message
         return res.status(201).json({ message: 'User registered successfully!',token });
 

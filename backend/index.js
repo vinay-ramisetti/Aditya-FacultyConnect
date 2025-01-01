@@ -22,6 +22,7 @@ const signup = require(path.join(__dirname, "routes", "signup"));
 const login = require(path.join(__dirname, "routes", "login"));
 const fetchData=require(path.join(__dirname,"routes","fetchData"));
 const protectedRoute=require(path.join(__dirname,"routes","protectedRoute"));
+const addUser=require(path.join(__dirname,"routes","add-user"));
 
 //requiring MongoDb
 const user = require(path.join(__dirname, "models", "user-model"));
@@ -29,6 +30,7 @@ const user = require(path.join(__dirname, "models", "user-model"));
 const corsOptions = {
     origin: 'http://localhost:5173', // Specify the frontend URL
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    exposedHeaders: ['Authorization']
 };
 app.use(cors(corsOptions));
 
@@ -39,6 +41,7 @@ app.use("/signup",signup);
 app.use("/login",login);
 app.use("/fetchData",fetchData);
 app.use("/protectedroute", protectedRoute);
+app.use("/add-user", addUser);
 // Database Connection
 const ConnectDB = async () => {
     try {

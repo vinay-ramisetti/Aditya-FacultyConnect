@@ -9,6 +9,8 @@ import Signup from './Signup';
 import Branch from './Branch';
 import Teacher from './Teacher';
 import Profile from './Profile';
+import Logout from './Logout';
+import UpdateUser from './UserUpdate';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -42,6 +44,7 @@ function App() {
         console.log('Error occurred:', error);
       }
     };
+
     fetchData();
   }, []);
        
@@ -50,6 +53,7 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/add-user" element={<UpdateUser />} />
         <Route
           path="/home"
           element={<Home faculty={faculty} departments={departments} />}
@@ -65,6 +69,10 @@ function App() {
         <Route
           path="/teacher/:id"
           element={<Teacher faculty={faculty} />}
+        />
+           <Route
+          path="/logout"
+          element={<Logout />}
         />
       </Routes>
   );

@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 
 const Profile = () => {
   const [lecturerDetails, setLecturerDetails] = useState({});
   const [classes, setClasses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
-        const token = localStorage.getItem('authToken'); // my
-        const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
+        const response = await fetch('http://localhost:5000/fetchData', {
           method: 'GET',
-          credentials: 'include', // Include cookies in the request
-          headers: {
-            'Authorization': `Bearer ${token}`,// my
-            'Content-Type': 'application/json',
-          },
+          credentials: 'include',
         });
         if (response.ok) {
           const data = await response.json();
           setLecturerDetails(data);
-          // Assuming 'classes' is part of the data returned
           setClasses(data.classes || []);
         } else {
           console.error('Failed to fetch lecturer details');
@@ -37,22 +33,39 @@ const Profile = () => {
     <div>
       <Navbar />
       <div className='m-2 p-1'>
-        <div>
-          <h2>Lecturer Details</h2>
-          <p>Name: {lecturerDetails.fullName}</p>
-          <p>Email: {lecturerDetails.email}</p>
-          <p>Department: {lecturerDetails.department}</p>
+        {/* Basic Details Section */}
+        <div className="mb-4">
+          <h2 className="text-xl font-bold mb-2">Basic Details</h2>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p>Name: {lecturerDetails.fullName}</p>
+            <p>Email: {lecturerDetails.email}</p>
+            <p>Employee ID: {lecturerDetails.EmpID}</p>
+            <p>Department: {lecturerDetails.department}</p>
+            <p>Joining Date: {lecturerDetails.JoiningDate}</p>
+          </div>
         </div>
-        <div>
-          <h2>Classes</h2>
-          <ul>
-            {classes.map((classItem, index) => (
-              <li key={index}>
-                {classItem.courseName} - {classItem.schedule}
-              </li>
-            ))}
-          </ul>
+
+        {/* Qualification Section */}
+        <div className="mb-4">
+          <h2 className="text-xl font-bold mb-2">Qualification Details</h2>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p>UG: {lecturerDetails.UG}</p>
+            <p>PG: {lecturerDetails.PG}</p>
+            <p>PhD: {lecturerDetails.Phd}</p>
+            <p>Year of Passing: {lecturerDetails.YearOfpass}</p>
+          </div>
         </div>
+
+        {/* Experience Section */}
+        <div className="mb-4">
+          <h2 className="text-xl font-bold mb-2">Experience</h2>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p>Industry Experience: {lecturerDetails.Industry} years</p>
+            <p>Total Experience: {lecturerDetails.Total_Exp} years</p>
+          </div>
+        </div>
+
+        {/* Update Button */}
         <div>
           <button
             style={{
@@ -68,7 +81,7 @@ const Profile = () => {
             }}
             onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
             onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
-            onClick={() => alert('Update Details functionality to be implemented')}
+            onClick={() => navigate('/add-user')}
           >
             Update Details
           </button>

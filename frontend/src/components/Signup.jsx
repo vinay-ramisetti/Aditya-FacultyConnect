@@ -9,7 +9,7 @@ const Signup = () => {
     password: '',
     designation: '',
     department: '',
-    branch: '',
+   
   });
 
   const [errors, setErrors] = useState({});
@@ -29,7 +29,7 @@ const Signup = () => {
     if (!data.password) errors.password = 'Password is required';
     if (!data.designation) errors.designation = 'Designation is required';
     if (!data.department) errors.department = 'Department is required';
-    if (!data.branch) errors.branch = 'Branch is required';
+   
     return errors;
   };
 
@@ -55,25 +55,25 @@ const Signup = () => {
         }
   
         const data = await response.json();
-        localStorage.setItem('authToken', data.token);
-        alert('Signup successful!');
         console.log('Success:', data);
         
-      //   fetch('http://localhost:5000/protectedroute/some-protected-route', {
-      //     method: 'GET',
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': `Bearer ${data.token}`
-      //     }
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //     console.log('Response:', data);
-      // })
-      // .catch(error => {
-      //     console.error('Error:', error);
-      // });
-
+        // Store token in local storage
+       
+        fetch('http://localhost:5000/protectedroute/some-protected-route', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${data.token}`
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log('Response:', data);
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+      
         navigate('/home');
       } catch (error) {
         console.error('Error:', error);
@@ -90,9 +90,8 @@ const Signup = () => {
       password: '',
       designation: '',
       department: '',
-      branch: '',
+     
     });
-    
   };
   
 
@@ -204,6 +203,7 @@ const Signup = () => {
               <option value="" disabled>
                 Select your Designation
               </option>
+              <option value="Principal">Principal</option>
               <option value="HOD">HOD</option>
               <option value="Professor">Professor</option>
               <option value="Assistant Professor">Assistant Professor</option>
@@ -234,18 +234,7 @@ const Signup = () => {
             {errors.department && <span style={errorStyle}>{errors.department}</span>}
           </div>
 
-          <div>
-            <label>Branch:</label>
-            <input
-              type="text"
-              name="branch"
-              value={formData.branch}
-              onChange={handleChange}
-              placeholder="Enter your Branch"
-              style={inputStyle}
-            />
-            {errors.branch && <span style={errorStyle}>{errors.branch}</span>}
-          </div>
+       
 
           <button type="submit" style={buttonStyle}>
             Sign Up
