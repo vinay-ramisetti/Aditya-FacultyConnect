@@ -33,7 +33,7 @@ const Home = (props) => {
             </div>
           </>
         ) : (
-          <p>Please log in to view this content.</p>
+          <p>Please login to view this content.</p>
         )}
       </div>
     </div>

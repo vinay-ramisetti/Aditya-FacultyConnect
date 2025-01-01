@@ -23,9 +23,9 @@ function App() {
     ]);
 
     setDepartments([
-      { name: "Computer Science", description: "Focuses on AI" },
-      { name: "Electronics and Communication", description: "Focuses on Chip design" },
-      { name: "Mechanical Engineering", description: "Focuses on Machines" }
+      { name: "CSE", description: "Focuses on AI" },
+      { name: "ECE", description: "Focuses on Chip design" },
+      { name: "MECH", description: "Focuses on Machines" }
     ]);
 
     const fetchData = async () => {
@@ -52,7 +52,7 @@ function App() {
         />
         <Route
           path="/department/:branchName"
-          element={<Branch faculty={faculty} departments={departments} />}
+          element={<Branch faculty={faculty} />}
         />
          <Route
           path="/profile"

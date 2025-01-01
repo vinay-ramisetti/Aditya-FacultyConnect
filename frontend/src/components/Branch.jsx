@@ -4,6 +4,7 @@ import { useParams,Link } from 'react-router-dom';
 
 const Branch = (props) => {
   const { branchName } = useParams();
+  console.log(branchName);
 
   const faculties = props.faculty.filter(
     (lecturer) => lecturer.department === branchName
@@ -40,9 +41,9 @@ const Branch = (props) => {
           padding: '20px',
         }}
       >
-        {faculties.map((faculty, index) => (
+        {faculties.map((faculty) => (
           <div
-            key={index}
+            key={faculty._id}
             style={{
               border: '1px solid #ddd',
               borderRadius: '8px',
@@ -69,7 +70,7 @@ const Branch = (props) => {
             <p style={{ color: '#555', fontSize: '14px' }}>
               {faculty.designation}
             </p>
-            <Link to={`/teacher/${id}`}>
+            <Link to={`/teacher/${faculty._id}`}>
             <button
               style={{
                 marginTop: '10px',
