@@ -23,10 +23,34 @@ const Signin = () => {
 
         const data = await response.json();
         console.log('Success:', data);
+        
+        // Store token in local storage
+        localStorage.setItem('authToken', data.token);
+       
+
+        // Set token in Authorization header for future requests
+        console.log('Authorization Header:', `Bearer ${data.token}`);
+
+        console.log('Token from data:', data.token);
+
+        fetch('http://localhost:5000/protectedroute', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${data.token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
         navigate("/home");
-        // Handle success (e.g., redirect to dashboard)
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('fetching fail ra ungmaaa', error.message);
         // Handle error (e.g., show an error message)
     }
   };

@@ -2,8 +2,11 @@ import React from 'react';
 import { CgProfile } from "react-icons/cg";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { RiColorFilterLine } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Navbar = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   return (
     <nav
       style={{
@@ -56,6 +59,7 @@ const Navbar = () => {
                 color: 'inherit',
                 transition: 'color 0.3s ease',
               }}
+              onClick={() => navigate('/home')}
               onMouseEnter={(e) => (e.target.style.color = '#007bff')}
               onMouseLeave={(e) => (e.target.style.color = '#555')}
             >
@@ -146,6 +150,7 @@ const Navbar = () => {
             cursor: 'pointer',
             transition: 'background-color 0.3s ease',
           }}
+          onClick={() => navigate('/profile')} // Use navigate to redirect
           onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
         >

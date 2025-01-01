@@ -8,18 +8,19 @@ import Welcome from './Welcome';
 import Signup from './Signup';
 import Branch from './Branch';
 import Teacher from './Teacher';
+import Profile from './Profile';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    // setFaculty([
-    //   { name: "vinay", department: "CSE" },
-    //   { name: "pranay", department: "ECE" },
-    //   { name: "venkat", department: "ECE" },
-    //   { name: "Ram", department: "Mech" }
-    // ]);
+    setFaculty([
+      // { name: "vinay", department: "CSE" },
+      // { name: "pranay", department: "ECE" },
+      // { name: "venkat", department: "ECE" },
+      // { name: "Ram", department: "Mech" }
+    ]);
 
     setDepartments([
       { name: "Computer Science", description: "Focuses on AI" },
@@ -32,15 +33,14 @@ function App() {
         const facultyData = await axios.get('http://localhost:5000/fetchData/faculty');
         setFaculty(facultyData.data);
         console.log(faculty);
-        // const departmentData = await axios.get('http://localhost:5000/fetchData/departments');
-        // setDepartments(departmentData.data);
+     // 
       } catch (error) {
         console.log('Error occurred:', error);
       }
     };
     fetchData();
   }, []);
-
+       
   return (
       <Routes>
         <Route path="/" element={<Welcome />} />
@@ -53,6 +53,10 @@ function App() {
         <Route
           path="/department/:branchName"
           element={<Branch faculty={faculty} departments={departments} />}
+        />
+         <Route
+          path="/profile"
+          element={<Profile/>}
         />
         <Route
           path="/teacher/:id"

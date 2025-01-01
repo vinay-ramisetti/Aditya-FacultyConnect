@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
         const token = generatetoken(user);
 
         // Set cookie with token
-        res.cookie('token', token, { httpOnly: true });
+        res.cookie('token', token);
 
         // Respond with success message
         res.status(200).json({ message: 'Login successful!', token });
