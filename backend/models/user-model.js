@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     Phd:String,
     Industry:String,
     TExp:Number,
-    
+    classes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }]
 });
 
 module.exports = mongoose.model("User", userSchema); 

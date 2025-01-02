@@ -127,6 +127,7 @@ const Profile = () => {
           >
             Update Details
           </button>
+          <button onClick={()=>navigate('/class')}>Create Class Details</button>
         </div>
       </div>
     </div>
