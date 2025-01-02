@@ -4,6 +4,7 @@ const User = require('../models/user-model');
 const Departments=require('../models/departments');
 const isloggedin =require('../middlewares/isloggedin')
 
+// this is for profile.jsx
 router.get("/",isloggedin,async(req,res)=>{
   try {
     const email = req.user.email;

@@ -11,18 +11,13 @@ import Teacher from './Teacher';
 import Profile from './Profile';
 import Logout from './logout';
 import UpdateUser from './UserUpdate';
+import AddResearch from './AddResearch';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    setFaculty([
-      // { name: "vinay", department: "CSE" },
-      // { name: "pranay", department: "ECE" },
-      // { name: "venkat", department: "ECE" },
-      // { name: "Ram", department: "Mech" }
-    ]);
 
     setDepartments([
       { name: "CSE", description: "Focuses on AI" },
@@ -39,7 +34,6 @@ function App() {
         const facultyData = await axios.get('http://localhost:5000/fetchData/faculty');
         setFaculty(facultyData.data);
         console.log(faculty);
-     // 
       } catch (error) {
         console.log('Error occurred:', error);
       }
@@ -73,6 +67,10 @@ function App() {
            <Route
           path="/logout"
           element={<Logout />}
+        />
+        <Route
+          path="/addResearch"
+          element={<AddResearch />}
         />
       </Routes>
   );

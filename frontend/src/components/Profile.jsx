@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import Researchinfo from './Researchinfo';
 
 const Profile = () => {
   const [lecturerDetails, setLecturerDetails] = useState({});
   const [classes, setClasses] = useState([]);
   const navigate = useNavigate();
+  const [tk,setTk]=useState();
 
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
         const token = localStorage.getItem('authToken'); // my
+        setTk(token);
         const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
           method: 'GET',
           credentials: 'include', // Include cookies in the request
@@ -91,6 +94,7 @@ const Profile = () => {
             Update Details
           </button>
         </div>
+        <Researchinfo lecturerId={lecturerDetails._id} token={tk}/>
       </div>
     </div>
   );

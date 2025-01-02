@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const app = express();
 const cors = require("cors");
+const research = require("./models/research");
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +24,7 @@ const login = require(path.join(__dirname, "routes", "login"));
 const fetchData=require(path.join(__dirname,"routes","fetchData"));
 const protectedRoute=require(path.join(__dirname,"routes","protectedRoute"));
 const addUser=require(path.join(__dirname,"routes","add-user"));
+const Research=require(path.join(__dirname,"routes","researchwork"));
 
 //requiring MongoDb
 const user = require(path.join(__dirname, "models", "user-model"));
@@ -42,6 +44,7 @@ app.use("/login",login);
 app.use("/fetchData",fetchData);
 app.use("/protectedroute", protectedRoute);
 app.use("/add-user", addUser);
+app.use("/research",Research);
 // Database Connection
 const ConnectDB = async () => {
     try {
