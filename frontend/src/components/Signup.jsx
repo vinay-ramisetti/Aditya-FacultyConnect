@@ -55,8 +55,29 @@ const Signup = () => {
         }
   
         const data = await response.json();
+<<<<<<< HEAD
     
       
+=======
+        localStorage.setItem('authToken', data.token);
+        alert('Signup successful!');
+        console.log('Success:', data);
+        
+      //   fetch('http://localhost:5000/protectedroute/some-protected-route', {
+      //     method: 'GET',
+      //     headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': `Bearer ${data.token}`
+      //     }
+      // })
+      // .then(response => response.json())
+      // .then(data => {
+      //     console.log('Response:', data);
+      // })
+      // .catch(error => {
+      //     console.error('Error:', error);
+      // });
+>>>>>>> 70a0b41d82542f537ea650990f1d5ff90e4e5cce
         navigate('/home');
       } catch (error) {
         console.error('Error:', error);
