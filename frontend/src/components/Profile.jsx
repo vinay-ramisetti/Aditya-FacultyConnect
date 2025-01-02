@@ -16,9 +16,9 @@ const Profile = () => {
         setTk(token);
         const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
           method: 'GET',
-          credentials: 'include', // Include cookies in the request
+          credentials: 'include',
           headers: {
-            'Authorization': `Bearer ${token}`,// my
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });
@@ -37,14 +37,55 @@ const Profile = () => {
     fetchLecturerDetails();
   }, []);
 
+  const styles = {
+    container: {
+      margin: '2rem',
+      padding: '2rem',
+      fontFamily: 'Arial, sans-serif',
+      backgroundColor: 'rgb(213, 226, 238)',
+      borderRadius: '10px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    },
+    section: {
+      marginBottom: '2rem',
+    },
+    sectionTitle: {
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
+      marginBottom: '1rem',
+      color: '#333',
+    },
+    sectionContent: {
+      backgroundColor: '#ffffff',
+      padding: '1.5rem',
+      borderRadius: '8px',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+    },
+    button: {
+      padding: '12px 24px',
+      fontSize: '16px',
+      border: 'none',
+      borderRadius: '5px',
+      backgroundColor: '#007bff',
+      color: 'white',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s ease, transform 0.2s',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    },
+    buttonHover: {
+      backgroundColor: '#0056b3',
+      transform: 'scale(1.05)',
+    },
+  };
+
   return (
     <div>
       <Navbar />
-      <div className='m-2 p-1'>
+      <div style={styles.container}>
         {/* Basic Details Section */}
-        <div className="mb-4">
-          <h2 className="text-xl font-bold mb-2">Basic Details</h2>
-          <div className="bg-gray-50 p-4 rounded-lg">
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>Basic Details</h2>
+          <div style={styles.sectionContent}>
             <p>Name: {lecturerDetails.fullName}</p>
             <p>Email: {lecturerDetails.email}</p>
             <p>Employee ID: {lecturerDetails.EmpID}</p>
@@ -54,9 +95,9 @@ const Profile = () => {
         </div>
 
         {/* Qualification Section */}
-        <div className="mb-4">
-          <h2 className="text-xl font-bold mb-2">Qualification Details</h2>
-          <div className="bg-gray-50 p-4 rounded-lg">
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>Qualification Details</h2>
+          <div style={styles.sectionContent}>
             <p>UG: {lecturerDetails.UG}</p>
             <p>PG: {lecturerDetails.PG}</p>
             <p>PhD: {lecturerDetails.Phd}</p>
@@ -65,9 +106,9 @@ const Profile = () => {
         </div>
 
         {/* Experience Section */}
-        <div className="mb-4">
-          <h2 className="text-xl font-bold mb-2">Experience</h2>
-          <div className="bg-gray-50 p-4 rounded-lg">
+        <div style={styles.section}>
+          <h2 style={styles.sectionTitle}>Experience</h2>
+          <div style={styles.sectionContent}>
             <p>Industry Experience: {lecturerDetails.Industry} years</p>
             <p>Total Experience: {lecturerDetails.Total_Exp} years</p>
           </div>
@@ -76,19 +117,15 @@ const Profile = () => {
         {/* Update Button */}
         <div>
           <button
-            style={{
-              padding: '8px 16px',
-              fontSize: '14px',
-              fontFamily: 'Arial, sans-serif',
-              border: 'none',
-              borderRadius: '5px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease',
+            style={styles.button}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = styles.buttonHover.backgroundColor;
+              e.target.style.transform = styles.buttonHover.transform;
             }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = styles.button.backgroundColor;
+              e.target.style.transform = 'scale(1)';
+            }}
             onClick={() => navigate('/add-user')}
           >
             Update Details
