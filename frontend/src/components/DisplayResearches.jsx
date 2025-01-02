@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
-const DisplayResearches = (props) => {
-  const Id = props.Id;
+const DisplayResearches = () => {
   const [researches, setResearches] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/research/get',{
-          params: { userId: Id }
+        const token = localStorage.getItem('authToken'); // Why Local Storage???
+        const response = await fetch('http://localhost:5000/research/data',{
+          method:'GET',
+          headers:{
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          }
         });
-        setResearches(response.data);
-        console.log('Fetched Researches:', response.data); // Verify the fetched data
+        if (response.ok) {
+          const data = await response.json(); // Parse the response JSON
+          setResearches(data); // Update state with the parsed data
+          console.log('Fetched Researches:', researches);
+        } else {
+          console.error('Failed to fetch researches:', response.statusText);
+        }
+       
       } catch (error) {
         console.log('Error occurred:', error);
       }

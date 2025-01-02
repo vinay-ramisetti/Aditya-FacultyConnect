@@ -8,6 +8,7 @@ const Profile = () => {
   const [classes, setClasses] = useState([]);
   const navigate = useNavigate();
   const [tk,setTk]=useState();
+  const [lecturerId,setLecturerId]=useState();
 
   useEffect(() => {
     const fetchLecturerDetails = async () => {
@@ -25,6 +26,7 @@ const Profile = () => {
         if (response.ok) {
           const data = await response.json();
           setLecturerDetails(data);
+          setLecturerId(data._id);
           setClasses(data.classes || []);
         } else {
           console.error('Failed to fetch lecturer details');
@@ -36,6 +38,8 @@ const Profile = () => {
 
     fetchLecturerDetails();
   }, []);
+        console.log("LecturerId at profile:",lecturerDetails._id);
+        console.log("Token at profile:",tk);
 
   const styles = {
     container: {
@@ -131,7 +135,8 @@ const Profile = () => {
             Update Details
           </button>
         </div>
-        <Researchinfo lecturerId={lecturerDetails._id} token={tk}/>
+        
+        <Researchinfo lecturerId={lecturerId} token={tk}/>
       </div>
     </div>
   );

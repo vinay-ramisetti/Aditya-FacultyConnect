@@ -32,7 +32,7 @@ const AddResearch = () => {
         },
         body: JSON.stringify(formData),
       });
-
+     console.log("Token at AddResearch:",token);
       if (response.ok) {
         alert('Research added successfully!');
         navigate('/profile');

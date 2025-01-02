@@ -27,10 +27,13 @@ router.post("/add",isloggedin,async(req,res)=>{
   }
 });
 
-router.get("/get",async(req,res)=>{
+router.get("/data",isloggedin,async(req,res)=>{
    try{
-    const { userId } = req.query;
-      const researchData = await ResearchData.find({userId});
+      const userId = req.user._id; 
+      console.log("LecturereId at backend1",userId);
+      const researchData = await ResearchData.find({userId:userId});
+      console.log("LecturereId at backend2",userId);
+      console.log(researchData);
       res.status(200).json(researchData);
     }
     catch(error){
