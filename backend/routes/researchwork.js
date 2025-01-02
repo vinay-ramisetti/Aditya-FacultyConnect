@@ -29,7 +29,8 @@ router.post("/add",isloggedin,async(req,res)=>{
 
 router.get("/get",async(req,res)=>{
    try{
-      const researchData = await ResearchData.find({});
+    const { userId } = req.query;
+      const researchData = await ResearchData.find({userId});
       res.status(200).json(researchData);
     }
     catch(error){
