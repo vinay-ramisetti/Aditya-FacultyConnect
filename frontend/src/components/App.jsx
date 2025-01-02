@@ -11,6 +11,7 @@ import Teacher from './Teacher';
 import Profile from './Profile';
 import Logout from './logout';
 import UpdateUser from './UserUpdate';
+import SignupSuccess from './SignupSuccess';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -54,6 +55,7 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/add-user" element={<UpdateUser />} />
+        <Route path="/signup/signup" element={<SignupSuccess />} />
         <Route
           path="/home"
           element={<Home faculty={faculty} departments={departments} />}
