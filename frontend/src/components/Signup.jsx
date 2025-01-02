@@ -55,47 +55,8 @@ const Signup = () => {
         }
   
         const data = await response.json();
-<<<<<<< HEAD
-        console.log('Success:', data);
-        
-        // Store token in local storage
-       
-        fetch('http://localhost:5000/protectedroute/some-protected-route', {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${data.token}`
-          }
-      })
-      .then(response => response.json())
-      .then(data => {
-          console.log('Response:', data);
-      })
-      .catch(error => {
-          console.error('Error:', error);
-      });
+    
       
-=======
-        localStorage.setItem('authToken', data.token);
-        alert('Signup successful!');
-        console.log('Success:', data);
-        
-      //   fetch('http://localhost:5000/protectedroute/some-protected-route', {
-      //     method: 'GET',
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': `Bearer ${data.token}`
-      //     }
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //     console.log('Response:', data);
-      // })
-      // .catch(error => {
-      //     console.error('Error:', error);
-      // });
-
->>>>>>> main
         navigate('/home');
       } catch (error) {
         console.error('Error:', error);
