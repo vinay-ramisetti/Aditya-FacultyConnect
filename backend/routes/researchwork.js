@@ -42,4 +42,45 @@ router.get("/data",isloggedin,async(req,res)=>{
     }
 })
 
+router.get("/otherResearch/:id", async(req,res)=>{
+   const {id}=req.params;
+  try{
+     const researches= await ResearchData.find({userId:id});
+     if (researches.length === 0) {
+      return res.status(404).json({ message: "No researches found for this user" });
+    }
+     res.status(200).json(researches);
+  }catch(error){
+    console.log("Failed to fetch the resources!!",error);
+    res.status(500).json({message: "Unable to fetch the data"});
+  }
+})
+
+router.delete("/delete/:id",isloggedin,async(req,res)=>{
+  try{
+   const {id}=req.params;
+    await ResearchData.findByIdAndDelete(id);
+    res.status(200).json({message:"Research Deleted"});
+  }catch(error){
+    console.log("Error occurred while deleting:",error);
+    res.status(500).json({ message: 'Failed to delete research.' });
+  }
+});
+
+router.put("/update/:id",isloggedin,async(req,res)=>{
+  try{
+    const {id}=req.params;
+    const {title,description}=req.body;
+    const updatedResearch= await ResearchData.findByIdAndUpdate(
+      id,
+      {title,description},
+      { new:true }
+    );
+    res.status(200).json(updatedResearch);
+  }catch(error){
+    console.error('Error occurred while updating research:', error);
+    res.status(500).json({ message: 'Failed to update research.' });
+  }
+});
+
 module.exports = router;
