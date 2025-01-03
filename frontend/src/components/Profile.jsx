@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import Researchinfo from './Researchinfo';
 
 const Profile = () => {
   const [lecturerDetails, setLecturerDetails] = useState({});
   const [classes, setClasses] = useState([]);
   const navigate = useNavigate();
+  const [tk,setTk]=useState();
+  const [lecturerId,setLecturerId]=useState();
 
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
-        const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5000/fetchData', {
+        const token = localStorage.getItem('authToken'); // my
+        setTk(token);
+        const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -22,6 +26,7 @@ const Profile = () => {
         if (response.ok) {
           const data = await response.json();
           setLecturerDetails(data);
+          setLecturerId(data._id);
           setClasses(data.classes || []);
         } else {
           console.error('Failed to fetch lecturer details');
@@ -33,6 +38,8 @@ const Profile = () => {
 
     fetchLecturerDetails();
   }, []);
+        console.log("LecturerId at profile:",lecturerDetails._id);
+        console.log("Token at profile:",tk);
 
   const styles = {
     container: {
@@ -129,6 +136,8 @@ const Profile = () => {
           </button>
           <button onClick={()=>navigate('/class')}>Create Class Details</button>
         </div>
+        
+        <Researchinfo lecturerId={lecturerId} token={tk}/>
       </div>
     </div>
   );

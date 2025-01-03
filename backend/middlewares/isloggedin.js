@@ -4,12 +4,10 @@ const jwt = require("jsonwebtoken");
 module.exports = async function (req, res, next) {
     try {
         let token;
-
         // Check for token in cookies
         if (req.cookies && req.cookies.token) {
             token = req.cookies.token;
         }
-
         // If not found in cookies, check in headers
         if (!token && req.headers.authorization) {
             const authHeader = req.headers.authorization;
@@ -18,7 +16,6 @@ module.exports = async function (req, res, next) {
                 token = authHeader.slice(7, authHeader.length); // Remove 'Bearer ' prefix
             }
         }
-
         // If token is still not found, return an error
         if (!token) {
             console.error("Token is missing from cookies or headers");
