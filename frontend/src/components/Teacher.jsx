@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link,useParams } from 'react-router-dom'
 import Navbar from './Navbar';
+import OthersResearch from './OthersResearch';
 
 const Teacher = (props) => {
   const {id} =useParams();
@@ -23,6 +24,7 @@ const Teacher = (props) => {
         <label>Department: </label>
         {teacher.department}
       </div>
+      <OthersResearch Id={teacher._id}/>
     </div>
   )
 }
