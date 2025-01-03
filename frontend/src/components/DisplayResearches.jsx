@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const DisplayResearches = () => {
+const DisplayResearches = (token) => {
+  const [tk,setTk]=useState();
   const [researches, setResearches] = useState([]);
+ console.log("TOken at DisplayResearches:",tk);
   useEffect(() => {
     const fetchData = async () => {
+      setTk(token);
+      
       try {
-        const token = localStorage.getItem('authToken'); // Why Local Storage???
+         const token = localStorage.getItem('authToken'); // Why Local Storage???
         const response = await fetch('http://localhost:5000/research/data',{
           method:'GET',
           headers:{
