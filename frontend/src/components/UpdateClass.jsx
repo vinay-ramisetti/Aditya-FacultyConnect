@@ -27,6 +27,7 @@ const UpdateClass = () => {
         const fetchUserId = async () => {
             try {
                 const token = localStorage.getItem('authToken');
+             
                 const response = await fetch('http://localhost:5000/fetchData', {
                     method: 'GET',
                     credentials: 'include',
@@ -63,7 +64,13 @@ const UpdateClass = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/update/classes', formData);
+            const token = localStorage.getItem('authToken');
+            const response = await axios.post('http://localhost:5000/update/classes', formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
             console.log('Class updated successfully:', response.data);
         } catch (error) {
             console.error('Error updating class:', error);

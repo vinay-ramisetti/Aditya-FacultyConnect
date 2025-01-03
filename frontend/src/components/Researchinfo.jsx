@@ -7,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 const Researchinfo = ({ lecturerId, token }) => {
   const navigate = useNavigate();
 
-  console.log("LecturerId at Researchinfo:", lecturerId);
-  console.log("Token at Researchinfo:", token);
 
   return (
     <div className="research-container">

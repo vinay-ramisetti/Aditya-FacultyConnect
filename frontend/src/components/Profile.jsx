@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Researchinfo from './Researchinfo';
+import ClassInfo from './ClassInfo';
 
 const Profile = () => {
   const [lecturerDetails, setLecturerDetails] = useState({});
@@ -134,9 +135,10 @@ const Profile = () => {
           >
             Update Details
           </button>
-          <button onClick={()=>navigate('/class')}>Create Class Details</button>
+         
+          
         </div>
-        
+        <ClassInfo lecturerId={lecturerId} token={tk}/>
         <Researchinfo lecturerId={lecturerId} token={tk}/>
       </div>
     </div>

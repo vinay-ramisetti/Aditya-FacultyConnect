@@ -13,12 +13,12 @@ const classSchema = new mongoose.Schema({
     averagePercentage: { type: Number, required: true },
     selfAssessmentMarks: { type: Number, required: true },
     courseFeedback: { type: String },
-    marksDistribution: {
+
         above95: { type: Number, default: 0 },
         between85And95: { type: Number, default: 0 },
         between75And85: { type: Number, default: 0 },
-        below75: { type: Number, default: 0 }
-    },
+        below75: { type: Number, default: 0 },
+        
     teacher: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
