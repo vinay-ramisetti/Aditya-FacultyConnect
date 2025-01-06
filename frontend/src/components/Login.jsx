@@ -23,11 +23,17 @@ const Signin = () => {
 
         const data = await response.json();
         console.log('Success:', data);
+<<<<<<< HEAD
         
         // Set token in local storage
         localStorage.setItem('token', data.token);
 
         // Set token in Authorization header for future requests
+=======
+        // Set token in Authorization header for future requests
+        localStorage.setItem('authToken', data.token);
+
+>>>>>>> main
         fetch('http://localhost:5000/protectedroute/some-protected-route', {
             method: 'GET',
             headers: {

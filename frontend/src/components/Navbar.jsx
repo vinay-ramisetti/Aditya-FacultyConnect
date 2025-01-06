@@ -1,8 +1,8 @@
 import React from 'react';
 import { CgProfile } from "react-icons/cg";
 import { IoIosHelpCircleOutline } from "react-icons/io";
-import { RiColorFilterLine } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import headlogo from '../images/headlogo.png';
 
 const Navbar = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -10,6 +10,9 @@ const Navbar = () => {
   return (
     <nav
       style={{
+        position: 'sticky', // Makes the navbar sticky
+        top: 0,             // Sticks it to the top of the viewport
+        zIndex: 1000,       // Ensures the navbar stays above other elements
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -20,19 +23,7 @@ const Navbar = () => {
     >
       {/* Left Side */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        <h1
-          style={{
-            display:'flex',
-            gap:'7px',
-            fontSize: '24px',
-            fontWeight: 'bold',
-            margin: 0,
-            color: '#333',
-            fontFamily: 'Arial, sans-serif',
-          }}
-        >
-         <RiColorFilterLine /> FacultyConnect
-        </h1>
+        <img src={headlogo} alt="HeadLogo" style={{ width: '50%', height: '100', border: '0' }} />
         <ul
           style={{
             listStyle: 'none',
@@ -49,7 +40,6 @@ const Navbar = () => {
               cursor: 'pointer',
               color: '#555',
               textDecoration: 'none',
-              position: 'relative',
             }}
           >
             <a
@@ -73,7 +63,6 @@ const Navbar = () => {
               cursor: 'pointer',
               color: '#555',
               textDecoration: 'none',
-              position: 'relative',
             }}
           >
             <a
@@ -96,7 +85,6 @@ const Navbar = () => {
               cursor: 'pointer',
               color: '#555',
               textDecoration: 'none',
-              position: 'relative',
             }}
           >
             <a
@@ -119,8 +107,8 @@ const Navbar = () => {
       <div style={{ display: 'flex', gap: '15px' }}>
         <button
           style={{
-            display:'flex',
-            gap:'7px',
+            display: 'flex',
+            gap: '7px',
             padding: '8px 16px',
             fontSize: '14px',
             fontFamily: 'Arial, sans-serif',
@@ -134,12 +122,12 @@ const Navbar = () => {
           onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
         >
-         <IoIosHelpCircleOutline /> Help
+          <IoIosHelpCircleOutline /> Help
         </button>
         <button
           style={{
-            display:'flex',
-            gap:'7px',
+            display: 'flex',
+            gap: '7px',
             padding: '8px 16px',
             fontSize: '14px',
             fontFamily: 'Arial, sans-serif',
@@ -150,11 +138,11 @@ const Navbar = () => {
             cursor: 'pointer',
             transition: 'background-color 0.3s ease',
           }}
-          onClick={() => navigate('/profile')} 
+          onClick={() => navigate('/profile')}
           onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
         >
-         <CgProfile /> Profile
+          <CgProfile /> Profile
         </button>
       </div>
     </nav>
