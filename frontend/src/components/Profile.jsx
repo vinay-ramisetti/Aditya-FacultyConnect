@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Researchinfo from './Researchinfo';
+import ClassInfo from './ClassInfo';
 
 const Profile = () => {
   const [lecturerDetails, setLecturerDetails] = useState({});
@@ -13,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
-        const token = localStorage.getItem('authToken'); // my
+        const token = localStorage.getItem('authToken'); 
         setTk(token);
         const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
           method: 'GET',
@@ -38,8 +39,6 @@ const Profile = () => {
 
     fetchLecturerDetails();
   }, []);
-        console.log("LecturerId at profile:",lecturerDetails._id);
-        console.log("Token at profile:",tk);
 
   const styles = {
     container: {
@@ -134,8 +133,10 @@ const Profile = () => {
           >
             Update Details
           </button>
+         
+          
         </div>
-        
+        <ClassInfo lecturerId={lecturerId} token={tk}/>
         <Researchinfo lecturerId={lecturerId} token={tk}/>
       </div>
     </div>

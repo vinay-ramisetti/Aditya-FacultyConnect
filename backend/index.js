@@ -25,6 +25,7 @@ const fetchData=require(path.join(__dirname,"routes","fetchData"));
 const protectedRoute=require(path.join(__dirname,"routes","protectedRoute"));
 const addUser=require(path.join(__dirname,"routes","add-user"));
 const Research=require(path.join(__dirname,"routes","researchwork"));
+const classroute=require(path.join(__dirname,"routes","class-route"));
 
 //requiring MongoDb
 const user = require(path.join(__dirname, "models", "user-model"));
@@ -45,6 +46,7 @@ app.use("/fetchData",fetchData);
 app.use("/protectedroute", protectedRoute);
 app.use("/add-user", addUser);
 app.use("/research",Research);
+app.use("/update", classroute);
 // Database Connection
 const ConnectDB = async () => {
     try {

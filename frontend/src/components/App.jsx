@@ -14,6 +14,8 @@ import UpdateUser from './UserUpdate';
 import AddResearch from './AddResearch';
 import SignupSuccess from './SignupSuccess';
 import Accept from './Accept';
+import UpdateClass from './UpdateClass';
+import DisplayClasses from './DisplayClasses';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -62,6 +64,14 @@ function App() {
          <Route
           path="/profile"
           element={<Profile/>}
+        />
+         <Route
+          path="/class"
+          element={<UpdateClass/>}
+        />
+         <Route
+          path="/classes"
+          element={<DisplayClasses/>}
         />
         <Route
           path="/teacher/:id"
