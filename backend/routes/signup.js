@@ -7,9 +7,9 @@ const { generatetoken } = require('../utils/generatetoken'); // Adjust based on 
 
 router.post('/register', async (req, res) => {
     try {
-        const { fullname, email, password, designation, department } = req.body;
+        const { fullname, email, password, designation, department,type } = req.body;
 
-        if (!fullname || !email || !password || !designation || !department) {
+        if (!fullname || !email || !password || !designation ) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
 
@@ -28,6 +28,7 @@ router.post('/register', async (req, res) => {
             password: hashedPassword,
             designation,
             department,
+            type,
         });
 
         // Generate token

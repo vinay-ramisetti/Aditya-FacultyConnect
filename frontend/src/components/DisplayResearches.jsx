@@ -89,57 +89,65 @@ const DisplayResearches = () => {
     <div style={{ padding: '20px' }}>
       {researches.length > 0 ? (
         <div>
-          {researches.map((research) => (
-            <div
-              key={research._id}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                border: '1px solid #ccc',
-                padding: '15px',
-                marginBottom: '10px',
-                borderRadius: '5px',
-              }}
-            >
-              <div>
-                <h3>{research.title}</h3>
-                <p>{research.description}</p>
-                <p>
-                  <strong>Published Date:</strong>{' '}
-                  {new Date(research.publishedDate).toLocaleDateString()}
-                </p>
+          {researches
+            .filter((research) => research.status) 
+            .map((research) => (
+              <div
+                key={research._id}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  border: '1px solid #ccc',
+                  padding: '15px',
+                  marginBottom: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <div>
+                  <h3>{research.title}</h3>
+                  <p>{research.description}</p>
+                  <p>
+                    <strong>Published Date:</strong>{' '}
+                    {new Date(research.publishedDate).toLocaleDateString()}
+                  </p>
+                </div>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <button
+                    onClick={() => handleUpdate(research._id)}
+                    style={{
+                      backgroundColor: '#007bff',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 12px',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                    }}
+                  >
+                    <HiMiniPencilSquare /> Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(research._id)}
+                    style={{
+                      backgroundColor: '#dc3545',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 12px',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                    }}
+                  >
+                    <MdDelete /> Delete
+                  </button>
+                </div>
               </div>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button
-                  onClick={() => handleUpdate(research._id)}
-                  style={{
-                    backgroundColor: '#007bff',
-                    color: 'white',
-                    border: 'none',
-                    padding: '8px 12px',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                  }}
-                >
-                 <HiMiniPencilSquare /> Update
-                </button>
-                <button
-                  onClick={() => handleDelete(research._id)}
-                  style={{
-                    backgroundColor: '#dc3545',
-                    color: 'white',
-                    border: 'none',
-                    padding: '8px 12px',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                  }}
-                >
-                <MdDelete />  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
       ) : (
         <p>No researches found.</p>

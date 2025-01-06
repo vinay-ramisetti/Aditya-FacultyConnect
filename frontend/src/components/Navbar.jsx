@@ -4,7 +4,7 @@ import { IoIosHelpCircleOutline } from "react-icons/io";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import headlogo from '../images/headlogo.png';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   return (
@@ -98,6 +98,26 @@ const Navbar = () => {
               onMouseLeave={(e) => (e.target.style.color = '#555')}
             >
               Updates
+            </a>
+          </li>
+          <li
+            style={{
+              fontSize: '16px',
+              fontFamily: 'Arial, sans-serif',
+              cursor: 'pointer',
+              color: '#555',
+              textDecoration: 'none',
+            }}
+          >
+            <a
+              href="/accept"
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+                transition: 'color 0.3s ease',
+              }}
+            >
+              Approvals
             </a>
           </li>
         </ul>

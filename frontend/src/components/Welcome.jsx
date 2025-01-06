@@ -1,139 +1,160 @@
 import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Ensure you import Carousel CSS
 import { Link } from 'react-router-dom';
-
 import Logo from '../images/AECRoundLogo.png';
-import Slide3 from '../images/silde3.jpg';
-import Slide4 from '../images/slide4.jpg';
-import Slide5 from '../images/slide5.jpg';
+import { useState } from 'react';
+import { FaSortDown } from "react-icons/fa";
 
 const Welcome = () => {
+  const [showOptions, setShowOptions] = useState(false);
+
+  const handleLoginClick = () => {
+    setShowOptions(!showOptions);
+  };
+
   return (
-    <div style={{ position: 'relative', overflow: 'hidden',  }}>
-      {/* Logo at the top-left corner */}
-      <div 
-        style={{
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-          zIndex: 10,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          padding: '5px',
-          borderRadius: '8px',
-        }}
-      >
-        <img 
-          src={Logo} 
-          alt="logo" 
-          style={{ width: '100px', height: '100px' }} // Adjust size as needed
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        backgroundColor: '#f8f9fa',
+        textAlign: 'center',
+      }}
+    >
+      {/* Centered Logo */}
+      <div style={{ marginBottom: '20px' }}>
+        <img
+          src={Logo}
+          alt="logo"
+          style={{ width: '250px', height: '250px' }} // Adjust size for a bigger logo
         />
       </div>
 
-      {/* Carousel */}
-      <Carousel 
-        showThumbs={false} 
-        infiniteLoop 
-        autoPlay 
-        interval={3000} 
-        transitionTime={500} 
-        showStatus={false}
-        emulateTouch
+      {/* Welcome Message */}
+      <h1
         style={{
-          margin: '20px',
+          fontSize: '36px',
+          fontWeight: 'bold',
+          margin: '10px 0',
         }}
       >
-        <div>
-          <img 
-            src={Slide3} 
-            alt="Slide 1" 
-            style={{ 
-              objectFit: 'cover', 
-              width: '100%', 
-              height: '60vh', 
-              borderRadius: '8px' 
-            }} 
-          />
-        </div>
-        <div>
-          <img 
-            src={Slide4} 
-            alt="Slide 2" 
-            style={{ 
-              objectFit: 'cover', 
-              width: '100%', 
-              height: '60vh', 
-              borderRadius: '8px' 
-            }} 
-          />
-        </div>
-        <div>
-          <img 
-            src={Slide5} 
-            alt="Slide 3" 
-            style={{ 
-              objectFit: 'cover', 
-              width: '100%', 
-              height: '60vh', 
-              borderRadius: '8px' 
-            }} 
-          />
-        </div>
-      </Carousel>
+        Welcome
+      </h1>
 
-      {/* Bottom Section */}
-      <div 
-        style={{
-          textAlign: 'center',
-          padding: '20px',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '8px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <h1 style={{ fontSize: '36px', fontWeight: 'bold', margin: '10px 0' }}>
-          Welcome
-        </h1>
-        <div>
-          <Link to="/signin">
-          <button 
+      {/* Login Button */}
+      <div style={{ position: 'relative', marginTop: '20px' }}>
+        <button
+          style={{
+            padding: '10px 20px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            color: '#fff',
+            backgroundColor: '#ff7f27',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease',
+            margin: '10px 0',
+          }}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = '#ff0000')}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = '#ff7f27')}
+          onClick={handleLoginClick}
+        >
+          Login as <FaSortDown />
+        </button>
+
+        {/* Dropdown Options */}
+        {showOptions && (
+  <div
+    style={{
+      position: 'absolute',
+      top: '0', // Aligns with the top of the button
+      left: '100%', // Positions the dropdown to the right of the button
+      marginLeft: '10px', // Spacing between the button and the dropdown
+      padding: '10px',
+      border: '1px solid #ddd',
+      borderRadius: '5px',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      backgroundColor: '#f9f9f9',
+      zIndex: 10, // Ensures it appears above other elements
+      textAlign: 'left',
+      minWidth: '180px', // Ensures consistent dropdown width
+      transition: 'opacity 0.3s ease, transform 0.3s ease', // Smooth animation
+      opacity: showOptions ? 1 : 0,
+      transform: showOptions ? 'translateX(0)' : 'translateX(-10px)', // Slight slide-in effect
+    }}
+  >
+    <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
+      {[
+        { role: 'Faculty', link: '/signin' },
+        { role: 'Dean', link: '/signin' },
+        { role: 'HOD', link: '/signin' },
+        { role: 'Admin', link: '/signin' },
+      ].map((option, index) => (
+        <li
+          key={index}
+          style={{
+            margin: '5px 0',
+            padding: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            borderRadius: '5px',
+            transition: 'background-color 0.3s ease, transform 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#ff7f27';
+            e.currentTarget.style.transform = 'scale(1.05)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          <Link
+            to={option.link}
             style={{
-              padding: '10px 20px',
-              fontSize: '16px',
+              textDecoration: 'none',
+              color: '#007bff',
               fontWeight: 'bold',
-              color: '#fff',
-              backgroundColor: '#007bff',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease',
-              marginBottom: '20px',
+              fontSize: '16px',
             }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
           >
-            Login
-          </button>
+            {option.role}
           </Link>
-         
-        </div>
-        <div>
-          <h2 style={{ fontSize: '18px', fontWeight: 'normal' }}>
-            Don't have an account?{' '} 
-            <Link 
-              to="/signup" 
-              style={{
-                color: '#007bff',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-              }}
-              onMouseEnter={(e) => (e.target.style.textDecoration = 'underline')}
-              onMouseLeave={(e) => (e.target.style.textDecoration = 'none')}
-            >
-              Sign Up
-            </Link>
-          </h2>
-        </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+
+      </div>
+
+      {/* Sign-Up Link */}
+      <div>
+        <h2
+          style={{
+            fontSize: '18px',
+            fontWeight: 'normal',
+            margin: '10px 0',
+          }}
+        >
+          Don't have an account?{' '}
+          <Link
+            to="/signup"
+            style={{
+              color: '#ff7f27',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+            }}
+            onMouseEnter={(e) => (e.target.style.textDecoration = 'underline')}
+            onMouseLeave={(e) => (e.target.style.textDecoration = 'none')}
+          >
+            Sign Up
+          </Link>
+        </h2>
       </div>
     </div>
   );

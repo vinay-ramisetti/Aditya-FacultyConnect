@@ -9,11 +9,12 @@ import Carousal from './Carousal';
 const Home = (props) => {
   const faculty = props.faculty;
   const departments = props.departments;
+  const designation=props.designation;
 
   return (
     <div>
       <Header />
-      <Navbar />
+      <Navbar  designation={designation}/>
       <Carousal/>
       <div className='m-2 p-1'>
         <div>

@@ -13,6 +13,7 @@ import Logout from './logout';
 import UpdateUser from './UserUpdate';
 import AddResearch from './AddResearch';
 import SignupSuccess from './SignupSuccess';
+import Accept from './Accept';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -73,6 +74,10 @@ function App() {
         <Route
           path="/addResearch"
           element={<AddResearch />}
+        />
+        <Route
+          path="/accept"
+          element={<Accept />}
         />
       </Routes>
   );

@@ -32,15 +32,6 @@ router.get('/faculty', async(req,res)=>{
   }
 }); 
 
-router.get('/departments', async(req,res)=>{
-  try{
-  const departmentsData= await Departments.find({});
-  res.status(200).json(departmentsData);
-  }
-  catch(error){
-    console.log('Unable to fetch the data:',error);
-    res.status(500).json({message:"Unable to fetch the Data"});
-  }
-});
+
 
 module.exports=router;

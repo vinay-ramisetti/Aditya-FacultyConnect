@@ -9,7 +9,7 @@ const Signup = () => {
     password: '',
     designation: '',
     department: '',
-   
+    type: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -28,129 +28,97 @@ const Signup = () => {
     if (!data.email) errors.email = 'Email is required';
     if (!data.password) errors.password = 'Password is required';
     if (!data.designation) errors.designation = 'Designation is required';
-    if (!data.department) errors.department = 'Department is required';
-   
     return errors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData); // Debugging
-  
-    const newErrors = validateForm(formData); // Just for finding the errors
+    const newErrors = validateForm(formData);
     if (Object.keys(newErrors).length === 0) {
       try {
         const response = await fetch('http://localhost:5000/signup/register', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
         });
-  
-        if (!response.ok) {
-          console.error("Response Status:", response.status);
-          console.error("Response Message:", await response.text());
-          throw new Error("Network response was not ok");
-        }
-  
+
+        if (!response.ok) throw new Error('Signup failed');
+
         const data = await response.json();
         localStorage.setItem('authToken', data.token);
         alert('Signup successful!');
-        console.log('Success:', data);
-        
-      //   fetch('http://localhost:5000/protectedroute/some-protected-route', {
-      //     method: 'GET',
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': `Bearer ${data.token}`
-      //     }
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //     console.log('Response:', data);
-      // })
-      // .catch(error => {
-      //     console.error('Error:', error);
-      // });
         navigate('/signup/signup');
       } catch (error) {
-        console.error('Error:', error);
         alert('An error occurred. Please try again.');
       }
     } else {
       setErrors(newErrors);
-      alert("Please fill out all required fields.");
     }
-    // Removing the data 
-    setFormData({
-      fullname: '',
-      email: '',
-      password: '',
-      designation: '',
-      department: '',
-     
-    });
   };
-  
 
-  // Styles
   const containerStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f4f4f4',
+    fontFamily: "'Poppins', sans-serif",
   };
 
   const formContainerStyle = {
+    width: '400px',
     backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    padding: '30px',
+    borderRadius: '10px',
+    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
   };
 
   const titleStyle = {
     textAlign: 'center',
     marginBottom: '20px',
+    fontSize: '24px',
+    fontWeight: '600',
+    color: '#333',
   };
 
   const inputStyle = {
     width: '100%',
-    padding: '10px',
-    marginBottom: '10px',
+    padding: '12px',
+    marginBottom: '15px',
     border: '1px solid #ccc',
-    borderRadius: '4px',
+    borderRadius: '6px',
+    fontSize: '14px',
   };
 
   const selectStyle = {
-    width: '100%',
-    padding: '10px',
-    marginBottom: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
+    ...inputStyle,
+    appearance: 'none',
+    cursor: 'pointer',
   };
 
   const buttonStyle = {
     width: '100%',
-    padding: '10px',
-    backgroundColor: '#007BFF',
+    padding: '12px',
+    backgroundColor: '#ff7f27',
     color: '#fff',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '6px',
+    fontSize: '16px',
+    fontWeight: '600',
     cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
   };
 
   const errorStyle = {
     color: 'red',
-    fontSize: '0.8rem',
+    fontSize: '12px',
     marginBottom: '10px',
   };
 
   return (
     <div style={containerStyle}>
       <div style={formContainerStyle}>
-        <h1 style={titleStyle}>Complete Your Profile!</h1>
+        <h1 style={titleStyle}>Complete Your Profile</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label>Full Name:</label>
@@ -202,40 +170,63 @@ const Signup = () => {
               <option value="" disabled>
                 Select your Designation
               </option>
-              <option value="Principal">Principal</option>
               <option value="HOD">HOD</option>
-              <option value="Professor">Professor</option>
-              <option value="Assistant Professor">Assistant Professor</option>
-              <option value="PHD">PHD</option>
+              <option value="Faculty">Faculty</option>
+              <option value="Dean">Dean</option>
+              <option value="Admin">Admin</option>
             </select>
             {errors.designation && <span style={errorStyle}>{errors.designation}</span>}
           </div>
 
-          <div>
-            <label>Department:</label>
-            <select
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-              style={selectStyle}
-            >
-              <option value="" disabled>
-                Select your Department
-              </option>
-              <option value="CSE">Computer Science and Engineering</option>
-              <option value="ECE">Electronics and Communication</option>
-              <option value="EE">Electrical Engineering</option>
-              <option value="MECH">Mechanical Engineering</option>
-              <option value="CIVIL">Civil Engineering</option>
-              <option value="CHE">Chemical Engineering</option>
-              <option value="BIO">Bio Engineering</option>
-            </select>
-            {errors.department && <span style={errorStyle}>{errors.department}</span>}
-          </div>
+          {formData.designation === 'Dean' && (
+            <div>
+              <label>Type:</label>
+              <select
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                style={selectStyle}
+              >
+                <option value="" disabled>
+                  Select the type
+                </option>
+                <option value="ENG">Dean of Engineering</option>
+                <option value="PH">Dean of Pharmacy</option>
+                <option value="BA">Dean of Business</option>
+                <option value="DP">Dean of Diploma</option>
+              </select>
+            </div>
+          )}
 
-       
+          {formData.designation !== 'Dean' && formData.designation !== 'Admin' && formData.designation && (
+            <div>
+              <label>Department:</label>
+              <select
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
+                style={selectStyle}
+              >
+                <option value="" disabled>
+                  Select your Department
+                </option>
+                <option value="CSE">Computer Science and Engineering</option>
+                <option value="ECE">Electronics and Communication</option>
+                <option value="EE">Electrical Engineering</option>
+                <option value="MECH">Mechanical Engineering</option>
+                <option value="CIVIL">Civil Engineering</option>
+                <option value="CHE">Chemical Engineering</option>
+                <option value="BIO">Bio Engineering</option>
+              </select>
+            </div>
+          )}
 
-          <button type="submit" style={buttonStyle}>
+         
+
+          <button
+            type="submit"
+            style={buttonStyle}
+          >
             Sign Up
           </button>
         </form>
