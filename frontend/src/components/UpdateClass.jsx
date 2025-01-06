@@ -12,8 +12,7 @@ const UpdateClass = () => {
         numberOfStudents: '',
         appeared: '',
         passCount: '',
-        passPercentage: '',
-        averagePercentage: '',
+
         selfAssessmentMarks: '',
         courseFeedback: '',
         above95: '',
@@ -87,8 +86,7 @@ const UpdateClass = () => {
             <input type="number" name="numberOfStudents" value={formData.numberOfStudents} onChange={handleChange} placeholder="Number of Students" required />
             <input type="number" name="appeared" value={formData.appeared} onChange={handleChange} placeholder="Appeared" required />
             <input type="number" name="passCount" value={formData.passCount} onChange={handleChange} placeholder="Pass Count" required />
-            <input type="number" name="passPercentage" value={formData.passPercentage} onChange={handleChange} placeholder="Pass Percentage" required />
-            <input type="number" name="averagePercentage" value={formData.averagePercentage} onChange={handleChange} placeholder="Average Percentage" required />
+            
             <input type="number" name="selfAssessmentMarks" value={formData.selfAssessmentMarks} onChange={handleChange} placeholder="Self-Assessment Marks" required />
             <textarea name="courseFeedback" value={formData.courseFeedback} onChange={handleChange} placeholder="Course Feedback"></textarea>
             <input type="number" name="above95" value={formData.above95} onChange={handleChange} placeholder="Marks ≥ 95%" />
