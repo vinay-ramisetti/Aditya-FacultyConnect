@@ -28,12 +28,50 @@ const Accept = () => {
     fetchData();
   }, []);
 
-  const handleApprove = (id) => {
-    console.log(`Approved research ID: ${id}`);
+  const handleApprove = async (id) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const response = await fetch(`http://localhost:5000/research/approve/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        console.log(`Approved research ID: ${id}`);
+        // Optionally, update the UI to reflect the change
+        setUnapproved((prev) => prev.filter((item) => item._id !== id));
+      } else {
+        console.error('Failed to approve research:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
   };
 
-  const handleReject = (id) => {
-    console.log(`Rejected research ID: ${id}`);
+  const handleReject = async (id) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const res = await fetch(`http://localhost:5000/research/reject/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        console.log(`Rejected research ID: ${id}`);
+        // Optionally, update the UI to reflect the change
+        setUnapproved((prev) => prev.filter((item) => item._id !== id));
+      } else {
+        console.error('Failed to approve research:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
   };
 
   return (

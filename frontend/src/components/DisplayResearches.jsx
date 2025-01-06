@@ -4,6 +4,7 @@ import { HiMiniPencilSquare } from "react-icons/hi2";
 
 const DisplayResearches = () => {
   const [researches, setResearches] = useState([]);
+  const [filter, setFilter] = useState('approved');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,10 +88,25 @@ const DisplayResearches = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <select 
+        value={filter} 
+        onChange={(e) => setFilter(e.target.value)}
+        style={{ marginBottom: '20px' }}
+      >
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+        <option value="notApproved">Not Approved</option>
+      </select>
+
       {researches.length > 0 ? (
         <div>
           {researches
-            .filter((research) => research.status) 
+            .filter((research) => {
+              if (filter === 'approved') return research.status === true && research.rejected === false;
+              if (filter === 'rejected') return research.status === false && research.rejected === true;
+              if (filter === 'notApproved') return research.status === false && research.rejected === false;
+              return true;
+            }) 
             .map((research) => (
               <div
                 key={research._id}

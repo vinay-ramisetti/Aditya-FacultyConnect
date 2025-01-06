@@ -87,14 +87,15 @@ router.get("/process", isloggedin, async (req, res) => {
   try {
     const userbranch = req.user.department;
  
-    const unapprovedResearches = await ResearchData.find({ status: false })
+    const unapprovedResearches = await ResearchData.find({ status: false,
+      rejected: false
+     })
       .populate({
         path: 'userId',
         match: { department: userbranch }
       })
       .exec();
 
-    console.log("Unapproved:", unapprovedResearches);
     res.status(200).json(unapprovedResearches);
 
   } catch (error) {
@@ -102,5 +103,36 @@ router.get("/process", isloggedin, async (req, res) => {
     res.status(500).json({ message: 'Failed to get research.' });
   }
 })
+
+router.put('/approve/:id', async (req, res) => {
+  try {
+    const research = await ResearchData.findByIdAndUpdate(
+      req.params.id,
+      { status: true },
+      { new: true }
+    );
+    if (!research) {
+      return res.status(404).send('Research not found');
+    }
+    res.send(research);
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
+});
+router.put('/reject/:id', async (req, res) => {
+  try {
+    const research = await ResearchData.findByIdAndUpdate(
+      req.params.id,
+      { rejected: true },
+      { new: true }
+    );
+    if (!research) {
+      return res.status(404).send('Research not found');
+    }
+    res.send(research);
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = router;
