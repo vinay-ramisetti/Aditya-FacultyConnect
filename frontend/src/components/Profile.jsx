@@ -28,7 +28,6 @@ const Profile = () => {
           const data = await response.json();
           setLecturerDetails(data);
           setLecturerId(data._id);
-          setClasses(data.classes || []);
         } else {
           console.error('Failed to fetch lecturer details');
         }

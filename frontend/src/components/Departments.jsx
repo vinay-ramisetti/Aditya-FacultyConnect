@@ -36,22 +36,24 @@ const Departments = (props) => {
             {department.description}
           </div>
           <Link to={`/department/${department.name}`}>
-          <button
-            style={{
-              padding: '8px 16px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease',
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
-          >
-            Learn More
-          </button>
-          </Link>
+  <button
+    style={{
+      padding: '6px 12px', 
+      backgroundColor: '#007bff',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
+      width:'150px',
+      transition: 'background-color 0.3s ease',
+    }}
+    onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
+    onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
+  >
+    Learn More
+  </button>
+</Link>
+
           
         </div>
 

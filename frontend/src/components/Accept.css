@@ -48,6 +48,7 @@
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+  width: 150px;
   transition: background-color 0.3s ease;
 }
 
@@ -62,6 +63,7 @@
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+  width: 150px;
   transition: background-color 0.3s ease;
 }
 
