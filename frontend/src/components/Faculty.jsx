@@ -3,25 +3,24 @@ import { Link } from 'react-router-dom';
 
 const Faculty = (props) => {
   const [user, setUser] = useState({});
-  const [userdesg, setUserdesg] = useState();
-  const [userbranch, setUserbranch] = useState();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5000/fetchData', {
+        console.log(token);
+        const response = await fetch('http://localhost:5000/fetchData', { 
           method: 'GET',
+          credentials: 'include',  // This line is important (Error occurs if this is not there).
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
           },
         });
         if (response.ok) {
           const data = await response.json();
           setUser(data);
-          setUserbranch(data.department);
-          setUserdesg(data.designation);
+          console.log(data.department);
         } else {
           console.error('Failed to fetch user:', response.statusText);
         }
@@ -33,7 +32,7 @@ const Faculty = (props) => {
   }, []);
 
   const renderFaculty = props.faculty
-    .filter((teacher) => teacher.department === userbranch)
+    .filter((teacher) => teacher.department === user.department && teacher.designation!=='HOD' )
     .map((teacher) => (
       <div
         key={teacher._id}
@@ -194,7 +193,7 @@ const Faculty = (props) => {
   return (
     <div>
 
-      {userdesg==='HOD' && <h2
+      {user.designation==='HOD' && <h2
         style={{
           fontWeight: 'bold',
           fontSize: '28px',
@@ -202,9 +201,9 @@ const Faculty = (props) => {
           marginBottom: '20px',
         }}
       >
-        Faculty Details of {userbranch} department:
+        Faculty Details of {user.department} department:
       </h2> }
-      {userdesg==='Dean' && <h2
+      {user.designation==='Dean' && <h2
         style={{
           fontWeight: 'bold',
           fontSize: '28px',
@@ -222,9 +221,9 @@ const Faculty = (props) => {
           justifyContent: 'center',
         }}
       >
-        {userdesg === 'HOD' && renderFaculty}
-        {userdesg === 'Dean' && renderAll}
-        {userdesg==='Admin' && renderOverAll}
+        {user.designation === 'HOD' && renderFaculty}
+        {user.designation === 'Dean' && renderAll}
+        {user.designation==='Admin' && renderOverAll}
       </div>
     </div>
   );

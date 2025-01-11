@@ -3,13 +3,16 @@ import { IoMdAdd } from 'react-icons/io';
 import './Researchinfo.css';
 import DisplayResearches from './DisplayResearches';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
-const Researchinfo = ({ lecturerId, token }) => {
+const Researchinfo = () => {
   const navigate = useNavigate();
-
+  const token = localStorage.getItem('authToken');
 
   return (
-    <div className="research-container">
+    <>
+    <Navbar/>
+     <div className="research-container">
       <div className="header">
         <h1>My Researches</h1>
         <button 
@@ -19,8 +22,10 @@ const Researchinfo = ({ lecturerId, token }) => {
           <IoMdAdd /> Add
         </button>
       </div>
-      <DisplayResearches token={token} />
+      <DisplayResearches />
     </div>
+    </>
+   
   );
 };
 

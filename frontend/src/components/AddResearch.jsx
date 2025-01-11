@@ -26,6 +26,7 @@ const AddResearch = () => {
     try {
       const response = await fetch('http://localhost:5000/research/add', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -35,7 +36,7 @@ const AddResearch = () => {
      console.log("Token at AddResearch:",token);
       if (response.ok) {
         alert('Research added successfully!');
-        navigate('/profile');
+        navigate('/research');
       } else {
         throw new Error('Failed to add research');
       }

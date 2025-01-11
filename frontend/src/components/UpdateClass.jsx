@@ -65,6 +65,7 @@ const UpdateClass = () => {
         try {
             const token = localStorage.getItem('authToken');
             const response = await axios.post('http://localhost:5000/update/classes', formData, {
+                credentials: 'include',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'

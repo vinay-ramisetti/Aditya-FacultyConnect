@@ -12,6 +12,7 @@ const DisplayResearches = () => {
         const token = localStorage.getItem('authToken');
         const response = await fetch('http://localhost:5000/research/data', {
           method: 'GET',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -36,6 +37,7 @@ const DisplayResearches = () => {
       const token = localStorage.getItem('authToken');
       const response = await fetch(`http://localhost:5000/research/delete/${id}`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -62,6 +64,7 @@ const DisplayResearches = () => {
       const token = localStorage.getItem('authToken');
       const response = await fetch(`http://localhost:5000/research/update/${id}`, {
         method: 'PUT',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -91,7 +94,7 @@ const DisplayResearches = () => {
       <select 
         value={filter} 
         onChange={(e) => setFilter(e.target.value)}
-        style={{ marginBottom: '20px' }}
+        style={{ marginBottom: '20px',width:'130px',height:'30px' }}
       >
         <option value="approved">Approved</option>
         <option value="rejected">Rejected</option>

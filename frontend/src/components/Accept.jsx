@@ -10,6 +10,7 @@ const Accept = () => {
         const token = localStorage.getItem('authToken');
         const response = await fetch('http://localhost:5000/research/process', {
           method: 'GET',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,

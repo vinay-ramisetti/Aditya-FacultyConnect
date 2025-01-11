@@ -86,19 +86,35 @@ router.put("/update/:id", isloggedin, async (req, res) => {
 router.get("/process", isloggedin, async (req, res) => {
   try {
     const userbranch = req.user.department;
- 
-    const unapprovedResearches = await ResearchData.find({ status: false,
-      rejected: false
-     })
-      .populate({
-        path: 'userId',
-        match: { department: userbranch }
-      })
-      .exec();
+
+    const unapprovedResearches = await ResearchData.aggregate([
+        { 
+            $match: { 
+                status: false, 
+                rejected: false 
+            } 
+        },
+        {
+            $lookup: {
+                from: 'users', // Replace 'users' with your actual user collection name
+                localField: 'userId',
+                foreignField: '_id',
+                as: 'userDetails'
+            }
+        },
+        { 
+            $unwind: '$userDetails' 
+        },
+        {
+            $match: {
+                'userDetails.department': userbranch
+            }
+        }
+    ]);
 
     res.status(200).json(unapprovedResearches);
 
-  } catch (error) {
+} catch (error) {
     console.log("Error occured while getting data in HOD", error);
     res.status(500).json({ message: 'Failed to get research.' });
   }

@@ -3,9 +3,35 @@ import { CgProfile } from "react-icons/cg";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import headlogo from '../images/headlogo.png';
+import { useState,useEffect } from 'react';
 
-const Navbar = (props) => {
+const Navbar = () => {
   const navigate = useNavigate(); // Initialize useNavigate
+  const [user,setUser]=useState({});
+   useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const token = localStorage.getItem('authToken');
+          const response = await fetch('http://localhost:5000/fetchData', { 
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setUser(data);
+          } else {
+            console.error('Failed to fetch user:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error occurred:', error);
+        }
+      };
+      fetchUser();
+    }, []);
 
   return (
     <nav
@@ -43,13 +69,12 @@ const Navbar = (props) => {
             }}
           >
             <a
-              href="#"
+              href="/home"
               style={{
                 textDecoration: 'none',
                 color: 'inherit',
                 transition: 'color 0.3s ease',
               }}
-              onClick={() => navigate('/home')}
               onMouseEnter={(e) => (e.target.style.color = '#007bff')}
               onMouseLeave={(e) => (e.target.style.color = '#555')}
             >
@@ -66,7 +91,7 @@ const Navbar = (props) => {
             }}
           >
             <a
-              href="#"
+              href="/articles"
               style={{
                 textDecoration: 'none',
                 color: 'inherit',
@@ -75,7 +100,7 @@ const Navbar = (props) => {
               onMouseEnter={(e) => (e.target.style.color = '#007bff')}
               onMouseLeave={(e) => (e.target.style.color = '#555')}
             >
-              Faculties
+              Articles
             </a>
           </li>
           <li
@@ -88,7 +113,7 @@ const Navbar = (props) => {
             }}
           >
             <a
-              href="#"
+              href="/research"
               style={{
                 textDecoration: 'none',
                 color: 'inherit',
@@ -97,10 +122,10 @@ const Navbar = (props) => {
               onMouseEnter={(e) => (e.target.style.color = '#007bff')}
               onMouseLeave={(e) => (e.target.style.color = '#555')}
             >
-              Updates
+              Researches
             </a>
           </li>
-          <li
+          {user.designation==='HOD' &&  <li
             style={{
               fontSize: '16px',
               fontFamily: 'Arial, sans-serif',
@@ -119,7 +144,8 @@ const Navbar = (props) => {
             >
               Approvals
             </a>
-          </li>
+          </li>}
+         
         </ul>
       </div>
 

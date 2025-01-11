@@ -16,6 +16,9 @@ import SignupSuccess from './SignupSuccess';
 import Accept from './Accept';
 import UpdateClass from './UpdateClass';
 import DisplayClasses from './DisplayClasses';
+import Researchinfo from './Researchinfo';
+import Articles from './Articles';
+import AddArticle from './AddArticle';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -44,6 +47,7 @@ function App() {
     };
 
     fetchData();
+
   }, []);
        
   return (
@@ -53,6 +57,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/add-user" element={<UpdateUser />} />
         <Route path="/signup/signup" element={<SignupSuccess />} />
+        <Route path="/articles" element={<Articles/>} />
+        <Route path="/addarticle" element={<AddArticle/>} />
         <Route
           path="/home"
           element={<Home faculty={faculty} departments={departments} />}
@@ -88,6 +94,10 @@ function App() {
         <Route
           path="/accept"
           element={<Accept />}
+        />
+        <Route
+          path="/research"
+          element={<Researchinfo />}
         />
       </Routes>
   );

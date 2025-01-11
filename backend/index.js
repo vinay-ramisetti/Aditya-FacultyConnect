@@ -22,10 +22,10 @@ const index1 = require(path.join(__dirname, "routes", "index1"));
 const signup = require(path.join(__dirname, "routes", "signup"));
 const login = require(path.join(__dirname, "routes", "login"));
 const fetchData=require(path.join(__dirname,"routes","fetchData"));
-const protectedRoute=require(path.join(__dirname,"routes","protectedRoute"));
 const addUser=require(path.join(__dirname,"routes","add-user"));
 const Research=require(path.join(__dirname,"routes","researchwork"));
 const classroute=require(path.join(__dirname,"routes","class-route"));
+const Articles=require(path.join(__dirname,"routes","articles"));
 
 //requiring MongoDb
 const user = require(path.join(__dirname, "models", "user-model"));
@@ -43,10 +43,10 @@ app.use("/index",index1);
 app.use("/signup",signup);
 app.use("/login",login);
 app.use("/fetchData",fetchData);
-app.use("/protectedroute", protectedRoute);
 app.use("/add-user", addUser);
 app.use("/research",Research);
 app.use("/update", classroute);
+app.use("/article",Articles);
 // Database Connection
 const ConnectDB = async () => {
     try {
@@ -63,8 +63,10 @@ ConnectDB();
 
 // Routes
 app.get("/logout", (req, res) => {
-    return res.clearCookie("token").redirect("/");
+    res.clearCookie("token"); 
+    return res.status(200).json({ message: "Logout successful" });
 });
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;

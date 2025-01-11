@@ -1,10 +1,28 @@
 import React from 'react';
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { IoPersonSharp } from "react-icons/io5";
-import { FaSortDown } from "react-icons/fa";
+import { IoLogOutOutline } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const Remove = async() => {
+    try{
+      const response=  await fetch('http://localhost:5000/logout',{
+        method:'GET',
+        credentials:'include',
+      });
+      
+      if (response.ok) {
+        navigate('/');
+      } else {
+        console.error('Logout failed');
+      }
+    }catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+  
   return (
     <div
       style={{
@@ -32,7 +50,7 @@ const Header = () => {
       </div>
 
       {/* Right Section */}
-      {/* <div>
+      <div>
         <button
           style={{
             backgroundColor: '#004b87',
@@ -40,17 +58,17 @@ const Header = () => {
             padding: '5px 15px',
             border: 'none',
             borderRadius: '5px',
-            fontWeight: 'bold',
             display: 'flex',
             alignItems: 'center',
             gap: '5px',
             cursor: 'pointer',
           }}
+          onClick={Remove}
         >
-         <IoPersonSharp /> <i className="fa fa-user"></i> Login <i className="fa fa-caret-down"></i>
-         <FaSortDown />
+           Logout <IoLogOutOutline />
+        
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };
