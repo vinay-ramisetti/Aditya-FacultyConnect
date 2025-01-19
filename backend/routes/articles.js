@@ -87,5 +87,19 @@ router.post('/:id/dislike', async (req, res) => {
   }
 });
 
+router.get('/othersArticles/:id',async (req,res)=> {
+  const  Id =req.params.id;
+  try {
+      const OthersArticles = await Articles.find({ author: Id });
+      if (OthersArticles.length === 0) {
+        return res.status(404).json({ message: "No Articles found for this user" });
+      }
+      res.status(200).json(OthersArticles);
+    } catch (error) {
+      console.log("Failed to fetch the Artilces!!", error);
+      res.status(500).json({ message: "Unable to fetch the Articles" });
+    }
+
+});
 
 module.exports=router;
