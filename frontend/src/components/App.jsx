@@ -26,6 +26,9 @@ import mechImage from '../images/mech.jpg';
 import civilImage from '../images/civil.jpg';
 import cheImage from '../images/che.jpeg';
 import bioImage from '../images/bio.jpeg';
+import Workshops from './Workshops';
+import About from './About';
+
 
 
 function App() {
@@ -75,6 +78,10 @@ function App() {
           path="/department/:branchName"
           element={<Branch faculty={faculty} />}
         />
+        <Route
+          path="/about"
+          element={<About/>}
+        />
          <Route
           path="/profile"
           element={<Profile/>}
@@ -106,6 +113,10 @@ function App() {
         <Route
           path="/research"
           element={<Researchinfo />}
+        />
+        <Route
+          path="/workshops"
+          element={<Workshops />}
         />
       </Routes>
   );

@@ -125,6 +125,28 @@ const Navbar = () => {
               Researches
             </a>
           </li>
+          <li
+            style={{
+              fontSize: '16px',
+              fontFamily: 'Arial, sans-serif',
+              cursor: 'pointer',
+              color: '#555',
+              textDecoration: 'none',
+            }}
+          >
+            <a
+              href="/workshops"
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+                transition: 'color 0.3s ease',
+              }}
+              onMouseEnter={(e) => (e.target.style.color = '#007bff')}
+              onMouseLeave={(e) => (e.target.style.color = '#555')}
+            >
+              Workshops
+            </a>
+          </li>
           {user.designation==='HOD' &&  <li
             style={{
               fontSize: '16px',
@@ -165,10 +187,11 @@ const Navbar = () => {
             cursor: 'pointer',
             transition: 'background-color 0.3s ease',
           }}
+          onClick={() => navigate('/about')}
           onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
           onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
         >
-          <IoIosHelpCircleOutline /> Help
+          <IoIosHelpCircleOutline />About
         </button>
         <button
           style={{
