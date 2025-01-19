@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import DisplayClasses from './DisplayClasses';
 const Faculty = (props) => {
   const [user, setUser] = useState({});
 
@@ -190,6 +190,7 @@ const Faculty = (props) => {
       </div>
     ));
 
+
   return (
     <div>
 
@@ -224,6 +225,7 @@ const Faculty = (props) => {
         {user.designation === 'HOD' && renderFaculty}
         {user.designation === 'Dean' && renderAll}
         {user.designation==='Admin' && renderOverAll}
+   
       </div>
     </div>
   );

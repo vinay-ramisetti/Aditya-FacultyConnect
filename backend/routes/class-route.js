@@ -110,7 +110,7 @@ router.get("/data", isloggedin, async (req, res) => {
 
             // Calculate rating for each class
             const rating = calculateRating(passPercentage, averagePercentage, selfAssessmentMarks);
-
+           
             totalRating += rating;
 
             return { ...item._doc, rating: rating.toFixed(2) }; 
@@ -118,7 +118,7 @@ router.get("/data", isloggedin, async (req, res) => {
 
         // Calculate overall rating
         const overallRating = (totalRating / Data.length).toFixed(2);
-
+  
         // Respond with the enhanced data and overall rating
         res.status(200).json({ Data: enhancedData, overallRating });
     } catch (error) {

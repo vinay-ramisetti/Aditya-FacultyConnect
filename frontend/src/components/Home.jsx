@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Carousal from './Carousal';
 import { useState,useEffect } from 'react';
-
+import DisplayClasses from './DisplayClasses';
 const Home = (props) => {
   const faculty = props.faculty;
   const departments = props.departments;
@@ -35,7 +35,8 @@ const Home = (props) => {
       };
       fetchUser();
     }, []);
-
+    
+  
 
   return (
     <div>
@@ -44,6 +45,9 @@ const Home = (props) => {
       <Carousal/>
       <div className='m-2 p-1'>
         <div>
+       
+        {user.designation === 'Faculty' && <DisplayClasses />}
+        {user.designation === 'HOD' && <DisplayClasses />}
           <Faculty faculty={faculty} />
         </div>
         {user.designation==='Dean' && <div>
