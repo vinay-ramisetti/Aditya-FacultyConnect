@@ -19,6 +19,14 @@ import DisplayClasses from './DisplayClasses';
 import Researchinfo from './Researchinfo';
 import Articles from './Articles';
 import AddArticle from './AddArticle';
+import cseImage from '../images/cse.jpeg';
+import eceImage from '../images/ece.jpg';
+import eeImage from '../images/ee.jpeg';
+import mechImage from '../images/mech.jpg';
+import civilImage from '../images/civil.jpg';
+import cheImage from '../images/che.jpeg';
+import bioImage from '../images/bio.jpeg';
+
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -27,13 +35,13 @@ function App() {
   useEffect(() => {
 
     setDepartments([
-      { name: "CSE", description: "Focuses on AI" },
-      { name: "ECE", description: "Focuses on Chip design" },
-      { name: "EE", description: "Focuses on Circuits" },
-      { name: "MECH", description: "Focuses on Machines" },
-      { name: "CIVIL", description: "Focuses on Designs" },
-      { name: "CHE", description: "Focuses on Chemicals" },
-      { name: "BIO", description: "Focuses on Organics" }
+      { name: "CSE", description: "Focuses on AI", image: cseImage },
+      { name: "ECE", description: "Focuses on Chip design", image: eceImage },
+      { name: "EE", description: "Focuses on Circuits", image: eeImage },
+      { name: "MECH", description: "Focuses on Machines", image: mechImage },
+      { name: "CIVIL", description: "Focuses on Designs", image: civilImage },
+      { name: "CHE", description: "Focuses on Chemicals", image: cheImage },
+      { name: "BIO", description: "Focuses on Organics", image: bioImage },
     ]);
 
     const fetchData = async () => {

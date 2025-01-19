@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Profile from "../images/default.jpg";
 
 const Faculty = (props) => {
   const [user, setUser] = useState({});
@@ -47,16 +48,27 @@ const Faculty = (props) => {
         }}
       >
         <div
-          style={{
-            borderRadius: '50%',
-            width: '80px',
-            height: '80px',
-            backgroundColor: '#ccc',
-            margin: '0 auto',
-          }}
-        >
-          {/* Placeholder for profile image */}
-        </div>
+         style={{
+         borderRadius: '50%',
+         width: '80px',
+         height: '80px',
+         backgroundColor: '#ccc',
+         margin: '0 auto',
+         overflow: 'hidden', // Prevents overflow
+       }}
+       >
+      <img
+      src={Profile}
+      alt="Profile"
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover', // Ensures the image scales properly
+        borderRadius: '50%', // Matches the parent container for circular shape
+     }}
+    />
+    </div>
+
         <div style={{ marginTop: '10px', fontWeight: 'bold', fontSize: '18px' }}>
           {teacher.fullName}
         </div>
@@ -100,16 +112,27 @@ const Faculty = (props) => {
         }}
       >
         <div
-          style={{
-            borderRadius: '50%',
-            width: '80px',
-            height: '80px',
-            backgroundColor: '#ccc',
-            margin: '0 auto',
-          }}
-        >
-          {/* Placeholder for profile image */}
-        </div>
+         style={{
+         borderRadius: '50%',
+         width: '80px',
+         height: '80px',
+         backgroundColor: '#ccc',
+         margin: '0 auto',
+         overflow: 'hidden', // Prevents overflow
+        }}
+      >
+      <img
+       src={Profile}
+       alt="Profile"
+        style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover', // Ensures the image scales properly
+        borderRadius: '50%', // Matches the parent container for circular shape
+      }}
+     />
+    </div>
+
         <div style={{ marginTop: '10px', fontWeight: 'bold', fontSize: '18px' }}>
           {teacher.fullName}
         </div>
@@ -154,15 +177,26 @@ const Faculty = (props) => {
       >
         <div
           style={{
-            borderRadius: '50%',
-            width: '80px',
-            height: '80px',
-            backgroundColor: '#ccc',
-            margin: '0 auto',
-          }}
-        >
-          {/* Placeholder for profile image */}
-        </div>
+          borderRadius: '50%',
+          width: '80px',
+          height: '80px',
+          backgroundColor: '#ccc',
+          margin: '0 auto',
+          overflow: 'hidden', // Prevents overflow
+         }}
+       >
+       <img
+        src={Profile}
+        alt="Profile"
+        style={{
+         width: '100%',
+         height: '100%',
+         objectFit: 'cover', // Ensures the image scales properly
+         borderRadius: '50%', // Matches the parent container for circular shape
+       }}
+      />
+    </div>
+
         <div style={{ marginTop: '10px', fontWeight: 'bold', fontSize: '18px' }}>
           {teacher.fullName}
         </div>
@@ -203,7 +237,7 @@ const Faculty = (props) => {
       >
         Faculty Details of {user.department} department:
       </h2> }
-      {user.designation==='Dean' && <h2
+      {/* {user.designation==='Dean' && <h2
         style={{
           fontWeight: 'bold',
           fontSize: '28px',
@@ -212,7 +246,7 @@ const Faculty = (props) => {
         }}
       >
         Details of Faculties:
-      </h2> }
+      </h2> } */}
      
       <div
         style={{
@@ -222,8 +256,8 @@ const Faculty = (props) => {
         }}
       >
         {user.designation === 'HOD' && renderFaculty}
-        {user.designation === 'Dean' && renderAll}
-        {user.designation==='Admin' && renderOverAll}
+        {/* {user.designation === 'Dean' && renderAll}
+        {user.designation==='Admin' && renderOverAll} */}
       </div>
     </div>
   );

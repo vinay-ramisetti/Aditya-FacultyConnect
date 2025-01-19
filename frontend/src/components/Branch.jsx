@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import { useParams,Link } from 'react-router-dom';
+import Profile from "../images/default.jpg";
 
 const Branch = (props) => {
   const { branchName } = useParams();
@@ -62,16 +63,26 @@ const Branch = (props) => {
             }}
           >
             <div
-              style={{
+             style={{
                 borderRadius: '50%',
                 width: '80px',
                 height: '80px',
                 backgroundColor: '#ccc',
                 margin: '0 auto 10px',
-              }}
+                overflow: 'hidden', 
+             }}
             >
-              {/* Placeholder for profile image */}
-            </div>
+           <img
+            src={faculty.profileImage || Profile} 
+            alt={faculty.fullName}
+           style={{
+             width: '100%',
+             height: '100%',
+             objectFit: 'cover', 
+           }}
+          />
+        </div>
+
             <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: '10px 0' }}>
               {faculty.fullName}
             </h3>
