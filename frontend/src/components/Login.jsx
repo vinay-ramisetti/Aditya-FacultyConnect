@@ -27,6 +27,10 @@ const Signin = () => {
         // Set token in local storage
         localStorage.setItem('token', data.token);
 
+        const token = localStorage.getItem('token');
+      console.log('Stored Token:', token);
+
+
 
         navigate("/home");
     } catch (error) {

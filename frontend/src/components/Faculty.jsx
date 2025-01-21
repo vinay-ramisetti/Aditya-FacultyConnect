@@ -8,7 +8,7 @@ const Faculty = (props) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('token');
         console.log(token);
         const response = await fetch('http://localhost:5000/fetchData', { 
           method: 'GET',

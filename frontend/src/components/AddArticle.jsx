@@ -14,7 +14,7 @@ const AddArticle = () => {
       createdAt: new Date(),
     };
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:5000/article/add', {
         method: 'POST',
         credentials: 'include',

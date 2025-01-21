@@ -14,7 +14,7 @@ const Logout = () => {
 
         if (response.ok) {
           // Clear token from local storage
-          localStorage.removeItem('authToken');
+          localStorage.removeItem('token');
           // Redirect to welcome page
           navigate('/');
         } else {

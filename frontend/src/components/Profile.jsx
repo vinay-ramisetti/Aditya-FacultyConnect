@@ -14,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('token');
         console.log(" token at profile:",token); 
         setTk(token);
         const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
@@ -137,7 +137,7 @@ const Profile = () => {
          
           
         </div>
-        <ClassInfo lecturerId={lecturerId} token={tk}/>
+        <ClassInfo />
         {/* <Researchinfo token={tk}/> */}
       </div>
     </div>

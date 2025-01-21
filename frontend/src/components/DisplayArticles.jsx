@@ -4,7 +4,7 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 const DisplayArticles = () => {
   const [articles, setArticles] = useState([]);
-  const token = localStorage.getItem('authToken'); 
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchArticles = async () => {

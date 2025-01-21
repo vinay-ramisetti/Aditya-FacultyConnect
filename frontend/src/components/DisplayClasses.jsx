@@ -15,7 +15,7 @@ const DisplayClasses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('token');
         if (!token) {
           console.error("No token found in localStorage");
           return;

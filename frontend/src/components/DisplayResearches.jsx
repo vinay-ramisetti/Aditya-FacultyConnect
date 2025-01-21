@@ -9,7 +9,7 @@ const DisplayResearches = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('token');
         const response = await fetch('http://localhost:5000/research/data', {
           method: 'GET',
           credentials: 'include',
@@ -34,7 +34,7 @@ const DisplayResearches = () => {
 
   const handleDelete = async (id) => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:5000/research/delete/${id}`, {
         method: 'DELETE',
         credentials: 'include',
@@ -61,7 +61,7 @@ const DisplayResearches = () => {
     if (!updatedTitle || !updatedDescription) return;
 
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:5000/research/update/${id}`, {
         method: 'PUT',
         credentials: 'include',

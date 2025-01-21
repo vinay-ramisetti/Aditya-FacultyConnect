@@ -25,7 +25,7 @@ const UpdateClass = () => {
     useEffect(() => {
         const fetchUserId = async () => {
             try {
-                const token = localStorage.getItem('authToken');
+                const token = localStorage.getItem('token');
              
                 const response = await fetch('http://localhost:5000/fetchData', {
                     method: 'GET',
@@ -63,7 +63,7 @@ const UpdateClass = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const token = localStorage.getItem('authToken');
+            const token = localStorage.getItem('token');
             const response = await axios.post('http://localhost:5000/update/classes', formData, {
                 credentials: 'include',
                 headers: {

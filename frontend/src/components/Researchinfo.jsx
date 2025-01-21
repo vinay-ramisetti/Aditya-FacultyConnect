@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 
 const Researchinfo = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem('token');
 
   return (
     <>

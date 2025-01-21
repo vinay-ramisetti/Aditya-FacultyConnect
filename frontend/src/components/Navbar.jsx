@@ -11,7 +11,7 @@ const Navbar = () => {
    useEffect(() => {
       const fetchUser = async () => {
         try {
-          const token = localStorage.getItem('authToken');
+          const token = localStorage.getItem('token');
           const response = await fetch('http://localhost:5000/fetchData', { 
             method: 'GET',
             credentials: 'include',

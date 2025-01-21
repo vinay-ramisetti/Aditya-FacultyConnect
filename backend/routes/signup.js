@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
 
         // Set token in response headers
         res.setHeader('Authorization', `Bearer ${token}`);
-        res.cookie('token', token, { httpOnly: true });
+       res.cookie('token', token, { httpOnly: true });
 
         // Respond with success message
         return res.status(201).json({ message: 'User registered successfully!',token });

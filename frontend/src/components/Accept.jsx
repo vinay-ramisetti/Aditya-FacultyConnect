@@ -7,7 +7,7 @@ const Accept = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('token');
         const response = await fetch('http://localhost:5000/research/process', {
           method: 'GET',
           credentials: 'include',
@@ -31,7 +31,7 @@ const Accept = () => {
 
   const handleApprove = async (id) => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:5000/research/approve/${id}`, {
         method: 'PUT',
         headers: {
@@ -54,7 +54,7 @@ const Accept = () => {
 
   const handleReject = async (id) => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       const res = await fetch(`http://localhost:5000/research/reject/${id}`, {
         method: 'PUT',
         headers: {
