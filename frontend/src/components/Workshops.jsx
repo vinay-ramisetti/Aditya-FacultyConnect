@@ -1,28 +1,33 @@
 import React from 'react';
-import Logo from '../images/aboutlogo.jpg';
+import DisplayWorkshops from './DisplayWorkshops';
+import { useNavigate } from 'react-router-dom';
+import './Workshop.css';
+import { FaPlus } from "react-icons/fa";
+import Navbar from './Navbar';
 
-const About = () => {
+const Workshops = () => {
+  const navigate = useNavigate();
+
   return (
-    <div style={{ textAlign: 'center' }}>
-      <img
-        src={Logo}
-        alt="About Us Logo"
-        style={{
-          width: '300px',
-          height: 'auto',
-          borderRadius: '8px',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          marginBottom: '20px',
-        }}
-      />
-      <p style={{ fontSize: '16px', color: '#555', lineHeight: '1.6' }}>
-        Welcome to the About page! Here, you can learn more about our mission, vision, and the 
-        amazing team behind our work. We are committed to delivering excellence and fostering 
-        innovation in everything we do.
-      </p>
+    <div>
+      <Navbar/>
+       <div className="articles-container">
+    <div className="header">
+      <h1 className="page-title">Workshops</h1>
+      <button
+        className="post-button"
+        onClick={() => navigate('/addworkshop')}
+      >
+      <FaPlus />  Add
+      </button>
     </div>
+    <hr className="divider" />
+    <DisplayWorkshops />
+  </div>
+  </div>
+   
   );
 };
 
-export default About;
+export default Workshops;
 

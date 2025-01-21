@@ -15,7 +15,7 @@ const Profile = () => {
     const fetchLecturerDetails = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        console.log(token); 
+        console.log(" token at profile:",token); 
         setTk(token);
         const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
           method: 'GET',

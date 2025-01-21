@@ -28,6 +28,7 @@ import cheImage from '../images/che.jpeg';
 import bioImage from '../images/bio.jpeg';
 import Workshops from './Workshops';
 import About from './About';
+import Addworkshop from './AddWorkshop';
 
 
 
@@ -105,6 +106,10 @@ function App() {
         <Route
           path="/addResearch"
           element={<AddResearch />}
+        />
+        <Route
+          path="/addworkshop"
+          element={<Addworkshop />}
         />
         <Route
           path="/accept"

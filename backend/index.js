@@ -5,7 +5,6 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const app = express();
 const cors = require("cors");
-const research = require("./models/research");
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,9 +25,8 @@ const addUser=require(path.join(__dirname,"routes","add-user"));
 const Research=require(path.join(__dirname,"routes","researchwork"));
 const classroute=require(path.join(__dirname,"routes","class-route"));
 const Articles=require(path.join(__dirname,"routes","articles"));
+const Workshops=require(path.join(__dirname,"routes","workshops"));
 
-//requiring MongoDb
-const user = require(path.join(__dirname, "models", "user-model"));
 
 const corsOptions = {
     origin: 'http://localhost:5173', // Specify the frontend URL
@@ -47,6 +45,7 @@ app.use("/add-user", addUser);
 app.use("/research",Research);
 app.use("/update", classroute);
 app.use("/article",Articles);
+app.use("/workshop",Workshops);
 // Database Connection
 const ConnectDB = async () => {
     try {

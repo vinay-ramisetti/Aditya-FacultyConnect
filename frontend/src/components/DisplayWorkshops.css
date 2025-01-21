@@ -1,0 +1,36 @@
+.workshop-section {
+  margin-bottom: 30px;
+}
+
+.workshop-section h2 {
+  font-size: 24px;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.workshop-card {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.workshop-card h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.workshop-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.no-workshops {
+  font-size: 16px;
+  color: #888;
+  text-align: center;
+}
