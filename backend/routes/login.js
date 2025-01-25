@@ -28,9 +28,16 @@ router.post('/login', async (req, res) => {
 
         // Generate token
         const token = generatetoken(user);
+        console.log(token);
 
         // Set cookie with token
-        res.cookie('token', token);
+        res.cookie('token', token, {
+            httpOnly: true, // Prevents JavaScript access (secure from XSS)
+            secure: process.env.NODE_ENV === 'production', // Use only over HTTPS in production
+            sameSite: 'strict', // Prevent CSRF (restrict cross-site requests)
+            maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years in milliseconds
+          });
+          console.log(res.cookie.token);
 
         // Respond with success message
         res.status(200).json({ message: 'Login successful!', token });

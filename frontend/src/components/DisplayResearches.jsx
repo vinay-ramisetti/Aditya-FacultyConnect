@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { MdDelete } from "react-icons/md";
 import { HiMiniPencilSquare } from "react-icons/hi2";
+import { useNavigate } from 'react-router-dom';
 
 const DisplayResearches = () => {
   const [researches, setResearches] = useState([]);
   const [filter, setFilter] = useState('approved');
+  const navigate = useNavigate();
+  const [hover, setHover] = useState(false);
+
+  const hoverStyle = {
+    cursor: 'pointer',
+    color: hover ? '#007bff' : '#000', // Changes color on hover
+    textDecoration: hover ? 'underline' : 'none', // Adds underline on hover
+    transition: 'color 0.1s, text-decoration 0.1s', // Smooth transition
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,7 +134,14 @@ const DisplayResearches = () => {
                 }}
               >
                 <div>
-                  <h3>{research.title}</h3>
+                <h3
+                 style={hoverStyle}
+                 onClick={() => navigate(`/researchtext/${research._id}`)}
+                 onMouseEnter={() => setHover(true)}
+                 onMouseLeave={() => setHover(false)}
+               >
+               {research.title}
+               </h3>
                   <p>{research.description}</p>
                   <p>
                     <strong>Published Date:</strong>{' '}

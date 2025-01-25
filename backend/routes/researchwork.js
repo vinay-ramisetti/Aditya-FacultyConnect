@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user-model');
 const ResearchData = require('../models/research');
 const isloggedin = require('../middlewares/isloggedin');
+const mongoose = require('mongoose');
 
 router.post("/add", isloggedin, async (req, res) => {
   try {
@@ -150,5 +151,49 @@ router.put('/reject/:id', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+router.get('/researchtext/:id', isloggedin,async (req, res) => {
+  try {
+    console.log('Endpoint hit!');
+    const Id = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(Id)) {
+      console.error('Invalid ObjectId:', Id);
+      return res.status(400).json({ message: 'Invalid ID format' });
+    }
+
+    console.log('Valid ObjectId:', Id);
+
+    const objectId = new mongoose.Types.ObjectId(Id);
+
+    const researchText = await ResearchData.aggregate([
+      {
+        $match: { _id: objectId },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'userId',
+          foreignField: '_id',
+          as: 'userDetails',
+        },
+      },
+      {
+        $unwind: '$userDetails',
+      },
+    ]);
+
+    if (researchText.length === 0) {
+      console.error('No research found for ID:', Id);
+      return res.status(404).json({ message: 'Research not found' });
+    }
+
+    res.status(200).json(researchText[0]);
+  } catch (error) {
+    console.error('Error fetching research text:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 module.exports = router;

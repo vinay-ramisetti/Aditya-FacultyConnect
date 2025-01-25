@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
 
 const OthersResearch = ({Id}) => {
   const [researches,setResearches]=useState([]);
+  const navigate = useNavigate();
    useEffect(() => {
      const fetchData= async ()=>{
       try{
@@ -41,7 +43,7 @@ const OthersResearch = ({Id}) => {
                  }}
                >
                  <div>
-                   <h3>{research.title}</h3>
+                 <h3 onClick={() => navigate(`/researchtext/${research._id}`)}>{research.title}</h3>
                    <p>{research.description}</p>
                    <p>
                      <strong>Published Date:</strong>{' '}

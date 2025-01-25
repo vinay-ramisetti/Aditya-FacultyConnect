@@ -30,6 +30,7 @@ import Workshops from './Workshops';
 import About from './About';
 import Addworkshop from './AddWorkshop';
 import ClassInfo from './ClassInfo';
+import ResearchText from './ResearchText';
 
 
 function App() {
@@ -122,6 +123,10 @@ function App() {
         <Route
           path="/workshops"
           element={<Workshops />}
+        />
+        <Route
+          path="/researchtext/:id"
+          element={<ResearchText />}
         />
       </Routes>
   );
