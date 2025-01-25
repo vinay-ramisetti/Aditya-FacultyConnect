@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Researchinfo from './Researchinfo';
 import ClassInfo from './ClassInfo';
+import DisplayClasses from './DisplayClasses';
 
 const Profile = () => {
   const [lecturerDetails, setLecturerDetails] = useState({});
@@ -137,7 +138,7 @@ const Profile = () => {
          
           
         </div>
-        <ClassInfo />
+        <DisplayClasses/>
         {/* <Researchinfo token={tk}/> */}
       </div>
     </div>

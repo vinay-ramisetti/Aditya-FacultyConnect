@@ -81,28 +81,30 @@ const Navbar = () => {
               Home
             </a>
           </li>
-          <li
-            style={{
-              fontSize: '16px',
-              fontFamily: 'Arial, sans-serif',
-              cursor: 'pointer',
-              color: '#555',
-              textDecoration: 'none',
-            }}
-          >
-            <a
-              href="/articles"
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseEnter={(e) => (e.target.style.color = '#007bff')}
-              onMouseLeave={(e) => (e.target.style.color = '#555')}
-            >
-              Articles
-            </a>
-          </li>
+          {(user.designation === 'Faculty' || user.designation === 'HOD')   && (
+              <li
+                style={{
+                  fontSize: '16px',
+                  fontFamily: 'Arial, sans-serif',
+                  cursor: 'pointer',
+                  color: '#555',
+                  textDecoration: 'none',
+                }}
+              >
+                <a
+                  href="/classes"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => (e.target.style.color = '#007bff')}
+                  onMouseLeave={(e) => (e.target.style.color = '#555')}
+                >
+                  Classes
+                </a>
+              </li>
+            )}
           <li
             style={{
               fontSize: '16px',
@@ -147,30 +149,29 @@ const Navbar = () => {
               Workshops
             </a>
             </li>
-            {user.designation === 'Faculty' && (
-              <li
-                style={{
-                  fontSize: '16px',
-                  fontFamily: 'Arial, sans-serif',
-                  cursor: 'pointer',
-                  color: '#555',
-                  textDecoration: 'none',
-                }}
-              >
-                <a
-                  href="/classes"
-                  style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'color 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => (e.target.style.color = '#007bff')}
-                  onMouseLeave={(e) => (e.target.style.color = '#555')}
-                >
-                  Classes
-                </a>
-              </li>
-            )}
+            <li
+            style={{
+              fontSize: '16px',
+              fontFamily: 'Arial, sans-serif',
+              cursor: 'pointer',
+              color: '#555',
+              textDecoration: 'none',
+            }}
+          >
+            <a
+              href="/articles"
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+                transition: 'color 0.3s ease',
+              }}
+              onMouseEnter={(e) => (e.target.style.color = '#007bff')}
+              onMouseLeave={(e) => (e.target.style.color = '#555')}
+            >
+              Articles
+            </a>
+          </li>
+           
             {user.designation === 'HOD' && (
               <li
                 style={{

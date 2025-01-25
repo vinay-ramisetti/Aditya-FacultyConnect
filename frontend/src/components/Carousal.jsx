@@ -17,7 +17,7 @@ const Carousal = () => {
         infiniteLoop
         interval={3000}
         showThumbs={false}
-        showStatus={false}
+        showStatus={true}
         showIndicators={true}
         dynamicHeight={false}
       >

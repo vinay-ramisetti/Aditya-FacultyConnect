@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Ensure hooks are imported
+import React, { useState, useEffect } from 'react'; 
 import {  Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import '../tailwind.css'; // Adjust the path if needed
