@@ -29,7 +29,7 @@ import bioImage from '../images/bio.jpeg';
 import Workshops from './Workshops';
 import About from './About';
 import Addworkshop from './AddWorkshop';
-
+import ClassInfo from './ClassInfo';
 
 
 function App() {
@@ -93,7 +93,7 @@ function App() {
         />
          <Route
           path="/classes"
-          element={<DisplayClasses/>}
+          element={<ClassInfo/>}
         />
         <Route
           path="/teacher/:id"

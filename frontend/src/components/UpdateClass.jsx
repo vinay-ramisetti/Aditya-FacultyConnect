@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './UpdateClass.css';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const UpdateClass = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         className: '',
         courseName: '',
@@ -72,6 +74,7 @@ const UpdateClass = () => {
                 }
             });
             console.log('Class updated successfully:', response.data);
+            navigate('/classes')
         } catch (error) {
             console.error('Error updating class:', error);
         }

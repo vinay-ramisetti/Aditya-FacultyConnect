@@ -146,28 +146,53 @@ const Navbar = () => {
             >
               Workshops
             </a>
-          </li>
-          {user.designation==='HOD' &&  <li
-            style={{
-              fontSize: '16px',
-              fontFamily: 'Arial, sans-serif',
-              cursor: 'pointer',
-              color: '#555',
-              textDecoration: 'none',
-            }}
-          >
-            <a
-              href="/accept"
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'color 0.3s ease',
-              }}
-            >
-              Approvals
-            </a>
-          </li>}
-         
+            </li>
+            {user.designation === 'Faculty' && (
+              <li
+                style={{
+                  fontSize: '16px',
+                  fontFamily: 'Arial, sans-serif',
+                  cursor: 'pointer',
+                  color: '#555',
+                  textDecoration: 'none',
+                }}
+              >
+                <a
+                  href="/classes"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => (e.target.style.color = '#007bff')}
+                  onMouseLeave={(e) => (e.target.style.color = '#555')}
+                >
+                  Classes
+                </a>
+              </li>
+            )}
+            {user.designation === 'HOD' && (
+              <li
+                style={{
+                  fontSize: '16px',
+                  fontFamily: 'Arial, sans-serif',
+                  cursor: 'pointer',
+                  color: '#555',
+                  textDecoration: 'none',
+                }}
+              >
+                <a
+                  href="/accept"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'color 0.3s ease',
+                  }}
+                >
+                  Approvals
+                </a>
+              </li>
+            )}
         </ul>
       </div>
 
