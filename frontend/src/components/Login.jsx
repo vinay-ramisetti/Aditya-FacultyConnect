@@ -22,13 +22,13 @@ const Signin = () => {
         }
 
         const data = await response.json();
-        console.log('Success:', data);
+      
         
         // Set token in local storage
         localStorage.setItem('token', data.token);
 
         const token = localStorage.getItem('token');
-      console.log('Stored Token:', token);
+   
 
 
 

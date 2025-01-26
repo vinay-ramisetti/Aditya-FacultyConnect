@@ -126,6 +126,22 @@ router.get("/data", isloggedin, async (req, res) => {
         res.status(500).json({ message: "Unable to fetch the data" });
     }
 });
+router.get("/otherclass/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+      // Find classes by teacher's ID (not userId)
+      const classdata = await Class.find({ teacher: id });
+      
+      if (classdata.length === 0) {
+        return res.status(404).json({ message: "No class found for this user" });
+      }
+      
+      res.status(200).json(classdata);
+    } catch (error) {
+      console.log("Failed to fetch the resources!!", error);
+      res.status(500).json({ message: "Unable to fetch the data" });
+    }
+});
 
-
+  
 module.exports = router;

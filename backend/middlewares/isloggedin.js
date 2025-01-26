@@ -8,7 +8,7 @@ module.exports = async function (req, res, next) {
          if (req.cookies && req.cookies.token) {
             token = req.cookies.token;
         }
-        console.log("Token in cookies:",token);
+      
          // If not found in cookies, check in headers
          if ( !token && req.headers.authorization) {
             const authHeader = req.headers.authorization;
@@ -17,7 +17,7 @@ module.exports = async function (req, res, next) {
                 token = authHeader.slice(7, authHeader.length); // Remove 'Bearer ' prefix
             }
         }
-        console.log("Token in header:",token);
+        
         // If token is still not found, return an error
         if (!token) {
             console.error("Token is missing from cookies or headers");

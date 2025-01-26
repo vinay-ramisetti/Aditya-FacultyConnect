@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import OthersResearch from './OthersResearch';
 import OthersArticles from './OthersArticles';
+import OthersClass from './OthersClass';
 
 const Teacher = (props) => {
   const { id } = useParams();
@@ -37,7 +38,9 @@ const Teacher = (props) => {
           <h3 style={styles.subHeading}>Articles</h3>
           <OthersArticles Id={teacher._id} />
         </div>
+          
       </div>
+      <div> <OthersClass Id={teacher._id}/> </div>
     </div>
   );
 };
