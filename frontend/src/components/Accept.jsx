@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Accept.css'; 
 import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const Accept = () => {
   const [unapproved, setUnapproved] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,7 +89,7 @@ const Accept = () => {
           <div className="research-list">
             {unapproved.map((item) => (
               <div key={item._id} className="research-item">
-                <h2 className="research-title">{item.title}</h2>
+                <h2 className="research-title" onClick={() => navigate(`/researchtext/${item._id}`)}>{item.title}</h2>
                 <p className="research-description">{item.description}</p>
                 <div className="button-group">
                   <button
