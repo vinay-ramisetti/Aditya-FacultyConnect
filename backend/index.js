@@ -29,8 +29,8 @@ const Workshops=require(path.join(__dirname,"routes","workshops"));
 
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Specify the frontend URL
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    origin: 'http://localhost:5173',
+    credentials: true,
     exposedHeaders: ['Authorization']
 };
 app.use(cors(corsOptions));
