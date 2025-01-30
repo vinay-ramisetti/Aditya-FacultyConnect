@@ -114,8 +114,8 @@ const Profile = () => {
         <div style={styles.section}>
           <h2 style={styles.sectionTitle}>Experience</h2>
           <div style={styles.sectionContent}>
-            <p>Industry Experience: {lecturerDetails.Industry} years</p>
-            <p>Total Experience: {lecturerDetails.Total_Exp} years</p>
+            <p>Institutions Worked at: {lecturerDetails.Industry} </p>
+            <p>Total Experience: {lecturerDetails.TExp} years</p>
           </div>
         </div>
 

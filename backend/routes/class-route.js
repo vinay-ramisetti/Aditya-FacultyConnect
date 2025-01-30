@@ -6,13 +6,12 @@ const User = require('../models/user-model');
 
 router.post('/classes', isloggedin, async (req, res) => {
     try {
-        // Find the logged-in user
+      
         const user = await User.findById(req.user._id);
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
 
-        // Destructure request body
         const {
             className,
             courseName,
@@ -30,7 +29,7 @@ router.post('/classes', isloggedin, async (req, res) => {
             below75
         } = req.body;
 
-        // Validate the required fields
+      
         if (!numberOfStudents || !appeared || !passCount) {
             return res.status(400).json({ error: 'numberOfStudents, appeared, and passCount are required fields' });
         }
@@ -39,10 +38,9 @@ router.post('/classes', isloggedin, async (req, res) => {
             return res.status(400).json({ error: 'Appeared students cannot exceed total number of students' });
         }
 
-        // Calculate Pass Percentage
         const passPercentage = ((passCount / appeared) * 100).toFixed(2);
 
-        // Calculate Average Percentage
+        
         const totalWeightedScore =
             (95 * (above95 || 0)) +
             (90 * (between85And95 || 0)) +
