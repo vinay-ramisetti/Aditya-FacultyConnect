@@ -4,6 +4,7 @@ import './ClassInfo.css';
 import DisplayClasses from './DisplayClasses'; 
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import DisplayCourses from './Displaycourses';
 
 const ClassInfo = () => {
   const navigate = useNavigate();
@@ -14,9 +15,8 @@ const ClassInfo = () => {
     <>
     <Navbar/>
     <div className="class-container">
-      
       <div className="header">
-        <h1>My Classes</h1>
+        <h2>Courses Average Pass Percentage</h2>
         <button 
           onClick={() => navigate('/class')} 
           className="add-button"
@@ -24,7 +24,19 @@ const ClassInfo = () => {
           <IoMdAdd /> Add
         </button>
       </div>
-      <DisplayClasses  />
+        <DisplayCourses />
+    </div>
+    <div className="class-container">
+      <div className="header">
+        <h2> Course feedback:</h2>
+        <button 
+          onClick={() => navigate('/class')} 
+          className="add-button"
+        >
+          <IoMdAdd /> Add
+        </button>
+      </div>
+        <DisplayCourses />
     </div>
     </>
   );
