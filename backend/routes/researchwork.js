@@ -152,48 +152,118 @@ router.put('/reject/:id', async (req, res) => {
   }
 });
 
-router.get('/researchtext/:id', isloggedin,async (req, res) => {
+router.get("/researchtext", isloggedin, async (req, res) => {
   try {
-    console.log('Endpoint hit!');
-    const Id = req.params.id;
-
-    if (!mongoose.Types.ObjectId.isValid(Id)) {
-      console.error('Invalid ObjectId:', Id);
-      return res.status(400).json({ message: 'Invalid ID format' });
+    const userId = req.user._id;
+    const researchText = await ResearchData.findOne({ userId }).populate("userId");
+    
+    if (!researchText) {
+      return res.status(404).json({ message: "Research not found" });
     }
 
-    console.log('Valid ObjectId:', Id);
+    // Calculate array sizes
+    const SciArticlesSize = researchText.SciArticles.length;
+    const WosArticlesSize = researchText.WosArticles.length;
+    const ProposalsSize = researchText.Proposals.length;
+    const PapersSize = researchText.Papers.length;
+    const BooksSize = researchText.Books.length;
+    const ChaptersSize = researchText.Chapters.length;
+    const PGrantedSize = researchText.PGranted.length;
+    const PFiledSize = researchText.PFiled.length;
 
-    const objectId = new mongoose.Types.ObjectId(Id);
+    // Calculate marks (max 2 for each)
+    const PapersMarks = Math.min(PapersSize, 2);
+    const BooksMarks = Math.min(BooksSize, 2);
+    const ChaptersMarks = Math.min(ChaptersSize, 2);
+    const PGrantedMarks = Math.min(PGrantedSize, 2);
+    const PFiledMarks = Math.min(PFiledSize, 2);
+    const SciMarks=Math.min(SciArticlesSize*10,60);
+    const WosMarks=Math.min(WosArticlesSize*10,60);
+    const ProposalMarks=Math.min(ProposalsSize,10);
+    const SelfAssessment=PapersMarks+BooksMarks+ChaptersMarks+PGrantedMarks+PFiledMarks;
 
-    const researchText = await ResearchData.aggregate([
-      {
-        $match: { _id: objectId },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'userId',
-          foreignField: '_id',
-          as: 'userDetails',
-        },
-      },
-      {
-        $unwind: '$userDetails',
-      },
-    ]);
 
-    if (researchText.length === 0) {
-      console.error('No research found for ID:', Id);
-      return res.status(404).json({ message: 'Research not found' });
-    }
+    // Convert Mongoose document to plain object and add calculated values
+    const responseData = {
+      _id: researchText._id,
+      userId: researchText.userId,
+      SciArticles: researchText.SciArticles,
+      WosArticles: researchText.WosArticles,
+      Proposals: researchText.Proposals,
+      Papers: researchText.Papers,
+      Books: researchText.Books,
+      Chapters: researchText.Chapters,
+      PGranted: researchText.PGranted,
+      PFiled: researchText.PFiled,
+      SciArticlesSize,
+      WosArticlesSize,
+      ProposalsSize,
+      PapersSize,
+      BooksSize,
+      ChaptersSize,
+      PGrantedSize,
+      PFiledSize,
+      SciMarks,
+      WosMarks,
+      ProposalMarks,
+      PapersMarks,
+      BooksMarks,
+      ChaptersMarks,
+      PGrantedMarks,
+      PFiledMarks,
+      SelfAssessment
+    };
 
-    res.status(200).json(researchText[0]);
+    res.status(200).json(responseData);
   } catch (error) {
-    console.error('Error fetching research text:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error("Error fetching research text:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
+
+router.post("/addsciarticles",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { articleDetails, ISSN, authorPosition } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        SciArticles: [{ articleDetails, ISSN, authorPosition }]
+      });
+    } else {
+      researchEntry.SciArticles.push({ articleDetails, ISSN, authorPosition });
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.get("/sciarticles", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
+
+    if (!researchEntry || researchEntry.SciArticles.length === 0) {
+      return res.status(404).json({ message: "No articles found" });
+    }
+
+    res.status(200).json(researchEntry.SciArticles);
+  } catch (error) {
+    console.error("Error fetching SCI articles:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+
+
 
 
 module.exports = router;

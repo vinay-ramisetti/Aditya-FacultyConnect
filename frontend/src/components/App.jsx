@@ -31,7 +31,22 @@ import About from './About';
 import Addworkshop from './AddWorkshop';
 import ClassInfo from './ClassInfo';
 import ResearchText from './ResearchText';
-import UpdateCla from './UpdateCla';
+import Sciarticles from './Sciarticles';
+import Wosarticles from './Wosarticles';
+import Proposals from './Proposals';
+import Papers from './Papers';
+import Books from './Books';
+import Chapters from './Chapters';
+import PatentsGranted from './PatentsGranted';
+import PatentsFiled from './PatentsFiled';
+import AddSciArticles from './AddSciArticles';
+import AddWosArticles from './AddWosArticles';
+import AddProposals from './AddProposals';
+import AddPapers from './AddPapers';
+import AddBooks from './AddBooks';
+import AddChapters from './AddChapters';
+import AddPGranted from './AddPGranted';
+import AddPFiled from './AddPFiled';
 
 
 function App() {
@@ -129,10 +144,23 @@ function App() {
           path="/workshops"
           element={<Workshops />}
         />
-        <Route
-          path="/researchtext/:id"
-          element={<ResearchText />}
-        />
+        <Route path="/sciarticles" element={<Sciarticles />} />
+        <Route path="/wosarticles" element={<Wosarticles />} />
+        <Route path="/proposals" element={<Proposals />} />
+        <Route path="/papers" element={<Papers />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/chapters" element={<Chapters />} />
+        <Route path="/patentsGranted" element={<PatentsGranted />} />
+        <Route path="/patentsFiled" element={<PatentsFiled />} />
+
+        <Route path="/sci-articles" element={<AddSciArticles/>} />
+        <Route path="/wos-articles" element={<AddWosArticles/>} />
+        <Route path="/addproposals" element={<AddProposals/>} />
+        <Route path="/addpapers" element={<AddPapers/>} />
+        <Route path="/addbooks" element={<AddBooks/>} />
+        <Route path="/addchapters" element={<AddChapters/>} />
+        <Route path="/addpgranted" element={<AddPGranted/>} />
+        <Route path="/addpfiled" element={<AddPFiled/>} />
       </Routes>
   );
 }
