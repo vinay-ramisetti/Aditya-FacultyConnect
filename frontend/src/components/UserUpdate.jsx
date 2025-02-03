@@ -105,7 +105,7 @@ function AddUserForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="Industry">Industry:</label>
+        <label htmlFor="Industry">Institutions Worked at:</label>
         <input type="text" id="Industry" name="Industry" value={formData.Industry} onChange={handleChange} />
       </div>
 
