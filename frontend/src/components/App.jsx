@@ -47,7 +47,7 @@ import AddBooks from './AddBooks';
 import AddChapters from './AddChapters';
 import AddPGranted from './AddPGranted';
 import AddPFiled from './AddPFiled';
-
+import UpdateCla from './UpdateCla';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
