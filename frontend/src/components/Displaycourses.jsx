@@ -64,31 +64,33 @@ const DisplayCourses = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.isArray(data) && data.length > 0 ? (
-                        data.map((course, index) => (
-                            <tr key={course.id || index}>
-                                <td>{index + 1}</td>
-                                <td>{course.courseName}</td>
-                                <td>{course.semester}</td>
-                                <td>{course.numberOfStudents}</td>
-                                <td>{course.passCount}</td>
-                                <td>{((course.passCount / course.numberOfStudents) * 100).toFixed(2)}%</td>
+    {Array.isArray(data) && data.length > 0 ? (
+        data.map((course, index) => (
+            <tr key={course.id || index}>
+                <td>{index + 1}</td>
+                <td>{course.courseName}</td>
+                <td>{course.semester}</td>
+                <td>{course.numberOfStudents}</td>
+                <td>{course.passCount}</td>
+                <td>{((course.passCount / course.numberOfStudents) * 100).toFixed(2)}%</td>
 
-                                {/* Only show "Average %" and "Self-Assessment Marks" once in the first row */}
-                                {index === 0 && (
-                                    <>
-                                        <td rowSpan={data.length}>{course.averagePercentage}</td>
-                                        <td rowSpan={data.length}>{course.selfAssessmentMarks}</td>
-                                    </>
-                                )}
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="10" style={{ textAlign: 'center' }}>No data available</td>
-                        </tr>
-                    )}
-                </tbody>
+                {/* Show last course's "Average %" and "Self-Assessment Marks" once but span all rows */}
+                {index === 0 && (
+                    <>
+                        <td rowSpan={data.length}>{data[data.length - 1].averagePercentage}</td>
+                        <td rowSpan={data.length}>{data[data.length - 1].selfAssessmentMarks}</td>
+                    </>
+                )}
+            </tr>
+        ))
+    ) : (
+        <tr>
+            <td colSpan="10" style={{ textAlign: 'center' }}>No data available</td>
+        </tr>
+    )}
+</tbody>
+
+
             </table>
         </div>
     );

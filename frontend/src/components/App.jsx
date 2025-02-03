@@ -31,6 +31,7 @@ import About from './About';
 import Addworkshop from './AddWorkshop';
 import ClassInfo from './ClassInfo';
 import ResearchText from './ResearchText';
+import UpdateCla from './UpdateCla';
 
 
 function App() {
@@ -91,6 +92,10 @@ function App() {
          <Route
           path="/class"
           element={<UpdateClass/>}
+        />
+         <Route
+          path="/feedback"
+          element={<UpdateCla/>}
         />
          <Route
           path="/classes"

@@ -5,6 +5,7 @@ import DisplayClasses from './DisplayClasses';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import DisplayCourses from './Displaycourses';
+import DisplayFeedback from './DisplayFeedback';
 
 const ClassInfo = () => {
   const navigate = useNavigate();
@@ -30,13 +31,13 @@ const ClassInfo = () => {
       <div className="header">
         <h2> Course feedback:</h2>
         <button 
-          onClick={() => navigate('/class')} 
+          onClick={() => navigate('/feedback')} 
           className="add-button"
         >
           <IoMdAdd /> Add
         </button>
       </div>
-        <DisplayCourses />
+        <DisplayFeedback />
     </div>
     </>
   );
