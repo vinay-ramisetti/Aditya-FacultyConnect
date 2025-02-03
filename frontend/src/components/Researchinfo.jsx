@@ -4,6 +4,7 @@ import './Researchinfo.css';
 import DisplayResearches from './DisplayResearches';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import ResearchText from './ResearchText';
 
 const Researchinfo = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Researchinfo = () => {
     <>
     <Navbar/>
      <div className="research-container">
-      <div className="header">
+      {/* <div className="header">
         <h1>My Researches</h1>
         <button 
           onClick={() => navigate('/addResearch', { state: { token } })} 
@@ -21,8 +22,9 @@ const Researchinfo = () => {
         >
           <IoMdAdd /> Add
         </button>
-      </div>
-      <DisplayResearches />
+      </div> */}
+      {/* <DisplayResearches /> */}
+      <ResearchText/>
     </div>
     </>
    

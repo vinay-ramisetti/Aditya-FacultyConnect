@@ -136,7 +136,7 @@ const DisplayResearches = () => {
                 <div>
                 <h3
                  style={hoverStyle}
-                 onClick={() => navigate(`/researchtext/${research._id}`)}
+                //  onClick={() => navigate(`/researchtext/${research._id}`)}
                  onMouseEnter={() => setHover(true)}
                  onMouseLeave={() => setHover(false)}
                >
