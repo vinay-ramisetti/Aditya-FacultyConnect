@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddChapters = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     chapterDetails: '',
     Publisher: '',
@@ -12,9 +14,35 @@ const AddChapters = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitted Data:', formData);
+    
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/research/addchapters', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        alert("Chapters submitted successfully!");
+        setFormData({ chapterDetails: '',
+          Publisher: '',
+          ISBN:'',
+          authorPosition:'' });
+        navigate('/chapters');
+        
+      } else {
+        alert("Error submitting Chapter");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Server error");
+    }
   };
 
   return (
@@ -24,13 +52,13 @@ const AddChapters = () => {
         <div>
           <label className="block text-sm font-medium">Chapters Authored</label>
           <textarea
-            name="bookDetails"
-            value={formData.chapterDetails}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-md"
-            rows="3"
-            required
-          ></textarea>
+             name="chapterDetails"
+             value={formData.chapterDetails}
+             onChange={handleChange}
+              className="w-full p-2 border rounded-md"
+              rows="3"
+              required
+             ></textarea>
         </div>
 
         <div>

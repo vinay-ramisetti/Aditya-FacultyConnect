@@ -172,14 +172,14 @@ router.get("/researchtext", isloggedin, async (req, res) => {
     const PFiledSize = researchText.PFiled.length;
 
     // Calculate marks (max 2 for each)
-    const PapersMarks = Math.min(PapersSize, 2);
-    const BooksMarks = Math.min(BooksSize, 2);
-    const ChaptersMarks = Math.min(ChaptersSize, 2);
-    const PGrantedMarks = Math.min(PGrantedSize, 2);
-    const PFiledMarks = Math.min(PFiledSize, 2);
-    const SciMarks=Math.min(SciArticlesSize*10,60);
-    const WosMarks=Math.min(WosArticlesSize*10,60);
-    const ProposalMarks=Math.min(ProposalsSize,10);
+    const PapersMarks = PapersSize*5;
+    const BooksMarks = BooksSize*10;
+    const ChaptersMarks = ChaptersSize*5;
+    const PGrantedMarks = PGrantedSize*10;
+    const PFiledMarks = PFiledSize*5;
+    const SciMarks=SciArticlesSize * 20 ;
+    const WosMarks=WosArticlesSize *10 ;
+    const ProposalMarks=ProposalsSize*10;
     const SelfAssessment=PapersMarks+BooksMarks+ChaptersMarks+PGrantedMarks+PFiledMarks;
 
 
@@ -245,6 +245,175 @@ router.post("/addsciarticles",isloggedin, async(req,res)=>{
   }
 })
 
+router.post("/addwosarticles",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { articleDetails, ISSN, authorPosition } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        WosArticles: [{ articleDetails, ISSN, authorPosition }]
+      });
+    } else {
+      researchEntry.WosArticles.push({ articleDetails, ISSN, authorPosition });
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post("/addproposals",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { proposalDetails, fundingAgency, amount } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        Proposals: [{ proposalDetails, fundingAgency, amount }]
+      });
+    } else {
+      researchEntry.Proposals.push({ proposalDetails, fundingAgency, amount });
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post("/addpapers",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { paperDetails, authorPosition } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        Papers: [{ paperDetails, authorPosition }]
+      });
+    } else {
+      researchEntry.Papers.push({ paperDetails, authorPosition });
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post("/addbooks",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { bookDetails, ISBN } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        Books: [{ bookDetails, ISBN }]
+      });
+    } else {
+      researchEntry.Books.push({ bookDetails, ISBN });
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post("/addchapters",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { chapterDetails, Publisher, ISBN, authorPosition } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        Chapters: [{ chapterDetails, Publisher, ISBN, authorPosition}]
+      });
+    } else {
+      researchEntry.Chapters.push({ chapterDetails, Publisher, ISBN, authorPosition });
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post("/addpgranted",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { PTitle, PNumber, CountryGranted,GrantedDate } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        PGranted: [{ PTitle, PNumber, CountryGranted,GrantedDate }]
+      });
+    } else {
+      researchEntry.PGranted.push({ PTitle, PNumber, CountryGranted,GrantedDate});
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post("/addpfiled",isloggedin, async(req,res)=>{
+  try{
+    const userId = req.user._id;
+    const { PTitle, PNumber, FiledinCountry,PublishedDate } = req.body;
+    let researchEntry = await ResearchData.findOne({ userId });
+    if (!researchEntry) {
+      researchEntry = new ResearchData({
+        userId,
+        PFiled: [{ PTitle, PNumber, FiledinCountry,PublishedDate }]
+      });
+    } else {
+      researchEntry.PFiled.push({PTitle, PNumber, FiledinCountry,PublishedDate});
+    }
+
+    // Save the updated document
+    await researchEntry.save();
+    res.status(201).json({ message: "Article added successfully!", data: researchEntry });
+
+  }catch(error){
+    console.error("Error while adding article:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+
 router.get("/sciarticles", isloggedin, async (req, res) => {
   try {
     const userId = req.user._id;
@@ -261,9 +430,117 @@ router.get("/sciarticles", isloggedin, async (req, res) => {
   }
 });
 
+router.get("/wosarticles", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
+
+    if (!researchEntry || researchEntry.WosArticles.length === 0) {
+      return res.status(404).json({ message: "No articles found" });
+    }
+
+    res.status(200).json(researchEntry.WosArticles);
+  } catch (error) {
+    console.error("Error fetching Wos articles:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/proposals", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
+
+    if (!researchEntry || researchEntry.Proposals.length === 0) {
+      return res.status(404).json({ message: "No Proposals found" });
+    }
+
+    res.status(200).json(researchEntry.Proposals);
+  } catch (error) {
+    console.error("Error fetching Proposals:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 
+router.get("/papers", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
 
+    if (!researchEntry || researchEntry.Papers.length === 0) {
+      return res.status(404).json({ message: "No papers found" });
+    }
 
+    res.status(200).json(researchEntry.Papers);
+  } catch (error) {
+    console.error("Error fetching Papers:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/books", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
+
+    if (!researchEntry || researchEntry.Books.length === 0) {
+      return res.status(404).json({ message: "No Books found" });
+    }
+
+    res.status(200).json(researchEntry.Books);
+  } catch (error) {
+    console.error("Error fetching Books:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/chapters", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
+
+    if (!researchEntry || researchEntry.Books.Chapters === 0) {
+      return res.status(404).json({ message: "No Chapters found" });
+    }
+
+    res.status(200).json(researchEntry.Chapters);
+  } catch (error) {
+    console.error("Error fetching Chapters:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/pgranted", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
+
+    if (!researchEntry || researchEntry.PGranted.length === 0) {
+      return res.status(404).json({ message: "No Patents Granted found" });
+    }
+
+    res.status(200).json(researchEntry.PGranted);
+  } catch (error) {
+    console.error("Error fetching Patents Granted:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/pfiled", isloggedin, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const researchEntry = await ResearchData.findOne({ userId });
+
+    if (!researchEntry || researchEntry.PFiled.length === 0) {
+      return res.status(404).json({ message: "No Patents Filed found" });
+    }
+
+    res.status(200).json(researchEntry.PFiled);
+  } catch (error) {
+    console.error("Error fetching Patents Filed:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 module.exports = router;
