@@ -5,7 +5,7 @@ const User = require('../models/user-model');
 // Route to update user details
 router.put('/', async (req, res) => {
     try {
-        const { email, EmpID, JoiningDate, Qualification, YearOfpass, UG, PG, Phd, Industry, TExp } = req.body;
+        const { email, EmpID, JoiningDate, Qualification, YearOfpass, UG, UGYear, PG, PGYear, Phd, PhdYear, Industry, OtherInst, OtherYear, TExp } = req.body;
         
         // Check if email is provided
         if (!email) {
@@ -15,7 +15,7 @@ router.put('/', async (req, res) => {
         // Find the user by email and update the fields
         const updatedUser = await User.findOneAndUpdate(
             { email },
-            { EmpID, JoiningDate, Qualification, YearOfpass, UG, PG, Phd, Industry, TExp },
+            { EmpID, JoiningDate, Qualification, YearOfpass, UG, UGYear, PG, PGYear, Phd, PhdYear, Industry, OtherInst, OtherYear, TExp },
             { new: true, runValidators: true }
         );
 

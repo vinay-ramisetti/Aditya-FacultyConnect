@@ -7,6 +7,7 @@ import Header from './Header';
 import Carousal from './Carousal';
 import { useState,useEffect } from 'react';
 import DisplayClasses from './DisplayClasses';
+import FacultyScoreTable from './FacultyScoreTable';
 const Home = (props) => {
   const faculty = props.faculty;
   const departments = props.departments;
@@ -46,8 +47,8 @@ const Home = (props) => {
       <div className='m-2 p-1'>
         <div>
        
-        {user.designation === 'Faculty' && <DisplayClasses />}
-        {user.designation === 'HOD' && <DisplayClasses />}
+        {user.designation === 'Faculty' && <FacultyScoreTable/>}
+        {user.designation === 'HOD' && <FacultyScoreTable/>}
           <Faculty faculty={faculty} />
         </div>
         {user.designation==='Dean' && <div>

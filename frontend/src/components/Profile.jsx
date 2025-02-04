@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-import Researchinfo from './Researchinfo';
-import ClassInfo from './ClassInfo';
-import DisplayClasses from './DisplayClasses';
+import './Profile.css';
+
 
 const Profile = () => {
   const [lecturerDetails, setLecturerDetails] = useState({});
-  const [classes, setClasses] = useState([]);
   const navigate = useNavigate();
-  const [tk,setTk]=useState();
-  const [lecturerId,setLecturerId]=useState();
 
   useEffect(() => {
     const fetchLecturerDetails = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log(" token at profile:",token); 
-        setTk(token);
-        const response = await fetch('http://localhost:5000/fetchData', { // Adjust the endpoint as necessary
+        const response = await fetch('http://localhost:5000/fetchData', {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -29,7 +23,6 @@ const Profile = () => {
         if (response.ok) {
           const data = await response.json();
           setLecturerDetails(data);
-          setLecturerId(data._id);
         } else {
           console.error('Failed to fetch lecturer details');
         }
@@ -37,109 +30,70 @@ const Profile = () => {
         console.error('Error fetching lecturer details:', error);
       }
     };
-
     fetchLecturerDetails();
   }, []);
 
-  const styles = {
-    container: {
-      margin: '2rem',
-      padding: '2rem',
-      fontFamily: 'Arial, sans-serif',
-      backgroundColor: 'rgb(213, 226, 238)',
-      borderRadius: '10px',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    },
-    section: {
-      marginBottom: '2rem',
-    },
-    sectionTitle: {
-      fontSize: '1.75rem',
-      fontWeight: 'bold',
-      marginBottom: '1rem',
-      color: '#333',
-    },
-    sectionContent: {
-      backgroundColor: '#ffffff',
-      padding: '1.5rem',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
-    },
-    button: {
-      padding: '12px 24px',
-      fontSize: '16px',
-      border: 'none',
-      borderRadius: '5px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      cursor: 'pointer',
-      transition: 'background-color 0.3s ease, transform 0.2s',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    },
-    buttonHover: {
-      backgroundColor: '#0056b3',
-      transform: 'scale(1.05)',
-    },
-  };
-
   return (
-    <div>
+    <div className="profile-container">
       <Navbar />
-      <div style={styles.container}>
-        {/* Basic Details Section */}
-        <div style={styles.section}>
-          <h2 style={styles.sectionTitle}>Basic Details</h2>
-          <div style={styles.sectionContent}>
-            <p>Name: {lecturerDetails.fullName}</p>
-            <p>Email: {lecturerDetails.email}</p>
-            <p>Employee ID: {lecturerDetails.EmpID}</p>
-            <p>Designation:{lecturerDetails.designation}</p>
-            <p>Department: {lecturerDetails.department}</p>
-            <p>Joining Date: {lecturerDetails.JoiningDate}</p>
-          </div>
-        </div>
+      <div className="profile-content">
+        {/* General Information */}
+        <section className="profile-section">
+          <h2>General Information</h2>
+          <p><strong>Name with Emp ID:</strong> {lecturerDetails.fullName} ({lecturerDetails.EmpID})</p>
+          <p><strong>Designation & Department:</strong> {lecturerDetails.designation}, {lecturerDetails.department}</p>
+          <p><strong>Date of Joining:</strong> {lecturerDetails.JoiningDate}</p>
+          <p><strong>Emp Email:</strong> {lecturerDetails.email}</p>
+        </section>
 
-        {/* Qualification Section */}
-        <div style={styles.section}>
-          <h2 style={styles.sectionTitle}>Qualification Details</h2>
-          <div style={styles.sectionContent}>
-            <p>UG: {lecturerDetails.UG}</p>
-            <p>PG: {lecturerDetails.PG}</p>
-            <p>PhD: {lecturerDetails.Phd}</p>
-            <p>Year of Passing: {lecturerDetails.YearOfpass}</p>
-          </div>
-        </div>
+        {/* Academic Qualifications */}
+        <section className="profile-section">
+          <h2>Academic Qualifications</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Qualification</th>
+                <th>Institution</th>
+                <th>Month & Year of Passing</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>UG</td>
+                <td>{lecturerDetails.UG}</td>
+                <td>{lecturerDetails.UGYear}</td>
+              </tr>
+              <tr>
+                <td>PG</td>
+                <td>{lecturerDetails.PG}</td>
+                <td>{lecturerDetails.PGYear}</td>
+              </tr>
+              <tr>
+                <td>Ph.D. / Pursuing Ph.D</td>
+                <td>{lecturerDetails.Phd || 'N/A'}</td>
+                <td>{lecturerDetails.PhdYear || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td>Any Other</td>
+                <td>{lecturerDetails.OtherInstitution || 'N/A'}</td>
+                <td>{lecturerDetails.OtherYear || 'N/A'}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-        {/* Experience Section */}
-        <div style={styles.section}>
-          <h2 style={styles.sectionTitle}>Experience</h2>
-          <div style={styles.sectionContent}>
-            <p>Institutions Worked at: {lecturerDetails.Industry} </p>
-            <p>Total Experience: {lecturerDetails.TExp} years</p>
-          </div>
-        </div>
+        {/* Experience */}
+        <section className="profile-section">
+          <h2>Experience</h2>
+          <p><strong>Industrial Experience (if any):</strong> {lecturerDetails.Industry || 'N/A'}</p>
+          <p><strong>Total Teaching Experience (after PG):</strong> {lecturerDetails.TExp} years</p>
+          <p><strong>Date of Joining in Aditya:</strong> {lecturerDetails.JoiningDate}</p>
+        </section>
 
         {/* Update Button */}
-        <div>
-          <button
-            style={styles.button}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = styles.buttonHover.backgroundColor;
-              e.target.style.transform = styles.buttonHover.transform;
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = styles.button.backgroundColor;
-              e.target.style.transform = 'scale(1)';
-            }}
-            onClick={() => navigate('/add-user')}
-          >
-            Update Details
-          </button>
-         
-          
-        </div>
-        <DisplayClasses/>
-        {/* <Researchinfo token={tk}/> */}
+        <button className="update-button" onClick={() => navigate('/add-user')}>
+          Update Details
+        </button>
       </div>
     </div>
   );

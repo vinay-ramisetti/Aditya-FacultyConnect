@@ -48,6 +48,7 @@ import AddChapters from './AddChapters';
 import AddPGranted from './AddPGranted';
 import AddPFiled from './AddPFiled';
 import UpdateCla from './UpdateCla';
+import FacultyScoreTable from './FacultyScoreTable';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -161,6 +162,7 @@ function App() {
         <Route path="/addchapters" element={<AddChapters/>} />
         <Route path="/addpgranted" element={<AddPGranted/>} />
         <Route path="/addpfiled" element={<AddPFiled/>} />
+        <Route path="/ScoreTable" element={<FacultyScoreTable/>} />
       </Routes>
   );
 }

@@ -1,29 +1,32 @@
-/* frontend/src/components/DisplayCourses.css */
-.courses-table {
+/* frontend/src/components/ProctoringTable.css */
+.proctoring-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
 }
 
-.courses-table th, .courses-table td {
+.proctoring-table th, .proctoring-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.courses-table th {
+.proctoring-table th {
     font-family: Arial, sans-serif; /* Common professional font */
     font-weight: normal; /* Remove bold styling */
-    background-color: rgb(255, 127, 39);;
-} /* Orange Title */
+    background-color: rgb(255, 127, 39); /* Orange Title */
+    color: white;
+}
 
-.courses-table tr:nth-child(even) {
+.proctoring-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.courses-table tr:hover {
+.proctoring-table tr:hover {
     background-color: #f1f1f1;
 }
+
+/* Add Button */
 .add-button {
     display: flex;
     align-items: center;
@@ -39,9 +42,9 @@
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     width: 100px;
-  }
-  
-  .add-button:hover {
+}
+
+.add-button:hover {
     background-color: #515151;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
+}

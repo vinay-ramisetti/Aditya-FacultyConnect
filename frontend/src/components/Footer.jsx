@@ -38,7 +38,7 @@ const Footer = () => {
             <strong>Email:</strong> office@aec.edu.in
           </p>
           <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-            <a href="#" style={{ color: '#fff' }}>
+            <a href="#" style={{ color: '#ffffff' }}>
               <i className="fab fa-facebook"></i>
             </a>
             <a href="#" style={{ color: '#fff' }}>
