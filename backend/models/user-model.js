@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema({
     PGYear:String,
     Phd:String,
     PhdYear:String,
+    OtherInst:String,
+    OtherYear:String,
     Industry:String,
     TExp:Number,
     CoufeedMarks: { type: Number, default: 0 },
