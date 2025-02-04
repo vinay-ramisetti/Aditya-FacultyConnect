@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const AddProposals = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     proposalDetails: '',
     fundingAgency: '',
@@ -11,9 +15,32 @@ const AddProposals = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitted Data:', formData);
+    
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/research/addproposals', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        alert("Proposals submitted successfully!");
+        setFormData({ proposalDetails: '', fundingAgency: '', amount: '' });
+        navigate('/proposals');
+        
+      } else {
+        alert("Error submitting article");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Server error");
+    }
   };
 
   return (

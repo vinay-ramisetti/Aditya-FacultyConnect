@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const AddWosArticles = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     articleDetails: '',
-    issn: '',
+    ISSN: '',
     authorPosition: ''
   });
 
@@ -11,9 +15,32 @@ const AddWosArticles = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitted Data:', formData);
+    
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/research/addwosarticles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        alert("Article submitted successfully!");
+        setFormData({ articleDetails: '', ISSN: '', authorPosition: '' });
+        navigate('/wosarticles');
+        
+      } else {
+        alert("Error submitting article");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Server error");
+    }
   };
 
   return (
@@ -36,8 +63,8 @@ const AddWosArticles = () => {
           <label className="block text-sm font-medium">ISSN</label>
           <input
             type="text"
-            name="issn"
-            value={formData.issn}
+            name="ISSN"
+            value={formData.ISSN}
             onChange={handleChange}
             className="w-full p-2 border rounded-md"
             required
