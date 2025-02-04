@@ -1,0 +1,46 @@
+/* frontend/src/components/DisplayCourses.css */
+.courses-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.courses-table th, .courses-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.courses-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.courses-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.courses-table tr:hover {
+    background-color: #f1f1f1;
+}
+.add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #959595;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100px;
+  }
+  
+  .add-button:hover {
+    background-color: #515151;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }

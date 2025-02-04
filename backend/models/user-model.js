@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema({
     Phd:String,
     Industry:String,
     TExp:Number,
+    CoufeedMarks: { type: Number, default: 0 },
+    couAvgPerMarks: { type: Number, default: 0 },
+    ProctoringMarks: { type: Number, default: 0 },
     classes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }]
 });
 

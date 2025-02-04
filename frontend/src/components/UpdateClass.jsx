@@ -6,21 +6,15 @@ import { Navigate, useNavigate } from 'react-router-dom';
 const UpdateClass = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        className: '',
+       
         courseName: '',
         semester: '',
-        branch: '',
-        section: '',
+      
         numberOfStudents: '',
-        appeared: '',
+     
         passCount: '',
 
-        selfAssessmentMarks: '',
-        courseFeedback: '',
-        above95: '',
-        between85And95: '',
-        between75And85: '',
-        below75: '',
+
         teacher: ''
     });
 
@@ -80,23 +74,20 @@ const UpdateClass = () => {
         }
     };
 
+
+
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" name="className" value={formData.className} onChange={handleChange} placeholder="Class Name" required />
+           
             <input type="text" name="courseName" value={formData.courseName} onChange={handleChange} placeholder="Course Name" required />
-            <input type="text" name="semester" value={formData.semester} onChange={handleChange} placeholder="Semester" required />
-            <input type="text" name="branch" value={formData.branch} onChange={handleChange} placeholder="Branch" required />
-            <input type="text" name="section" value={formData.section} onChange={handleChange} placeholder="Section" required />
-            <input type="number" name="numberOfStudents" value={formData.numberOfStudents} onChange={handleChange} placeholder="Number of Students" required />
-            <input type="number" name="appeared" value={formData.appeared} onChange={handleChange} placeholder="Appeared" required />
+            <input type="text" name="semester" value={formData.semester} onChange={handleChange} placeholder="Semester-Branch-sec" required />
+           
+            <input type="number" name="numberOfStudents" value={formData.numberOfStudents} onChange={handleChange} placeholder="Number of Students Appeared" required />
+
             <input type="number" name="passCount" value={formData.passCount} onChange={handleChange} placeholder="Pass Count" required />
             
-            <input type="number" name="selfAssessmentMarks" value={formData.selfAssessmentMarks} onChange={handleChange} placeholder="Self-Assessment Marks" required />
-            <textarea name="courseFeedback" value={formData.courseFeedback} onChange={handleChange} placeholder="Course Feedback"></textarea>
-            <input type="number" name="above95" value={formData.above95} onChange={handleChange} placeholder="Marks ≥ 95%" />
-            <input type="number" name="between85And95" value={formData.between85And95} onChange={handleChange} placeholder="Marks ≥ 85% & < 95%" />
-            <input type="number" name="between75And85" value={formData.between75And85} onChange={handleChange} placeholder="Marks ≥ 75% & < 85%" />
-            <input type="number" name="below75" value={formData.below75} onChange={handleChange} placeholder="Marks < 75%" />
+          
+           
             <button type="submit">Update Class</button>
         </form>
     );
