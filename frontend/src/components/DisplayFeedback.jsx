@@ -72,15 +72,10 @@ const DisplayFeedback = () => {
                                 <td>{feedback.feedbackPercentage}</td>
                                 
                                 {/* Show Average % and Self-Assessment Marks only in the last row */}
-                                {index === 0? (
+                                  {index === 0 && (
                                     <>
-                                        <td>{feedback.averagePercentage}</td>
-                                        <td>{feedback.selfAssessmentMarks}</td>
-                                    </>
-                                ) : (
-                                    <>
-                                        <td></td>
-                                        <td></td>
+                                        <td rowSpan={data.length}>{data[data.length - 1].averagePercentage}</td>
+                                        <td rowSpan={data.length}>{data[data.length - 1].selfAssessmentMarks}</td>
                                     </>
                                 )}
                             </tr>
