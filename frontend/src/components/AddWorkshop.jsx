@@ -13,6 +13,7 @@ const AddWorkshop = () => {
     EndTime: '',
     Venue: '',
     Mode: '',
+    OrganizedBy:'',
   });
 
   const handleChange = (e) => {
@@ -142,6 +143,16 @@ const AddWorkshop = () => {
             <option value="Offline">Offline</option>
             <option value="Online">Online</option>
           </select>
+        </div>
+        <div className="form-group">
+          <label>Organized By:</label>
+          <input
+            type="text"
+            name="OrganizedBy"
+            value={formData.OrganizedBy}
+            onChange={handleChange}
+            className="input-field"
+          />
         </div>
         <button type="submit" className="submit-btn">Add Workshop</button>
       </form>

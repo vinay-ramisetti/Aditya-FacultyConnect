@@ -20,7 +20,8 @@ router.post("/add",isloggedin,async(req,res)=>{
               EndTime:req.body.EndTime,
               Venue:req.body.Venue,
               Mode:req.body.Mode,
-              Instructor:user._id,
+              OrganizedBy:req.body.OrganizedBy,
+              User:user._id,
             });
             await newWorkshop.save();
             res.status(201).json({ message: "Workshop added successfully" });
@@ -32,42 +33,12 @@ router.post("/add",isloggedin,async(req,res)=>{
 });
 
 
-router.get("/data",async(req,res)=>{
+router.get("/data",isloggedin,async(req,res)=>{
   try{
-    const Workshops=await WorkshopData.aggregate([
-      {
-        $lookup: {
-          from: "users", // Name of the users collection
-          localField: "Instructor", // Field in Wrokshops that references the user's _id
-          foreignField: "_id", // The field in the users collection that is being matched
-          as: "userDetails", // The name of the new field that will contain the user data
-        },
-      },
-      {
-        $unwind: {
-          path: "$userDetails", // Flatten the userDetails array so that each Workshop has a single user object
-        },
-      },
-      {
-        $project: {
-          // Select the fields to return in the response
-          title: 1, // Assuming "title" is a field in Workshops
-          Description: 1, // Assuming "Description" is a field in Workshops
-          Category:1,
-          Date:1,
-          StartTime:1,
-          EndTime:1,
-          Venue:1,
-          Mode:1,
-          userDetails: {
-            fullName: 1,
-            email: 1,
-            department: 1, // Include user details such as fullName, email, etc.
-          },
-        },
-      },
-    ]);
-    res.status(200).json(Workshops);
+    const UserId=req.user._id;
+    const Workshops=await WorkshopData.find({User:UserId});
+    const TotalMarks=Workshops.length*5;
+    res.status(200).json({Workshops,TotalMarks});
 
   }catch(error){
     console.log("Unable to fetch the data:",error);
