@@ -44,24 +44,8 @@ const ResearchText = () => {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <button
-        onClick={() => navigate(-1)}
-        style={{
-          marginBottom: '20px',
-          padding: '8px 15px',
-          fontSize: '14px',
-          fontWeight: 'bold',
-          width: '100px',
-          color: '#fff',
-          backgroundColor: '#007bff',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}
-      >
-        ← Back
-      </button>
+    <div style={{ padding: '20px', position: 'relative' }}>
+      
 
       <b style={{ fontSize: '23px' }}>       4. Research Contributions:</b>
       <p><b>(1 SCI article – 20, 1 Scopus/WoS article – 10, 1 Conference – 5, 1 Book -10, 1 Chapter – 5, 

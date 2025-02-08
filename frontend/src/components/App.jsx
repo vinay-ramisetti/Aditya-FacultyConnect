@@ -54,6 +54,8 @@ import AddActivity from './Addactivity';
 import AddResponsibility from './Addresponsibility';
 import AddContribution from './Addcontribution';
 import AddAward from './Addaward';
+import DisplayAll from './DisplayAll';
+import ProctoringForm from './ProctoringForm';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -150,6 +152,7 @@ function App() {
           path="/workshops"
           element={<Workshops />}
         />
+         <Route path="/partb" element={<DisplayAll/>} />
         <Route path="/sciarticles" element={<Sciarticles />} />
         <Route path="/wosarticles" element={<Wosarticles />} />
         <Route path="/proposals" element={<Proposals />} />
@@ -173,6 +176,7 @@ function App() {
         <Route path="/addresponsibility" element={<AddResponsibility/>} />
         <Route path="/addcontribution" element={<AddContribution/>} />
         <Route path="/addaward" element={<AddAward/>} />
+        <Route path="/proctoring" element={<ProctoringForm/>} />
       </Routes>
   );
 }

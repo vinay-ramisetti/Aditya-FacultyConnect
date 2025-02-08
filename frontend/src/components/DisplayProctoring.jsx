@@ -12,7 +12,7 @@ const ProctoringTable = () => {
                     return;
                 }
 
-                const response = await fetch('http://localhost:5000/proctoring-data', {
+                const response = await fetch('http://localhost:5000/proc/proctoring-data', {
                     method: 'GET',
                     credentials: 'include',
                     headers: {
@@ -82,7 +82,7 @@ const ProctoringTable = () => {
                                     {index === 0 && (
                                         <>
                                             <td rowSpan={data.length}>{data[data.length - 1].averagePercentage}</td>
-                                            <td rowSpan={data.length}>{getSelfAssessmentMarks(data[data.length - 1].averagePercentage)}</td>
+                                            <td rowSpan={data.length}>{data[data.length - 1].selfAssessmentMarks}</td>
                                         </>
                                     )}
                                 </tr>
