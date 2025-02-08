@@ -38,17 +38,18 @@ const Profile = () => {
       <Navbar />
       <div className="profile-content">
         {/* General Information */}
+        <h1 style={{ fontFamily: 'YourFontFamily', fontSize: '24px', fontWeight: 'bold',padding:'25px'}}>PART A: Personal Information </h1>
         <section className="profile-section">
-          <h2>General Information</h2>
-          <p><strong>Name with Emp ID:</strong> {lecturerDetails.fullName} ({lecturerDetails.EmpID})</p>
-          <p><strong>Designation & Department:</strong> {lecturerDetails.designation}, {lecturerDetails.department}</p>
-          <p><strong>Date of Joining:</strong> {lecturerDetails.JoiningDate}</p>
-          <p><strong>Emp Email:</strong> {lecturerDetails.email}</p>
+          <h2>1. General Information</h2>
+          <p style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px' }}><strong>(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name with Emp ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</strong> {lecturerDetails.fullName} </p>
+          <p style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px' }}><strong>(b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Designation & Department&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</strong> {lecturerDetails.designation}, {lecturerDetails.department}</p>
+          <p style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px' }}><strong>(c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Joining&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</strong> {lecturerDetails.JoiningDate}</p>
+
         </section>
 
         {/* Academic Qualifications */}
         <section className="profile-section">
-          <h2>Academic Qualifications</h2>
+          <h2>2. Academic Qualifications</h2>
           <table>
             <thead>
               <tr>
@@ -84,10 +85,10 @@ const Profile = () => {
 
         {/* Experience */}
         <section className="profile-section">
-          <h2>Experience</h2>
-          <p><strong>Industrial Experience (if any):</strong> {lecturerDetails.Industry || 'N/A'}</p>
-          <p><strong>Total Teaching Experience (after PG):</strong> {lecturerDetails.TExp} years</p>
-          <p><strong>Date of Joining in Aditya:</strong> {lecturerDetails.JoiningDate}</p>
+          <h2>3. Experience</h2>
+          <p style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px' }}><strong>(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Industrial Experience (if any)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</strong> {lecturerDetails.Industry || 'N/A'}</p>
+          <p style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px' }}><strong>(b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Total Teaching Experience (after PG)&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</strong> {lecturerDetails.TExp} years</p>
+          <p style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px' }}><strong>(c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Date of Joining in Aditya&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</strong> {lecturerDetails.JoiningDate}</p>
         </section>
 
         {/* Update Button */}

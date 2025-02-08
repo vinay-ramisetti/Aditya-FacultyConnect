@@ -92,7 +92,7 @@ const Navbar = () => {
                 }}
               >
                 <a
-                  href="/classes"
+                  href="/profile"
                   style={{
                     textDecoration: 'none',
                     color: 'inherit',
@@ -101,10 +101,11 @@ const Navbar = () => {
                   onMouseEnter={(e) => (e.target.style.color = '#007bff')}
                   onMouseLeave={(e) => (e.target.style.color = '#555')}
                 >
-                  Classes
+                  Part-A
                 </a>
               </li>
             )}
+        
           <li
             style={{
               fontSize: '16px',
@@ -115,7 +116,7 @@ const Navbar = () => {
             }}
           >
             <a
-              href="/research"
+              href="/partb"
               style={{
                 textDecoration: 'none',
                 color: 'inherit',
@@ -124,53 +125,10 @@ const Navbar = () => {
               onMouseEnter={(e) => (e.target.style.color = '#007bff')}
               onMouseLeave={(e) => (e.target.style.color = '#555')}
             >
-              Researches
-            </a>
-          </li>
-          <li
-            style={{
-              fontSize: '16px',
-              fontFamily: 'Arial, sans-serif',
-              cursor: 'pointer',
-              color: '#555',
-              textDecoration: 'none',
-            }}
-          >
-            <a
-              href="/workshops"
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseEnter={(e) => (e.target.style.color = '#007bff')}
-              onMouseLeave={(e) => (e.target.style.color = '#555')}
-            >
-              Workshops
+              Part-B
             </a>
             </li>
-            <li
-            style={{
-              fontSize: '16px',
-              fontFamily: 'Arial, sans-serif',
-              cursor: 'pointer',
-              color: '#555',
-              textDecoration: 'none',
-            }}
-          >
-            <a
-              href="/articles"
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseEnter={(e) => (e.target.style.color = '#007bff')}
-              onMouseLeave={(e) => (e.target.style.color = '#555')}
-            >
-              Articles
-            </a>
-          </li>
+           
            
             {user.designation === 'HOD' && (
               <li
@@ -219,26 +177,7 @@ const Navbar = () => {
         >
           <IoIosHelpCircleOutline />About
         </button>
-        <button
-          style={{
-            display: 'flex',
-            gap: '7px',
-            padding: '8px 16px',
-            fontSize: '14px',
-            fontFamily: 'Arial, sans-serif',
-            border: 'none',
-            borderRadius: '5px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s ease',
-          }}
-          onClick={() => navigate('/profile')}
-          onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
-          onMouseLeave={(e) => (e.target.style.backgroundColor = '#007bff')}
-        >
-          <CgProfile /> Profile
-        </button>
+        
       </div>
     </nav>
   );

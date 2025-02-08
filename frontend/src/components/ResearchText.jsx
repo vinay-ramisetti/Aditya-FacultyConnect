@@ -45,26 +45,7 @@ const ResearchText = () => {
 
   return (
     <div style={{ padding: '20px', position: 'relative' }}>
-      <button
-        onClick={() => navigate(-1)}
-        style={{
-          marginBottom: '20px',
-          padding: '8px 15px',
-          fontSize: '14px',
-          fontWeight: 'bold',
-          width: '100px',
-          color: '#fff',
-          backgroundColor: '#007bff',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          position: 'absolute',
-          top: '10px',
-          left: '10px'
-        }}
-      >
-        ← Back
-      </button>
+      
 
       <div style={{ marginTop: '50px' }}>
         <b style={{fontSize:'23px'}}>4. Research Contributions:</b>

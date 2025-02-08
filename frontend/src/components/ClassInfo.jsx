@@ -3,7 +3,7 @@ import { IoMdAdd } from 'react-icons/io';
 import './ClassInfo.css';
 import DisplayClasses from './DisplayClasses'; 
 import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
+
 import DisplayCourses from './Displaycourses';
 import DisplayFeedback from './DisplayFeedback';
 import DisplayProctoring from './DisplayProctoring'
@@ -14,10 +14,10 @@ const ClassInfo = () => {
 
   return (
     <>
-    <Navbar/>
+  
     <div className="class-container">
       <div className="header">
-        <h2>Courses Average Pass Percentage</h2>
+        <h2 style={{ fontFamily: 'General Information' }}>1.&nbsp;&nbsp;Courses Average Pass Percentage:</h2>
         <button 
           onClick={() => navigate('/class')} 
           className="add-button"
@@ -27,9 +27,10 @@ const ClassInfo = () => {
       </div>
         <DisplayCourses />
     </div>
+    <div style={{ margin: '20px 0' }} />
     <div className="class-container">
       <div className="header">
-        <h2> Course feedback:</h2>
+        <h2 style={{ fontFamily: 'General Information' }}> 2.&nbsp;&nbsp;Course feedback:</h2>
         <button 
           onClick={() => navigate('/feedback')} 
           className="add-button"
@@ -39,11 +40,12 @@ const ClassInfo = () => {
       </div>
         <DisplayFeedback />
     </div>
+    <div style={{ margin: '20px 0' }} />
     <div className="class-container">
       <div className="header">
-        <h2> Course feedback:</h2>
+        <h2 style={{ fontFamily: 'General Information' }}> 3.&nbsp;&nbsp;Proctoring Students Average pass percentage: </h2>
         <button 
-          onClick={() => navigate('/feedback')} 
+          onClick={() => navigate('/proctoring')} 
           className="add-button"
         >
           <IoMdAdd /> Add
