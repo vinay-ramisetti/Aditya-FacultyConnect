@@ -11,6 +11,7 @@ const researchSchema= new mongoose.Schema({
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
   WosArticles: [{
     articleDetails: { type: String, required: true },
@@ -18,6 +19,7 @@ const researchSchema= new mongoose.Schema({
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
   Proposals: [{
     proposalDetails: { type: String, required: true },
@@ -25,18 +27,21 @@ const researchSchema= new mongoose.Schema({
     amount: { type: Number, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
   Papers: [{
     paperDetails: { type: String, required: true },
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
   Books: [{
     bookDetails: { type: String, required: true },
     ISBN: { type: Number, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
   Chapters: [{
     chapterDetails: { type: String, required: true },
@@ -45,6 +50,7 @@ const researchSchema= new mongoose.Schema({
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
   PGranted: [{
     PTitle: { type: String, required: true },
@@ -53,6 +59,7 @@ const researchSchema= new mongoose.Schema({
     GrantedDate:{type:Date,required:true},
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
   PFiled: [{
     PTitle: { type: String, required: true },
@@ -61,6 +68,7 @@ const researchSchema= new mongoose.Schema({
     PublishedDate:{type:Date,required:true},
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
+    UploadFiles:[]
   }],
 })
 

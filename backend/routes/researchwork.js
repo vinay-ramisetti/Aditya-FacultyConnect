@@ -177,10 +177,10 @@ router.get("/researchtext", isloggedin, async (req, res) => {
     const ChaptersMarks = ChaptersSize*5;
     const PGrantedMarks = PGrantedSize*10;
     const PFiledMarks = PFiledSize*5;
-    const SciMarks=SciArticlesSize * 20 ;
-    const WosMarks=WosArticlesSize *10 ;
-    const ProposalMarks=ProposalsSize*10;
-    const SelfAssessment=PapersMarks+BooksMarks+ChaptersMarks+PGrantedMarks+PFiledMarks;
+    const SciMarks=Math.min(SciArticlesSize * 20,30) ;
+    const WosMarks=Math.min(WosArticlesSize *10,30) ;
+    const ProposalMarks=Math.min(ProposalsSize*10,10);
+    const SelfAssessment=Math.min((5*PapersSize)+(10*BooksSize)+(5*ChaptersSize)+(10*PGrantedSize)+(5*PFiledSize),10);
 
 
     // Convert Mongoose document to plain object and add calculated values

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ResearchText = () => {
-  const [data, setData] = useState(null); // Store fetched research data
-  const [loading, setLoading] = useState(true); // Handle loading state
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,14 +21,14 @@ const ResearchText = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          setData(responseData); // Save API response
+          setData(responseData);
         } else {
           console.error('Error:', response.statusText);
         }
       } catch (error) {
         console.error('Fetch error:', error);
       } finally {
-        setLoading(false); // Stop loading after fetch
+        setLoading(false);
       }
     };
 
@@ -44,7 +44,7 @@ const ResearchText = () => {
   }
 
   return (
-    <div style={{ padding: '20px', position: 'relative' }}>
+    <div style={{ padding: '20px' }}>
       <button
         onClick={() => navigate(-1)}
         style={{
@@ -57,21 +57,21 @@ const ResearchText = () => {
           backgroundColor: '#007bff',
           border: 'none',
           borderRadius: '5px',
-          cursor: 'pointer',
-          position: 'absolute',
-          top: '10px',
-          left: '10px'
+          cursor: 'pointer'
         }}
       >
         ← Back
       </button>
 
-      <div style={{ marginTop: '50px' }}>
-        <b style={{fontSize:'23px'}}>4. Research Contributions:</b>
-        <p><b>(1 SCI article – 20, 1 Scopus/WoS article – 10, 1 Conference – 5, 1 Book -10, 1 Chapter – 5,
-          1 Patent Granted-10, 1 Patent filed-5, 1 Project Proposal submitted/funded – 10)</b>
-</p>
-        <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '16px' }}>
+      <b style={{ fontSize: '23px' }}>       4. Research Contributions:</b>
+      <p><b>(1 SCI article – 20, 1 Scopus/WoS article – 10, 1 Conference – 5, 1 Book -10, 1 Chapter – 5, 
+        1 Patent Granted-10, 1 Patent filed-5, 1 Project Proposal submitted/funded – 10)</b></p>
+
+      {/* Create a flex container to hold both tables side by side */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '20px' }}>
+        
+        {/* Left Table - Research Contributions */}
+        <table border="1" cellPadding="10" style={{ width: '48%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '16px' }}>
           <thead>
             <tr style={{ backgroundColor: '#d0e8f2', fontWeight: 'bold' }}>
               <th>S.No</th>
@@ -107,8 +107,8 @@ const ResearchText = () => {
           </tbody>
         </table>
 
-        <h3 style={{ marginTop: '20px' }}><b>Research - Others:</b></h3>
-        <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '16px' }}>
+        {/* Right Table - Research Others */}
+        <table border="1" cellPadding="10" style={{ width: '48%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '16px' }}>
           <thead>
             <tr style={{ backgroundColor: '#d0e8f2', fontWeight: 'bold' }}>
               <th>Research - Others</th>
@@ -144,7 +144,8 @@ const ResearchText = () => {
             </tr>
             <tr>
               <td colSpan="2"><b>Self-Assessment Marks (Max: 10)</b></td>
-              <td><b>{data.SelfAssessment}</b></td>
+              {/* <td><b>{data.SelfAssessment}</b></td> */}
+              <td><b>8</b></td>
             </tr>
           </tbody>
         </table>
