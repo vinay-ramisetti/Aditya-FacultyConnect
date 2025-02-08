@@ -40,6 +40,9 @@ const Papers = () => {
         <button onClick={() => navigate('/addpapers')}> + Add</button>
       </div>
       <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '1rem' }}>
+      d) Research-Others 
+      </h3>
+      <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '1rem' }}>
         Conference Papers:
       </h3>
 

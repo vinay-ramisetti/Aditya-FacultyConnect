@@ -49,6 +49,11 @@ import AddPGranted from './AddPGranted';
 import AddPFiled from './AddPFiled';
 import UpdateCla from './UpdateCla';
 import FacultyScoreTable from './FacultyScoreTable';
+import Others from './Others';
+import AddActivity from './Addactivity';
+import AddResponsibility from './Addresponsibility';
+import AddContribution from './Addcontribution';
+import AddAward from './Addaward';
 
 function App() {
   const [faculty, setFaculty] = useState([]);
@@ -163,6 +168,11 @@ function App() {
         <Route path="/addpgranted" element={<AddPGranted/>} />
         <Route path="/addpfiled" element={<AddPFiled/>} />
         <Route path="/ScoreTable" element={<FacultyScoreTable/>} />
+        <Route path="/others" element={<Others/>} />
+        <Route path="/addactivity" element={<AddActivity/>} />
+        <Route path="/addresponsibility" element={<AddResponsibility/>} />
+        <Route path="/addcontribution" element={<AddContribution/>} />
+        <Route path="/addaward" element={<AddAward/>} />
       </Routes>
   );
 }

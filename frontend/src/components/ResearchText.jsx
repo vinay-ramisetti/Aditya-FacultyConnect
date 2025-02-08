@@ -67,6 +67,10 @@ const ResearchText = () => {
       </button>
 
       <div style={{ marginTop: '50px' }}>
+        <b style={{fontSize:'23px'}}>4. Research Contributions:</b>
+        <p><b>(1 SCI article – 20, 1 Scopus/WoS article – 10, 1 Conference – 5, 1 Book -10, 1 Chapter – 5,
+          1 Patent Granted-10, 1 Patent filed-5, 1 Project Proposal submitted/funded – 10)</b>
+</p>
         <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '16px' }}>
           <thead>
             <tr style={{ backgroundColor: '#d0e8f2', fontWeight: 'bold' }}>
@@ -103,7 +107,7 @@ const ResearchText = () => {
           </tbody>
         </table>
 
-        <h3 style={{ marginTop: '20px' }}>Research - Others</h3>
+        <h3 style={{ marginTop: '20px' }}><b>Research - Others:</b></h3>
         <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '16px' }}>
           <thead>
             <tr style={{ backgroundColor: '#d0e8f2', fontWeight: 'bold' }}>

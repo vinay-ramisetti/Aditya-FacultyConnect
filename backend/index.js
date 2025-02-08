@@ -26,6 +26,7 @@ const Research=require(path.join(__dirname,"routes","researchwork"));
 const classroute=require(path.join(__dirname,"routes","class-route"));
 const Articles=require(path.join(__dirname,"routes","articles"));
 const Workshops=require(path.join(__dirname,"routes","workshops"));
+const Others=require(path.join(__dirname,"routes","others"));
 
 
 const corsOptions = {
@@ -46,6 +47,7 @@ app.use("/research",Research);
 app.use("/update", classroute);
 app.use("/article",Articles);
 app.use("/workshop",Workshops);
+app.use("/others",Others);
 // Database Connection
 const ConnectDB = async () => {
     try {
