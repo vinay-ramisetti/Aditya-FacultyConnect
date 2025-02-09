@@ -5,6 +5,7 @@ const WosArticles = () => {
   const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -34,11 +35,84 @@ const WosArticles = () => {
     fetchArticles();
   }, []);
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file) {
+      alert("Please select a file first.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:5000/research/upload-wos", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        alert("File uploaded successfully!");
+        setFile(null);
+      } else {
+        console.error("Upload failed");
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
+
   return (
     <div style={{ padding: '15px' }}>
-      <div style={{ width: '90px', marginLeft: '1100px' }}>
-        <button onClick={() => navigate('/add-wos-articles')}> + Add</button>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '10px', marginBottom: '10px' }}>
+        
+        {/* File Upload Input */}
+        <input
+          type="file"
+          onChange={handleFileChange}
+          style={{ border: '1px solid #ccc', padding: '5px', borderRadius: '5px', }}
+        />
+        <button
+          onClick={handleUpload}
+          style={{
+            padding: '8px 12px',
+            fontSize: '14px',
+            color: '#fff',
+            backgroundColor: '#007bff',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            width: '140px',
+          }}
+        >
+          Upload
+        </button>
+
+        {/* Add Article Button */}
+        <button 
+          onClick={() => navigate('/wos-articles')} 
+          style={{
+            padding: '8px 12px',
+            fontSize: '14px',
+            color: '#fff',
+            backgroundColor: '#007bff',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            width: '140px',
+          }}
+        >
+          + Add
+        </button>
       </div>
+
       <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '1rem' }}>
         b) Scopus/WoS Indexed Articles:
       </h3>

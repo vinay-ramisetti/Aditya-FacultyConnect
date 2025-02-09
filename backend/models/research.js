@@ -11,7 +11,7 @@ const researchSchema= new mongoose.Schema({
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
   WosArticles: [{
     articleDetails: { type: String, required: true },
@@ -19,7 +19,7 @@ const researchSchema= new mongoose.Schema({
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
   Proposals: [{
     proposalDetails: { type: String, required: true },
@@ -27,21 +27,21 @@ const researchSchema= new mongoose.Schema({
     amount: { type: Number, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
   Papers: [{
     paperDetails: { type: String, required: true },
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
   Books: [{
     bookDetails: { type: String, required: true },
     ISBN: { type: Number, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
   Chapters: [{
     chapterDetails: { type: String, required: true },
@@ -50,7 +50,7 @@ const researchSchema= new mongoose.Schema({
     authorPosition: { type: String, required: true },
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
   PGranted: [{
     PTitle: { type: String, required: true },
@@ -59,7 +59,7 @@ const researchSchema= new mongoose.Schema({
     GrantedDate:{type:Date,required:true},
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
   PFiled: [{
     PTitle: { type: String, required: true },
@@ -68,7 +68,7 @@ const researchSchema= new mongoose.Schema({
     PublishedDate:{type:Date,required:true},
     status:{type:Boolean, default:false},
     rejected:{type:Boolean,default:false},
-    UploadFiles:[]
+    UploadFiles:[{Image:{type:String}}]
   }],
 })
 
