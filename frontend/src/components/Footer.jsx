@@ -17,14 +17,14 @@ const Footer = () => {
             alt="Aditya University Logo"
             style={{ width: '250px', marginBottom: '15px' }}
           />
-          <p>
+          <p style={{color:"white"}}>
           <IoLocationSharp />ADITYA UNIVERSITY
             <br />
             Aditya Nagar, ADB Road, Surampalem - Pin:533437
             <br />
             Kakinda District, Andhra Pradesh, INDIA.
           </p>
-          <p>
+          <p style={{color:"white"}}>
           <MdOutlinePhoneAndroid />
             <strong>Phone:</strong> 0884-23 26 202, +91 99498 76662, +91 99897 76661
             <br />
@@ -36,7 +36,7 @@ const Footer = () => {
             <br />
             <MdEmail />
             <strong>Email:</strong> office@aec.edu.in
-          </p>
+          </p >
           <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
             <a href="#" style={{ color: '#ffffff' }}>
               <i className="fab fa-facebook"></i>
@@ -121,6 +121,7 @@ const Footer = () => {
           borderTop: '1px solid #fff',
           paddingTop: '10px',
           marginTop: '20px',
+          color:"white"
         }}
       >
         <p>Aditya University © 2024 - All Rights Reserved.</p>

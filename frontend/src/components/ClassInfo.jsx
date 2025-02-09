@@ -1,58 +1,58 @@
 import React from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import './ClassInfo.css';
-import DisplayClasses from './DisplayClasses'; 
+import DisplayCourses from './DisplayCourses';
+import DisplayFeedback from './DisplayFeedback';
+import DisplayProctoring from './DisplayProctoring';
 import { useNavigate } from 'react-router-dom';
 
-import DisplayCourses from './Displaycourses';
-import DisplayFeedback from './DisplayFeedback';
-import DisplayProctoring from './DisplayProctoring'
 const ClassInfo = () => {
   const navigate = useNavigate();
-  
- 
 
   return (
     <>
-  
-    <div className="class-container">
-      <div className="header">
-        <h2 style={{ fontFamily: 'General Information' }}>1.&nbsp;&nbsp;Courses Average Pass Percentage:</h2>
-        <button 
-          onClick={() => navigate('/class')} 
-          className="add-button"
-        >
-          <IoMdAdd /> Add
-        </button>
-      </div>
+      <div className="class-container">
+        <div className="header">
+          <h2 className="title">1.Courses Average Pass Percentage:</h2>
+          <div className="flex items-center gap-2">
+          <input type="file" style={{ border: '1px solid #ccc', padding: '5px',borderRadius:'8px' }} />
+            <button className=" bg-blue-500 text-white rounded text-sm w-21 h-8 flex items-center justify-center">Upload</button>
+            <button className=" bg-blue-500 text-white rounded text-sm h-8 w-21 flex items-center justify-center" onClick={() => navigate('/class')}>
+            <IoMdAdd /> Add
+           </button>
+
+          </div>
+        </div>
         <DisplayCourses />
-    </div>
-    <div style={{ margin: '20px 0' }} />
-    <div className="class-container">
-      <div className="header">
-        <h2 style={{ fontFamily: 'General Information' }}> 2.&nbsp;&nbsp;Course feedback:</h2>
-        <button 
-          onClick={() => navigate('/feedback')} 
-          className="add-button"
-        >
-          <IoMdAdd /> Add
-        </button>
       </div>
+
+      <div className="class-container">
+        <div className="header">
+          <h2 className="title">2.Course Feedback:</h2>
+          <div className="flex items-center gap-2">
+          <input type="file" style={{ border: '1px solid #ccc', padding: '5px',borderRadius:'8px' }} />
+            <button className=" bg-blue-500 text-white rounded text-sm w-21 h-8 flex items-center justify-center">Upload</button>
+            <button className=" bg-blue-500 text-white rounded text-sm h-8 w-21 flex items-center justify-center" onClick={() => navigate('/feedback')} >
+              <IoMdAdd /> Add
+            </button>
+          </div>
+        </div>
         <DisplayFeedback />
-    </div>
-    <div style={{ margin: '20px 0' }} />
-    <div className="class-container">
-      <div className="header">
-        <h2 style={{ fontFamily: 'General Information' }}> 3.&nbsp;&nbsp;Proctoring Students Average pass percentage: </h2>
-        <button 
-          onClick={() => navigate('/proctoring')} 
-          className="add-button"
-        >
-          <IoMdAdd /> Add
-        </button>
       </div>
-        <DisplayProctoring/>
-    </div>
+
+      <div className="class-container">
+        <div className="header">
+          <h2 className="title">3.Proctoring Students Average Pass Percentage:</h2>
+          <div className="flex items-center gap-2">
+          <input type="file" style={{ border: '1px solid #ccc', padding: '5px',borderRadius:'8px' }} />
+            <button className=" bg-blue-500 text-white rounded text-sm w-21 h-8 flex items-center justify-center">Upload</button>
+            <button  className=" bg-blue-500 text-white rounded text-sm w-21 h-8 flex items-center justify-center" onClick={() => navigate('/proctoring')} >
+              <IoMdAdd /> Add
+            </button>
+          </div>
+        </div>
+        <DisplayProctoring />
+      </div>
     </>
   );
 };
