@@ -53,7 +53,9 @@ router.post('/classes', isloggedin, async (req, res) => {
 
         // Save the new class to the database
         const savedClass = await newClass.save();
-
+         user.AvgSelfAsses = totalMarks; // Update the user's average self-assessment marks
+         await user.save(); // Save the updated user document
+         
         // Respond with the saved class and average pass percentage
         res.status(201).json({ savedClass, averagePassPercentage });
     } catch (error) {
@@ -95,7 +97,7 @@ router.post('/feedback', isloggedin, async (req, res) => {
         }
 
         // Update the User model with the computed totalMarks
-        user.couAvgPerMarks = totalMarks;
+        user.feedSelfAsses = totalMarks;
         await user.save(); // Save the updated user document
 
         // Create a new feedback document

@@ -24,6 +24,7 @@ router.post("/add",isloggedin,async(req,res)=>{
               User:user._id,
             });
             await newWorkshop.save();
+          
             res.status(201).json({ message: "Workshop added successfully" });
 
    }catch (error) {
@@ -36,8 +37,13 @@ router.post("/add",isloggedin,async(req,res)=>{
 router.get("/data",isloggedin,async(req,res)=>{
   try{
     const UserId=req.user._id;
+    const user = await User.findById(UserId);
     const Workshops=await WorkshopData.find({User:UserId});
     const TotalMarks=Workshops.length*5;
+    if(TotalMarks>0){
+    user.WorkshopMarks = TotalMarks;
+    await user.save();
+    }
     res.status(200).json({Workshops,TotalMarks});
 
   }catch(error){

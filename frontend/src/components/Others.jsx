@@ -53,7 +53,8 @@ const Others = () => {
       {/** Activities Table **/}
       <div className="mb-6 relative">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="font-bold text-base">6. Outreach Activities - (Resource Person/Session Chairs/Invited Talks/Guest Lecture / National / International Collaboration etc.) (1 activity outside AUS – 5 marks)</h2>
+          <h2 className="font-bold">6. Outreach Activities </h2>
+         
           <button className="p-1 bg-blue-500 text-white rounded text-sm w-24 h-8" onClick={() => navigate('/addactivity')}>+ Add</button>
         </div>
         <table className="w-full border-collapse border border-gray-300">
@@ -74,11 +75,11 @@ const Others = () => {
           </tbody>
         </table>
       </div>
-
+      <div style={{ margin: '100px 0' }} />
       {/** Responsibilities Table **/}
       <div className="mb-6 relative">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="font-bold text-base">7. Additional responsibilities in the Department / College: (College activity/Committee Convenor: 10, Committee member/Dept. Incharge – 5 marks)</h2>
+          <h2 className="font-bold ">7. Additional responsibilities in the Department / College:</h2>
           <button className="p-1 bg-blue-500 text-white rounded text-sm w-24 h-8" onClick={() => navigate('/addresponsibility')}>+ Add</button>
         </div>
         <table className="w-full border-collapse border border-gray-300">
@@ -101,11 +102,11 @@ const Others = () => {
           </tbody>
         </table>
       </div>
-
+      <div style={{ margin: '100px 0' }} />
       {/** Contributions Table **/}
       <div className="mb-6 relative">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="font-bold text-base">8. Any special contribution to the Department/College which leverage the existing process/System. (Innovation in Teaching / Technology Development /Taking GATE classes/e-content preparation/guiding students for Hackathons / Consultancy/Preparing students for Project challenges / Community Service etc. – Each activity 5 marks)</h2>
+          <h2 className="font-bold ">8. Any special contribution to the Department/College which leverage the existing process/System.</h2>
           <button className="p-1 bg-blue-500 text-white rounded text-sm w-24 h-8" onClick={() => navigate('/addcontribution')}>+ Add</button>
         </div>
         <table className="w-full border-collapse border border-gray-300">
@@ -128,11 +129,11 @@ const Others = () => {
           </tbody>
         </table>
       </div>
-
+      <div style={{ margin: '100px 0' }} />
       {/** Awards Table **/}
       <div className="mb-6 relative">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="font-bold text-base">9. Awards received by Faculty:</h2>
+          <h2 className="font-bold">9. Awards received by Faculty:</h2>
           <button className="p-1 bg-blue-500 text-white rounded text-sm w-24 h-8" onClick={() => navigate('/addaward')}>+ Add</button>
         </div>
         <table className="w-full border-collapse border border-gray-300">

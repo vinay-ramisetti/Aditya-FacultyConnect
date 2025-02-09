@@ -155,6 +155,8 @@ router.put('/reject/:id', async (req, res) => {
 router.get("/researchtext", isloggedin, async (req, res) => {
   try {
     const userId = req.user._id;
+    const email = req.user.email;
+    const user = await User.findOne({ email });
     const researchText = await ResearchData.findOne({ userId }).populate("userId");
     
     if (!researchText) {
@@ -213,7 +215,11 @@ router.get("/researchtext", isloggedin, async (req, res) => {
       PFiledMarks,
       SelfAssessment
     };
-
+    user.ResearchSelfAsses=SelfAssessment; 
+    user.WosMarks= WosMarks;
+    user.SciMarks=SciMarks;
+    user.ProposalMarks=ProposalMarks;
+    await user.save();
     res.status(200).json(responseData);
   } catch (error) {
     console.error("Error fetching research text:", error);

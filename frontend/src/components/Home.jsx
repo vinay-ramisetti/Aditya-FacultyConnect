@@ -47,7 +47,7 @@ const Home = (props) => {
       <div className='m-2 p-1'>
         <div>
        
-        {user.designation === 'Faculty' && <FacultyScoreTable/>}
+        {user.designation === 'Faculty' && <FacultyScoreTable user={user}/>}
         {user.designation === 'HOD' && <FacultyScoreTable/>}
           <Faculty faculty={faculty} />
         </div>

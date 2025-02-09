@@ -4,9 +4,10 @@ const Proctoring = require("../models/ProctoringModel");
 const isloggedin = require('../middlewares/isloggedin');
 const User = require("../models/user-model");
 // Fetch all proctoring data
-router.get("/proctoring-data", async (req, res) => {
+router.get("/proctoring-data",isloggedin, async (req, res) => {
     try {
-        const data = await Proctoring.find();
+        const userId = req.user._id;  // Get userId from logged-in user
+        const data = await Proctoring.find({ teacher: userId });
         const totalPassPercentage = data.reduce((sum, item) => sum + (item.passedStudents / item.eligibleStudents) * 100, 0) / data.length;
         res.json({ data, averagePercentage: totalPassPercentage.toFixed(2) });
     } catch (error) {
@@ -64,6 +65,9 @@ router.post("/proctoring-data", isloggedin, async (req, res) => {
         });
 
         await newProctoring.save();
+
+        user.ProctorSelfAsses =selfAssessmentMarks ; 
+        await user.save();
 
         // Respond with saved data
         res.status(201).json({ newProctoring });
