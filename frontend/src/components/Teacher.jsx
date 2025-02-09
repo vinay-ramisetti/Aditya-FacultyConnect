@@ -1,96 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
-import OthersResearch from './OthersResearch';
-import OthersArticles from './OthersArticles';
-import OthersClass from './OthersClass';
-
-const Teacher = (props) => {
+import DisplayCourses from './DisplayCourses';
+import Profile from './Profile';
+const Teacher = ({ faculty }) => {
   const { id } = useParams();
-  const teacher = props.faculty.find((teacher) => teacher._id === id);
+  const teacher = faculty.find((teacher) => teacher._id === id);
+  const [teacherData, setTeacherData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!teacher) return null;
+  useEffect(() => {
+    const fetchTeacherData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/fetchdata/teachers/${id}`);
+        const result = await response.json();
+        if (result.success) {
+          setTeacherData(result.data);
+        } else {
+          setError('Failed to fetch teacher data.');
+        }
+      } catch (err) {
+        console.error('Error fetching teacher data:', err);
+        setError('An error occurred while fetching teacher data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeacherData();
+  }, [id]);
+
+  if (!teacher) return <p>Teacher not found.</p>;
 
   return (
     <div style={styles.pageContainer}>
       <Navbar />
+      
+
       <div style={styles.contentContainer}>
-        <div style={styles.teacherInfo}>
-          <h2 style={styles.heading}>Teacher Information:</h2>
-          <div style={styles.infoRow}>
-            <label style={styles.label}>Name  :</label>
-            <span style={styles.value}>{teacher.fullName}</span>
-          </div>
-          <div style={styles.infoRow}>
-            <label style={styles.label}>Designation  :</label>
-            <span style={styles.value}>{teacher.designation}</span>
-          </div>
-          <div style={styles.infoRow}>
-            <label style={styles.label}>Department  :</label>
-            <span style={styles.value}>{teacher.department}</span>
-          </div>
-        </div>
-        <div style={styles.section}>
-          <h3 style={styles.subHeading}>Research</h3>
-          <OthersResearch Id={teacher._id} />
-        </div>
-        <div style={styles.section}>
-          <h3 style={styles.subHeading}>Articles</h3>
-          <OthersArticles Id={teacher._id} />
-        </div>
+
+ 
+        {loading && <p>Loading teacher data...</p>}
+        {error && <p style={styles.error}>{error}</p>}
+        {teacherData && (
+          <>
           
+            <DisplayCourses coursesData={teacherData?.classes} />
+
+          </>
+        )}
       </div>
-      <div> <OthersClass Id={teacher._id}/> </div>
     </div>
   );
 };
 
 const styles = {
-  pageContainer: {
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#f9f9f9',
-    padding: '20px',
-    minHeight: '100vh',
-  },
-  contentContainer: {
-    maxWidth: '800px',
-    margin: '0 auto',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    padding: '20px',
-  },
-  teacherInfo: {
-    marginBottom: '20px',
-    borderBottom: '1px solid #e0e0e0',
-    paddingBottom: '20px',
-  },
-  heading: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '15px',
-    color: '#333',
-  },
-  infoRow: {
-    display: 'flex',
-    marginBottom: '10px',
-  },
-  label: {
-    fontWeight: 'bold',
-    color: '#555',
-  },
-  value: {
-    color: '#333',
-  },
-  section: {
-    marginBottom: '20px',
-  },
-  subHeading: {
-    fontSize: '20px',
-    fontWeight: 'bold',
-    marginBottom: '10px',
-    color: '#444',
-  },
+
+
 };
 
 export default Teacher;
