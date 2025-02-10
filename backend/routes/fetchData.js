@@ -49,10 +49,10 @@ router.get('/teachers/:id', async (req, res) => {
    
    const proctoringData = await Proctoring.find({ teacher: id });
    const classData = await Class.find({ teacher: id });
-   const researchData = await Research.find({ teacher: id });
-   const othersData = await Others.find({ teacher: id });
+   const researchData = await Research.find({ userId: id });
+   const othersData = await Others.findOne({ userId: id });
    const feedbackData = await Feedback.find({ teacher: id });
-   const workshopData = await Workshop.find({ teacher: id });
+   const workshopData = await Workshop.find({ User: id });
     // Log the results of each query
  
     res.json({

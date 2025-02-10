@@ -1,46 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import './DisplayProctoring.css'; // Import the CSS file
-const ProctoringTable = () => {
-    const [data, setData] = useState([]);
+
+const ProctoringTable = ({ proctoringData }) => {
+    const [data, setData] = useState(proctoringData || []); // Initialize with props data if available
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    console.error("No token found in localStorage");
-                    return;
+        if (!proctoringData) {
+            // Fetch data from API only if no data is passed via props
+            const fetchData = async () => {
+                try {
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        console.error("No token found in localStorage");
+                        return;
+                    }
+
+                    const response = await fetch('http://localhost:5000/proc/proctoring-data', {
+                        method: 'GET',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+
+                    if (!response.ok) {
+                        console.error(`Failed to fetch data: ${response.statusText}`);
+                        return;
+                    }
+
+                    const fetchedData = await response.json();
+                    if (Array.isArray(fetchedData.data)) {
+                        setData(fetchedData.data);
+                    } else {
+                        console.error("Unexpected API response format:", fetchedData);
+                        setData([]);
+                    }
+                } catch (error) {
+                    console.error('Error fetching data:', error);
                 }
+            };
 
-                const response = await fetch('http://localhost:5000/proc/proctoring-data', {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                if (!response.ok) {
-                    console.error(`Failed to fetch data: ${response.statusText}`);
-                    return;
-                }
-
-                const fetchedData = await response.json();
-                if (Array.isArray(fetchedData.data)) {
-                    setData(fetchedData.data);
-                } else {
-                    console.error("Unexpected API response format:", fetchedData);
-                    setData([]);
-                }
-
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
+            fetchData();
+        }
+    }, [proctoringData]);
 
     // Function to calculate self-assessment marks
     const getSelfAssessmentMarks = (passPercentage) => {
@@ -69,6 +72,8 @@ const ProctoringTable = () => {
                     {Array.isArray(data) && data.length > 0 ? (
                         data.map((proctor, index) => {
                             const passPercentage = ((proctor.passedStudents / proctor.eligibleStudents) * 100).toFixed(2);
+                            const selfAssessmentMarks = getSelfAssessmentMarks(passPercentage);
+
                             return (
                                 <tr key={proctor.id || index}>
                                     <td>{index + 1}</td>
@@ -78,11 +83,11 @@ const ProctoringTable = () => {
                                     <td>{proctor.passedStudents}</td>
                                     <td>{passPercentage}%</td>
 
-                                    {/* Show last row's "Average %" and "Self-Assessment Marks" once */}
+                                    {/* Render "Average %" and "Self-Assessment Marks" only in the first row */}
                                     {index === 0 && (
                                         <>
-                                            <td rowSpan={data.length}>{data[data.length - 1].averagePercentage}</td>
-                                            <td rowSpan={data.length}>{data[data.length - 1].selfAssessmentMarks}</td>
+                                            <td rowSpan={data.length}>{data[data.length - 1]?.averagePercentage || 'N/A'}</td>
+                                            <td rowSpan={data.length}>{data[data.length - 1]?.selfAssessmentMarks || selfAssessmentMarks}</td>
                                         </>
                                     )}
                                 </tr>

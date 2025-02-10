@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import DisplayCourses from './DisplayCourses';
 import Profile from './Profile';
+import DisplayFeedback from './DisplayFeedback';
+import ProctoringTable from './DisplayProctoring';
+import ResearchText from './ResearchText';
+import DisplayWorkshops from './DisplayWorkshops';
+import Others from './Others';
 const Teacher = ({ faculty }) => {
   const { id } = useParams();
   const teacher = faculty.find((teacher) => teacher._id === id);
@@ -17,6 +22,7 @@ const Teacher = ({ faculty }) => {
         const result = await response.json();
         if (result.success) {
           setTeacherData(result.data);
+          console.log(result.data);
         } else {
           setError('Failed to fetch teacher data.');
         }
@@ -45,11 +51,21 @@ const Teacher = ({ faculty }) => {
         {error && <p style={styles.error}>{error}</p>}
         {teacherData && (
           <>
-          
+           
             <DisplayCourses coursesData={teacherData?.classes} />
-
+            <DisplayFeedback feedbackData={teacherData?.feedback}/>
+            <ProctoringTable proctoringData={teacherData?.proctoring} />
+            <ResearchText data={ teacherData?.research } />
+            <DisplayWorkshops
+              data={{
+                workshops: teacherData.workshop,
+                totalMarks: 18,
+              }}
+            />
+           <Others data={teacherData.others}/>
           </>
         )}
+
       </div>
     </div>
   );
