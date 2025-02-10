@@ -19,7 +19,7 @@ const Others = () => {
         const response = await fetch('http://localhost:5000/others/data', {
           method: 'GET',
           headers: {
-            'Authorization': Bearer `${token}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
