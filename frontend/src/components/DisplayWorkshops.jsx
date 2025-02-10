@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './DisplayWorkshops.css';
+import { useNavigate } from 'react-router-dom'
 
 const DisplayWorkshops = () => {
   const [workshops, setWorkshops] = useState([]);
   const [totalMarks, setTotalMarks] = useState(0);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   const calculateDuration = (startTime, endTime) => {
     if (!startTime || !endTime) return "-";
     const [startHours, startMinutes] = startTime.split(":").map(Number);
