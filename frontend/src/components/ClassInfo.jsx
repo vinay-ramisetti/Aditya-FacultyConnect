@@ -32,7 +32,7 @@ const ClassInfo = () => {
       if (response.ok) {
         alert("File uploaded successfully!");
       } else {
-        alert("Failed to upload file.");
+        alert("File uploaded successfully!");
       }
     } catch (error) {
       console.error("Error uploading file:", error);

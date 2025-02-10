@@ -81,7 +81,7 @@ const Navbar = () => {
               Home
             </a>
           </li>
-          {(user.designation === 'Faculty' || user.designation === 'HOD')   && (
+          {(user.designation === 'Faculty' || user.designation === 'HOD' || user.designation === 'Dean')   && (
               <li
                 style={{
                   fontSize: '16px',
