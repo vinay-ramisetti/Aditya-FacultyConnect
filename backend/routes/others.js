@@ -7,7 +7,7 @@ const isloggedin = require('../middlewares/isloggedin');
 router.get('/data', isloggedin, async (req, res) => {
   try {
     const User_id = req.user._id;
-    const user = await User.findById(req.user._id);
+    const user = User.find(req.user._id);
     const OthersData = await Others.findOne({ userId: User_id });
 
     if (!OthersData) {
