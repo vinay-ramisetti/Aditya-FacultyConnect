@@ -156,48 +156,45 @@ router.put('/reject/:id', async (req, res) => {
 router.get("/researchtext", isloggedin, async (req, res) => {
   try {
     const userId = req.user._id;
-    const email = req.user.email;
+    const email = req.user.email.toLowerCase();
+    console.log("Fetching research data for:", { userId, email });
+
     const user = await User.findOne({ email });
+    if (!user) {
+      console.error("User not found for email:", email);
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const researchText = await ResearchData.findOne({ userId }).populate("userId");
-    
     if (!researchText) {
+      console.error("Research data not found for userId:", userId);
       return res.status(404).json({ message: "Research not found" });
     }
 
-    // Calculate array sizes
-    const SciArticlesSize = researchText.SciArticles.length;
-    const WosArticlesSize = researchText.WosArticles.length;
-    const ProposalsSize = researchText.Proposals.length;
-    const PapersSize = researchText.Papers.length;
-    const BooksSize = researchText.Books.length;
-    const ChaptersSize = researchText.Chapters.length;
-    const PGrantedSize = researchText.PGranted.length;
-    const PFiledSize = researchText.PFiled.length;
+    console.log("Research data fetched:", researchText);
 
-    // Calculate marks (max 2 for each)
-    const PapersMarks = PapersSize*5;
-    const BooksMarks = BooksSize*10;
-    const ChaptersMarks = ChaptersSize*5;
-    const PGrantedMarks = PGrantedSize*10;
-    const PFiledMarks = PFiledSize*5;
-    const SciMarks=Math.min(SciArticlesSize * 20,30) ;
-    const WosMarks=Math.min(WosArticlesSize *10,30) ;
-    const ProposalMarks=Math.min(ProposalsSize*10,10);
-    const SelfAssessment=Math.min((5*PapersSize)+(10*BooksSize)+(5*ChaptersSize)+(10*PGrantedSize)+(5*PFiledSize),10);
+    const SciArticlesSize = researchText.SciArticles?.length || 0;
+    const WosArticlesSize = researchText.WosArticles?.length || 0;
+    const ProposalsSize = researchText.Proposals?.length || 0;
+    const PapersSize = researchText.Papers?.length || 0;
+    const BooksSize = researchText.Books?.length || 0;
+    const ChaptersSize = researchText.Chapters?.length || 0;
+    const PGrantedSize = researchText.PGranted?.length || 0;
+    const PFiledSize = researchText.PFiled?.length || 0;
 
+    const PapersMarks = PapersSize * 5;
+    const BooksMarks = BooksSize * 10;
+    const ChaptersMarks = ChaptersSize * 5;
+    const PGrantedMarks = PGrantedSize * 10;
+    const PFiledMarks = PFiledSize * 5;
+    const SciMarks = Math.min(SciArticlesSize * 20, 30);
+    const WosMarks = Math.min(WosArticlesSize * 10, 30);
+    const ProposalMarks = Math.min(ProposalsSize * 10, 10);
+    const SelfAssessment = Math.min((5 * PapersSize) + (10 * BooksSize) + (5 * ChaptersSize) + (10 * PGrantedSize) + (5 * PFiledSize), 10);
 
-    // Convert Mongoose document to plain object and add calculated values
     const responseData = {
       _id: researchText._id,
       userId: researchText.userId,
-      SciArticles: researchText.SciArticles,
-      WosArticles: researchText.WosArticles,
-      Proposals: researchText.Proposals,
-      Papers: researchText.Papers,
-      Books: researchText.Books,
-      Chapters: researchText.Chapters,
-      PGranted: researchText.PGranted,
-      PFiled: researchText.PFiled,
       SciArticlesSize,
       WosArticlesSize,
       ProposalsSize,
@@ -214,19 +211,22 @@ router.get("/researchtext", isloggedin, async (req, res) => {
       ChaptersMarks,
       PGrantedMarks,
       PFiledMarks,
-      SelfAssessment
+      SelfAssessment,
     };
-    user.ResearchSelfAsses=SelfAssessment; 
-    user.WosMarks= WosMarks;
-    user.SciMarks=SciMarks;
-    user.ProposalMarks=ProposalMarks;
+
+    user.ResearchSelfAsses = SelfAssessment;
+    user.WosMarks = WosMarks;
+    user.SciMarks = SciMarks;
+    user.ProposalMarks = ProposalMarks;
     await user.save();
+    console.log("User updated successfully:", user);
     res.status(200).json(responseData);
   } catch (error) {
-    console.error("Error fetching research text:", error);
+    console.error("Error fetching research text:", error.message, error.stack);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 router.post("/addsciarticles",isloggedin, async(req,res)=>{
   try{
