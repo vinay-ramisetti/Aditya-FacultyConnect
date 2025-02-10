@@ -6,26 +6,18 @@ const DisplayWorkshops = () => {
   const [totalMarks, setTotalMarks] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Function to calculate duration
   const calculateDuration = (startTime, endTime) => {
     if (!startTime || !endTime) return "-";
-
     const [startHours, startMinutes] = startTime.split(":").map(Number);
     const [endHours, endMinutes] = endTime.split(":").map(Number);
-
     const start = new Date();
     start.setHours(startHours, startMinutes, 0);
-
     const end = new Date();
     end.setHours(endHours, endMinutes, 0);
-
-    let diff = (end - start) / (1000 * 60); // Convert ms to minutes
-
-    if (diff < 0) diff += 24 * 60; // Handle cases where end time is past midnight
-
+    let diff = (end - start) / (1000 * 60);
+    if (diff < 0) diff += 24 * 60;
     const hours = Math.floor(diff / 60);
     const minutes = diff % 60;
-
     return `${hours}h ${minutes}m`;
   };
 
@@ -40,27 +32,29 @@ const DisplayWorkshops = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
         const data = await response.json();
-
-        setWorkshops(data.Workshops);  // ✅ Correct variable name
-        setTotalMarks(data.TotalMarks); // ✅ Store total marks
+        setWorkshops(data.Workshops);
+        setTotalMarks(data.TotalMarks);
       } catch (error) {
         console.error('Error fetching workshops:', error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchWorkshops();
   }, []);
 
   return (
     <div className="workshops-container">
-      <h2 className="workshop-title">Workshops/FDPs/STTP/Refresher Courses Attended</h2>
-      <p className="workshop-subtitle">
-        (1 workshop - 5 marks, 5 days FDP/STTP/Refresher Course - 10 marks, NPTEL Course - 10 marks)
-      </p>
+      <div className="flex justify-between items-center mb-2">
+  <h2 className="font-bold text-base">5. Workshops/FDPs/STTP/Refresher Courses Attended:</h2>
+  <div className="flex items-center gap-2">
+    <input type="file" style={{ border: '1px solid #ccc', padding: '5px', borderRadius: '8px' }} />
+    <button className="p-1 bg-blue-500 text-white rounded text-sm w-24 h-8">Upload</button>
+    <button className="p-1 bg-blue-500 text-white rounded text-sm w-24 h-8" onClick={() => navigate('/addworkshop')}>+ Add</button>
+  </div>
+</div>
+      
 
       {loading ? (
         <p>Loading workshops...</p>
@@ -95,14 +89,15 @@ const DisplayWorkshops = () => {
                   <td colSpan="5" className="no-data">No workshops available</td>
                 </tr>
               )}
+              {/* Self-Assessment Marks row */}
+              <tr>
+                <td colSpan="4" className="text-right font-bold">Self-Assessment Marks (Max: 20):</td>
+                <td className="font-bold">{totalMarks}</td>
+              </tr>
             </tbody>
           </table>
         </div>
       )}
-
-      <div className="self-assessment">
-        <strong>Self-Assessment Marks (Max: 20) :- {totalMarks}</strong>
-      </div>
     </div>
   );
 };

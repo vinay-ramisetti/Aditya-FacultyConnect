@@ -23,7 +23,7 @@ const AddResponsibility = () => {
       });
       
       if (response.ok) {
-        navigate('/others');
+        navigate('/partb');
       } else {
         console.error('Error adding responsibility');
       }

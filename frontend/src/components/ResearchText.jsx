@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const ResearchText = () => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,17 +24,12 @@ const ResearchText = () => {
         }
       } catch (error) {
         console.error('Fetch error:', error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
     fetchData();
   }, []);
 
-  if (loading) {
-    return <p style={{ textAlign: 'center', marginTop: '20px', fontSize: '18px', color: '#666' }}>Loading...</p>;
-  }
 
   if (!data) {
     return <p style={{ textAlign: 'center', marginTop: '20px', fontSize: '18px', color: 'red' }}>No Research Data Found</p>;
@@ -46,7 +38,6 @@ const ResearchText = () => {
   return (
     <div style={{ padding: '20px', position: 'relative' }}>
       
-
       <b style={{ fontSize: '23px' }}>       4. Research Contributions:</b>
       <p><b>(1 SCI article – 20, 1 Scopus/WoS article – 10, 1 Conference – 5, 1 Book -10, 1 Chapter – 5, 
         1 Patent Granted-10, 1 Patent filed-5, 1 Project Proposal submitted/funded – 10)</b></p>

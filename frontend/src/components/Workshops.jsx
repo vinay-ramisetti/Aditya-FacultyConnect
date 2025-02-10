@@ -3,23 +3,17 @@ import DisplayWorkshops from './DisplayWorkshops';
 import { useNavigate } from 'react-router-dom';
 import './Workshop.css';
 import { FaPlus } from "react-icons/fa";
-import Navbar from './Navbar';
 
 const Workshops = () => {
   const navigate = useNavigate();
 
   return (
     <div>
-      <Navbar/>
-       <div className="articles-container">
+      
+       <div >
     <div className="header">
-      <h1 className="page-title">Workshops</h1>
-      <button
-        className="post-button"
-        onClick={() => navigate('/addworkshop')}
-      >
-      <FaPlus />  Add
-      </button>
+      <h1 className="page-title"></h1>
+     
     </div>
     <hr className="divider" />
     <DisplayWorkshops />

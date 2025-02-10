@@ -3,6 +3,7 @@ import ClassInfo from './ClassInfo';
 import ResearchText from './ResearchText';
 import Navbar from './Navbar';
 import Others from './Others';
+import Workshops from './Workshops';
 
 const DisplayAll = () => {
   return (
@@ -17,6 +18,7 @@ const DisplayAll = () => {
       <ClassInfo />
       <div style={{ margin: '20px 0' }} />
       <ResearchText />
+      <Workshops />
       <div style={{ margin: '20px 0' }} />
        <Others/>
     </div>

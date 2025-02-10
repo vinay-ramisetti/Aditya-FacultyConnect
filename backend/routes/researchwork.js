@@ -156,37 +156,47 @@ router.put('/reject/:id', async (req, res) => {
 router.get("/researchtext", isloggedin, async (req, res) => {
   try {
     const userId = req.user._id;
-    const email = req.user.email;
-    const user = await User.findOne({ email });
-    const researchText = await ResearchData.findOne({ userId }).populate("userId");
-    
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const researchText = await ResearchData.findOne({ userId:userId });
+    console.log("ss",researchText);
     if (!researchText) {
       return res.status(404).json({ message: "Research not found" });
     }
 
-    // Calculate array sizes
-    const SciArticlesSize = researchText.SciArticles.length;
-    const WosArticlesSize = researchText.WosArticles.length;
-    const ProposalsSize = researchText.Proposals.length;
-    const PapersSize = researchText.Papers.length;
-    const BooksSize = researchText.Books.length;
-    const ChaptersSize = researchText.Chapters.length;
-    const PGrantedSize = researchText.PGranted.length;
-    const PFiledSize = researchText.PFiled.length;
+    // Calculate array sizes safely
+    const SciArticlesSize = researchText.SciArticles?.length || 0;
+    const WosArticlesSize = researchText.WosArticles?.length || 0;
+    const ProposalsSize = researchText.Proposals?.length || 0;
+    const PapersSize = researchText.Papers?.length || 0;
+    const BooksSize = researchText.Books?.length || 0;
+    const ChaptersSize = researchText.Chapters?.length || 0;
+    const PGrantedSize = researchText.PGranted?.length || 0;
+    const PFiledSize = researchText.PFiled?.length || 0;
 
-    // Calculate marks (max 2 for each)
-    const PapersMarks = PapersSize*5;
-    const BooksMarks = BooksSize*10;
-    const ChaptersMarks = ChaptersSize*5;
-    const PGrantedMarks = PGrantedSize*10;
-    const PFiledMarks = PFiledSize*5;
-    const SciMarks=Math.min(SciArticlesSize * 20,30) ;
-    const WosMarks=Math.min(WosArticlesSize *10,30) ;
-    const ProposalMarks=Math.min(ProposalsSize*10,10);
-    const SelfAssessment=Math.min((5*PapersSize)+(10*BooksSize)+(5*ChaptersSize)+(10*PGrantedSize)+(5*PFiledSize),10);
+    // Calculate marks (apply min where needed)
+    const PapersMarks = PapersSize * 5;
+    const BooksMarks = BooksSize * 10;
+    const ChaptersMarks = ChaptersSize * 5;
+    const PGrantedMarks = PGrantedSize * 10;
+    const PFiledMarks = PFiledSize * 5;
+    const SciMarks = Math.min(SciArticlesSize * 20, 30);
+    const WosMarks = Math.min(WosArticlesSize * 10, 30);
+    const ProposalMarks = Math.min(ProposalsSize * 10, 10);
+    const SelfAssessment = Math.min(PapersMarks + BooksMarks + ChaptersMarks + PGrantedMarks + PFiledMarks, 10);
 
+    // Update user marks
+    user.ResearchSelfAsses = SelfAssessment;
+    user.WosMarks = WosMarks;
+    user.SciMarks = SciMarks;
+    user.ProposalMarks = ProposalMarks;
+    await user.save(); // Ensure this is awaited
 
-    // Convert Mongoose document to plain object and add calculated values
+    // Construct response object
     const responseData = {
       _id: researchText._id,
       userId: researchText.userId,
@@ -214,19 +224,16 @@ router.get("/researchtext", isloggedin, async (req, res) => {
       ChaptersMarks,
       PGrantedMarks,
       PFiledMarks,
-      SelfAssessment
+      SelfAssessment,
     };
-    user.ResearchSelfAsses=SelfAssessment; 
-    user.WosMarks= WosMarks;
-    user.SciMarks=SciMarks;
-    user.ProposalMarks=ProposalMarks;
-    await user.save();
+   console.log(responseData);
     res.status(200).json(responseData);
   } catch (error) {
     console.error("Error fetching research text:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 router.post("/addsciarticles",isloggedin, async(req,res)=>{
   try{
@@ -549,6 +556,39 @@ router.get("/pfiled", isloggedin, async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+router.get("/getdata",isloggedin,async(req,res)=>{
+  try{
+   const UserId=req.user._id;
+   const user=await User.findById(UserId);
+   if(!user){
+    return res.status(404).json({message:"User Not Found"});
+   }
+   const responseData={
+    CouAvgPerMarks:user.couAvgPerMarks,
+    CoufeedMarks:user.CoufeedMarks,
+    ProctoringMarks:user.ProctoringMarks,
+    SciMarks:user.SciMarks,
+    WosMarks:user.WosMarks,
+    ProposalMarks:user.ProposalMarks,
+    ResearchSelfAssesMarks:user.ResearchSelfAsses,
+    WorkSelfAssesMarks:user.WorkSelfAsses,
+    OutreachSelfAssesMarks:user.OutreachSelfAsses,
+    AddSelfAssesMarks:user.AddSelfAsses,
+    SpecialSelfAssesMarks:user.SpeacialSelfAsses,
+    // AvgSelfAssesMarks:user.AvgSelfAsses,
+    // ProctorSelfAssesMarks:user.ProctorSelfAsses,
+    
+    // WorkShopMarks:user.WorkshopMarks,
+    // FeedSelfAssesMarks:user.feedSelfAsses,
+   };
+   console.log(responseData);
+   res.status(200).json(responseData);
+  }catch(error){
+    console.error("Error fetching Data:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
 
 
 
