@@ -166,7 +166,29 @@ router.get("/researchtext", isloggedin, async (req, res) => {
     console.log("ss",researchText);
     if (!researchText) {
       console.error("Research data not found for userId:", userId);
-      return res.status(404).json({ message: "Research not found" });
+      // Return dummy data
+      const dummyData = {
+        _id: null,
+        userId: userId,
+        SciArticlesSize: 0,
+        WosArticlesSize: 0,
+        ProposalsSize: 0,
+        PapersSize: 0,
+        BooksSize: 0,
+        ChaptersSize: 0,
+        PGrantedSize: 0,
+        PFiledSize: 0,
+        SciMarks: 0,
+        WosMarks: 0,
+        ProposalMarks: 0,
+        PapersMarks: 0,
+        BooksMarks: 0,
+        ChaptersMarks: 0,
+        PGrantedMarks: 0,
+        PFiledMarks: 0,
+        SelfAssessment: 0,
+      };
+      return res.status(200).json(dummyData);
     }
 
     // Calculate array sizes safely
