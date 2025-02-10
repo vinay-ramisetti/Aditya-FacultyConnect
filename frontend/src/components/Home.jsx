@@ -8,6 +8,7 @@ import Carousal from './Carousal';
 import { useState,useEffect } from 'react';
 import DisplayClasses from './DisplayClasses';
 import FacultyScoreTable from './FacultyScoreTable';
+import HoDTable from './HodTable';
 const Home = (props) => {
   const faculty = props.faculty;
   const departments = props.departments;
@@ -51,10 +52,12 @@ const Home = (props) => {
           <Faculty faculty={faculty} />
         </div> */}
         <FacultyScoreTable/>
+       
         {user.designation==='HOD' && <div><Faculty faculty={faculty} /></div>}
         {user.designation==='Dean' && <div>
           <Departments departments={departments} />
         </div>}
+     
       </div>
       <Footer />
     </div>

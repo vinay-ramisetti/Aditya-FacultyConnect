@@ -58,7 +58,7 @@ const Profile = ({ lecturerDetails: initialDetails }) => {
             <strong>
               (a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name with Emp ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;
             </strong>{" "}
-            {lecturerDetails.fullName}
+            {lecturerDetails.fullName} ({lecturerDetails.EmpID})
           </p>
           <p style={{ marginLeft: "20px", marginBottom: "10px", padding: "10px" }}>
             <strong>

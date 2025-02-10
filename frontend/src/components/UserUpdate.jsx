@@ -129,10 +129,7 @@ function AddUserForm() {
         <input type="text" id="PhdYear" name="PhdYear" value={formData.PhdYear} onChange={handleChange} />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="Industry">Institutions Worked at:</label>
-        <input type="text" id="Industry" name="Industry" value={formData.Industry} onChange={handleChange} />
-      </div>
+
 
       <div className="form-group">
         <label htmlFor="OtherInst">Other Institutions:</label>
@@ -143,9 +140,12 @@ function AddUserForm() {
         <label htmlFor="OtherYear">Other Year:</label>
         <input type="text" id="OtherYear" name="OtherYear" value={formData.OtherYear} onChange={handleChange} />
       </div>
-
       <div className="form-group">
-        <label htmlFor="TExp">Total Experience:</label>
+        <label htmlFor="Industry">Industrial Experience (if any)</label>
+        <input type="text" id="Industry" name="Industry" value={formData.Industry} onChange={handleChange} />
+      </div>
+      <div className="form-group">
+        <label htmlFor="TExp">Total Teaching experience (after PG)</label>
         <input type="number" id="TExp" name="TExp" value={formData.TExp} onChange={handleChange} />
       </div>
 

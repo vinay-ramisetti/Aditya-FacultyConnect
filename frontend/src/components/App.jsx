@@ -56,7 +56,7 @@ import AddContribution from './Addcontribution';
 import AddAward from './Addaward';
 import DisplayAll from './DisplayAll';
 import ProctoringForm from './ProctoringForm';
-
+import HodTable from './HodTable';
 function App() {
   const [faculty, setFaculty] = useState([]);
   const [departments, setDepartments] = useState([]);
@@ -131,6 +131,10 @@ function App() {
            <Route
           path="/logout"
           element={<Logout />}
+        />
+          <Route
+          path="/hodtable"
+          element={<HodTable />}
         />
         <Route
           path="/addResearch"

@@ -130,7 +130,7 @@ const Navbar = () => {
             </li>
            
            
-            {/* {user.designation === 'HOD' && (
+            {user.designation === 'HOD' && (
               <li
                 style={{
                   fontSize: '16px',
@@ -141,17 +141,17 @@ const Navbar = () => {
                 }}
               >
                 <a
-                  href="/accept"
+                  href="/hodtable"
                   style={{
                     textDecoration: 'none',
                     color: 'inherit',
                     transition: 'color 0.3s ease',
                   }}
                 >
-                  Approvals
+                  HOD Table
                 </a>
               </li>
-            )} */}
+            )}
         </ul>
       </div>
 
