@@ -36,6 +36,7 @@ router.post('/register', async (req, res) => {
 
         // Set cookie with token
         res.cookie('token', token);
+        
 
         // Set token in response headers
         res.setHeader('Authorization', `Bearer ${token}`);

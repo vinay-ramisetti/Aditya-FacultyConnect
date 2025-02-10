@@ -45,12 +45,13 @@ const Home = (props) => {
       <Navbar />
       <Carousal/>
       <div className='m-2 p-1'>
-        <div>
-       
+        {/* <div>
         {user.designation === 'Faculty' && <FacultyScoreTable user={user}/>}
         {user.designation === 'HOD' && <FacultyScoreTable user={user}/>}
           <Faculty faculty={faculty} />
-        </div>
+        </div> */}
+        <FacultyScoreTable/>
+        {user.designation==='HOD' && <div><Faculty faculty={faculty} /></div>}
         {user.designation==='Dean' && <div>
           <Departments departments={departments} />
         </div>}

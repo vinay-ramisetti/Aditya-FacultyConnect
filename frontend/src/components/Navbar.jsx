@@ -130,7 +130,7 @@ const Navbar = () => {
             </li>
            
            
-            {user.designation === 'HOD' && (
+            {/* {user.designation === 'HOD' && (
               <li
                 style={{
                   fontSize: '16px',
@@ -151,7 +151,7 @@ const Navbar = () => {
                   Approvals
                 </a>
               </li>
-            )}
+            )} */}
         </ul>
       </div>
 

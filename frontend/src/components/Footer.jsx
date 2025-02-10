@@ -117,14 +117,14 @@ const Footer = () => {
       {/* Bottom Section */}
       <div
         style={{
+          color:'white',
           textAlign: 'center',
           borderTop: '1px solid #fff',
           paddingTop: '10px',
           marginTop: '20px',
-          color:"white"
         }}
       >
-        <p>Aditya University © 2024 - All Rights Reserved.</p>
+        <p style={{color:'white'}}>Aditya University © 2024 - All Rights Reserved.</p>
       </div>
     </div>
   );

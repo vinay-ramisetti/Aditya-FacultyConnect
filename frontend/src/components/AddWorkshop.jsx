@@ -40,7 +40,7 @@ const AddWorkshop = () => {
       console.log(token);
       if (response.ok) {
         alert('Workshop added successfully!');
-        navigate('/workshops');
+        navigate('/partb');
       } else {
         const error = await response.json();
         console.error('Error adding workshop:', error);
