@@ -7,20 +7,26 @@ const isloggedin = require('../middlewares/isloggedin');
 router.get('/data', isloggedin, async (req, res) => {
   try {
     const User_id = req.user._id;
-    const user = User.find(req.user._id);
+    const user = await User.findById(User_id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const OthersData = await Others.findOne({ userId: User_id });
 
     if (!OthersData) {
       return res.status(404).json({ message: "No Data Found" });  
     }
 
-    const ActivityMarks=Math.min(OthersData.Activities.length*5,10);
-    const ResponsibilityMarks=Math.min(OthersData.Responsibilities.length*10,20);
-    const ContributionMarks=Math.min(OthersData.Contribution.length*5,10);
+    const ActivityMarks = Math.min(OthersData.Activities.length * 5, 10);
+    const ResponsibilityMarks = Math.min(OthersData.Responsibilities.length * 10, 20);
+    const ContributionMarks = Math.min(OthersData.Contribution.length * 5, 10);
     user.OutreachSelfAsses = ActivityMarks; 
     user.AddSelfAsses = ResponsibilityMarks;
     user.SpeacialSelfAsses = ContributionMarks;
-        await user.save();
+    await user.save();
+
     return res.status(200).json({
       Activities: OthersData.Activities || [], 
       Responsibilities: OthersData.Responsibilities || [],
