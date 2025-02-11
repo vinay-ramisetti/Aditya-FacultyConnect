@@ -36,127 +36,22 @@ const Navbar = () => {
   return (
     <nav
       style={{
-        position: 'sticky', // Makes the navbar sticky
-        top: 0,             // Sticks it to the top of the viewport
-        zIndex: 1000,       // Ensures the navbar stays above other elements
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         padding: '10px 20px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         backgroundColor: '#f8f9fa',
+        
       }}
     >
-      {/* Left Side */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        <img src={headlogo} alt="HeadLogo" style={{ width: '50%', height: '100', border: '0' }} />
-        <ul
-          style={{
-            listStyle: 'none',
-            display: 'flex',
-            margin: 0,
-            padding: 0,
-            gap: '15px',
-          }}
-        >
-          <li
-            style={{
-              fontSize: '16px',
-              fontFamily: 'Arial, sans-serif',
-              cursor: 'pointer',
-              color: '#555',
-              textDecoration: 'none',
-            }}
-          >
-            <a
-              href="/home"
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseEnter={(e) => (e.target.style.color = '#007bff')}
-              onMouseLeave={(e) => (e.target.style.color = '#555')}
-            >
-              Home
-            </a>
-          </li>
-          {(user.designation === 'Faculty' || user.designation === 'HOD' || user.designation === 'Dean')   && (
-              <li
-                style={{
-                  fontSize: '16px',
-                  fontFamily: 'Arial, sans-serif',
-                  cursor: 'pointer',
-                  color: '#555',
-                  textDecoration: 'none',
-                }}
-              >
-                <a
-                  href="/profile"
-                  style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'color 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => (e.target.style.color = '#007bff')}
-                  onMouseLeave={(e) => (e.target.style.color = '#555')}
-                >
-                  Part-A
-                </a>
-              </li>
-            )}
-        
-          <li
-            style={{
-              fontSize: '16px',
-              fontFamily: 'Arial, sans-serif',
-              cursor: 'pointer',
-              color: '#555',
-              textDecoration: 'none',
-            }}
-          >
-            <a
-              href="/partb"
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseEnter={(e) => (e.target.style.color = '#007bff')}
-              onMouseLeave={(e) => (e.target.style.color = '#555')}
-            >
-              Part-B
-            </a>
-            </li>
-           
-           
-            {user.designation === 'HOD' && (
-              <li
-                style={{
-                  fontSize: '16px',
-                  fontFamily: 'Arial, sans-serif',
-                  cursor: 'pointer',
-                  color: '#555',
-                  textDecoration: 'none',
-                }}
-              >
-                <a
-                  href="/hodtable"
-                  style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  HOD Table
-                </a>
-              </li>
-            )}
-        </ul>
-      </div>
-
+      {/* Centered Logo */}
+      <img src={headlogo} alt="HeadLogo" style={{ width: '40%', height: 'auto', border: '0' }} />
       {/* Right Side */}
-      <div style={{ display: 'flex', gap: '15px' }}>
+      <div style={{ position: 'absolute', right: '20px', display: 'flex', gap: '15px' }}>
         <button
           style={{
             display: 'flex',
@@ -177,7 +72,6 @@ const Navbar = () => {
         >
           <IoIosHelpCircleOutline />About
         </button>
-        
       </div>
     </nav>
   );

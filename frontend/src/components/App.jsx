@@ -48,7 +48,7 @@ import AddChapters from './AddChapters';
 import AddPGranted from './AddPGranted';
 import AddPFiled from './AddPFiled';
 import UpdateCla from './UpdateCla';
-import FacultyScoreTable from './FacultyScoreTable';
+import Carousal from './Carousal'
 import Others from './Others';
 import AddActivity from './Addactivity';
 import AddResponsibility from './Addresponsibility';
@@ -57,6 +57,7 @@ import AddAward from './Addaward';
 import DisplayAll from './DisplayAll';
 import ProctoringForm from './ProctoringForm';
 import HodTable from './HodTable';
+import FacultyScoreTable from './FacultyScoreTable';
 function App() {
   const [faculty, setFaculty] = useState([]);
   const [departments, setDepartments] = useState([]);
@@ -145,8 +146,8 @@ function App() {
           element={<Addworkshop />}
         />
         <Route
-          path="/accept"
-          element={<Accept />}
+          path="/facultyaprisaltable"
+          element={ <FacultyScoreTable/>}
         />
         <Route
           path="/research"
@@ -180,7 +181,7 @@ function App() {
         <Route path="/addresponsibility" element={<AddResponsibility/>} />
         <Route path="/addcontribution" element={<AddContribution/>} />
         <Route path="/addaward" element={<AddAward/>} />
-        <Route path="/proctoring" element={<ProctoringForm/>} />
+        <Route path="/ccc" element={<Carousal/>} />
       </Routes>
   );
 }

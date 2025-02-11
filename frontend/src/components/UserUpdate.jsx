@@ -25,9 +25,16 @@ function AddUserForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let newValue = value;
+
+    // Convert negative numbers to positive for specific fields
+    if (['YearOfpass', 'UGYear', 'PGYear', 'PhdYear', 'OtherYear', 'TExp'].includes(name)) {
+      newValue = Math.abs(value);
+    }
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: newValue,
     });
   };
 

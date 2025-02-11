@@ -44,14 +44,14 @@ const Home = (props) => {
     <div>
       <Header />
       <Navbar />
-      <Carousal/>
+      <Carousal data={user.designation}/>
       <div className='m-2 p-1'>
         {/* <div>
         {user.designation === 'Faculty' && <FacultyScoreTable user={user}/>}
         {user.designation === 'HOD' && <FacultyScoreTable user={user}/>}
           <Faculty faculty={faculty} />
         </div> */}
-        <FacultyScoreTable/>
+       
        
         {user.designation==='HOD' && <div><Faculty faculty={faculty} /></div>}
         {user.designation==='Dean' && <div>

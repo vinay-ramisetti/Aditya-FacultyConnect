@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import Navbar from './Navbar';
 const FacultyScoreTable = () => {
   const [data, setData] = useState([]);
 
@@ -48,7 +48,9 @@ const FacultyScoreTable = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+    <>
+     <Navbar/>
+    <div className="container mx-auto p-6">
       <h2 className="text-xl font-bold mb-4">Faculty Self Appraisal - Performance Parameters</h2>
       <table className="table-auto border-collapse border border-gray-400 w-full">
         <thead>
@@ -90,6 +92,7 @@ const FacultyScoreTable = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 
