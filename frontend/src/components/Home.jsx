@@ -44,7 +44,7 @@ const Home = (props) => {
     <div>
       <Header />
       <Navbar />
-      <Carousal data={user.designation}/>
+      <Carousal role={user.designation}/>
       <div className='m-2 p-1'>
         {/* <div>
         {user.designation === 'Faculty' && <FacultyScoreTable user={user}/>}

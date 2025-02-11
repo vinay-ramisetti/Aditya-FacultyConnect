@@ -28,7 +28,7 @@ const Articles=require(path.join(__dirname,"routes","articles"));
 const Workshops=require(path.join(__dirname,"routes","workshops"));
 const Others=require(path.join(__dirname,"routes","others"));
 const proctoring=require(path.join(__dirname,"routes","proctoring"));
-
+const users = require(path.join(__dirname,"routes","user"));
 
 const corsOptions = {
     origin: 'http://localhost:5173',
@@ -50,6 +50,7 @@ app.use("/article",Articles);
 app.use("/workshop",Workshops);
 app.use("/others",Others);
 app.use("/proc",proctoring);
+app.use("/users",users);
 // Database Connection
 const ConnectDB = async () => {
     try {

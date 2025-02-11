@@ -58,6 +58,7 @@ import DisplayAll from './DisplayAll';
 import ProctoringForm from './ProctoringForm';
 import HodTable from './HodTable';
 import FacultyScoreTable from './FacultyScoreTable';
+import UserList from './UserList';
 function App() {
   const [faculty, setFaculty] = useState([]);
   const [departments, setDepartments] = useState([]);
@@ -182,6 +183,7 @@ function App() {
         <Route path="/addcontribution" element={<AddContribution/>} />
         <Route path="/addaward" element={<AddAward/>} />
         <Route path="/ccc" element={<Carousal/>} />
+        <Route path="/admin" element={<UserList/>} />
       </Routes>
   );
 }

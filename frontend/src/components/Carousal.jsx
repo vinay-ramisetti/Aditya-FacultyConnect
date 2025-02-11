@@ -7,9 +7,9 @@ import three from "../images/three.jpeg";
 import four from "../images/four.jpg";
 import five from "../images/five.jpg";
 
-const Carousal = () => {
+const Carousal = (props) => {
   const images = [one, two, three, four, five];
-
+    
   return (
     <div style={styles.container}>
       {/* Sidebar */}
@@ -24,12 +24,19 @@ const Carousal = () => {
           <li>
             <a href="/facultyaprisaltable" style={styles.navLink}>Faculty Self Appraisal</a>
           </li>
+          {props.role === 'HOD' &&   <li>
+            <a href="/hodtable" style={styles.navLink}>HOD Table</a>
+          </li> }
+
+          {props.role === 'Admin' &&   <li>
+            <a href="/admin" style={styles.navLink}>Admin Pannel</a>
+          </li> }
           <li>
             <a href="/about" style={styles.navLink}>About</a>
           </li>
         </ul>
       </div>
-
+      
       {/* Carousel */}
       <div style={styles.carouselContainer}>
         <Carousel
@@ -51,6 +58,7 @@ const Carousal = () => {
           ))}
         </Carousel>
       </div>
+     
     </div>
   );
 };
