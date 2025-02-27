@@ -4,6 +4,8 @@ const Class = require('../models/class-model');
 const isloggedin = require('../middlewares/isloggedin');
 const User = require('../models/user-model');
 const Feedback = require('../models/Feedback');
+const mongoose = require('mongoose');
+
 
 router.post('/classes', isloggedin, async (req, res) => {
     try {
@@ -84,7 +86,7 @@ router.post('/feedback', isloggedin, async (req, res) => {
         // Fetch all feedback for the user
         const feedbacks = await Feedback.find({ teacher: user._id });
         const totalFeedbackPercentage = feedbacks.reduce((acc, fb) => acc + fb.feedbackPercentage, 0);
-        console.log(feedbacks.length);
+      
         const averageFeedbackPercentage = feedbacks.length > 0 ? (totalFeedbackPercentage / feedbacks.length).toFixed(2) : 0;
 
         let totalMarks = 0;
@@ -148,6 +150,34 @@ router.get("/raw", isloggedin, async (req, res) => {
         console.error("Error fetching classes:", error);
         res.status(500).json({ message: "Unable to fetch classes" });
     }
+});
+
+router.delete("/courses/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deletedCourse = await Class.findByIdAndDelete(id);
+      if (!deletedCourse) {
+        return res.status(404).json({ message: "Course not found" });
+      }
+      res.json({ message: "Course deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting course:", error.message);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
+
+
+// Update a course by ID
+router.put('/courses/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+    const updatedCourse = await Course.findByIdAndUpdate(id, updateData, { new: true });
+    console.log("callingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
+    res.status(200).json({ data: updatedCourse, message: 'Course updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating course' });
+  }
 });
 
 

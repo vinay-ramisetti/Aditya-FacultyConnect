@@ -45,3 +45,33 @@
     background-color: #515151;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
+
+
+
+
+
+
+  .update-form {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.update-form h2 {
+    margin-bottom: 10px;
+}
+
+.update-form input {
+    display: block;
+    margin: 5px 0;
+    padding: 8px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.update-form button {
+    margin: 5px;
+    padding: 8px 12px;
+}
