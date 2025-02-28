@@ -162,7 +162,7 @@ router.get("/researchtext", isloggedin, async (req, res) => {
     }
 
     const researchText = await ResearchData.findOne({ userId:userId });
-    console.log("ss",researchText);
+   
     if (!researchText) {
       console.error("Research data not found for userId:", userId);
       // Return dummy data
@@ -240,7 +240,7 @@ router.get("/researchtext", isloggedin, async (req, res) => {
       PFiledMarks,
       SelfAssessment,
     };
-   console.log(responseData);
+
     res.status(200).json(responseData);
   } catch (error) {
     console.error("Error fetching research text:", error.message, error.stack);

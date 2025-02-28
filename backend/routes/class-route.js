@@ -167,18 +167,38 @@ router.delete("/courses/:id", async (req, res) => {
   });
 
 
-// Update a course by ID
-router.put('/courses/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updateData = req.body;
-    const updatedCourse = await Course.findByIdAndUpdate(id, updateData, { new: true });
-    console.log("callingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
-    res.status(200).json({ data: updatedCourse, message: 'Course updated successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating course' });
-  }
+ 
+  router.put('/courses/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { courseName, semester, numberOfStudents, passCount } = req.body;
+
+      
+      
+
+        // Update the course
+        const updatedCourse = await Class.findByIdAndUpdate(
+            id,
+            { courseName, semester, numberOfStudents, passCount },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedCourse) {
+            console.log("No course found with ID:", id);
+            return res.status(404).json({ message: 'Course not found' });
+        }
+
+    
+        res.json(updatedCourse);
+
+    } catch (error) {
+        console.error('Error updating course:', error.message);
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
 });
+
+
+  
 
 
 module.exports = router;
