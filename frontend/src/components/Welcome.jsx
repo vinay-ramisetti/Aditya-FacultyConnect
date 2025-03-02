@@ -89,8 +89,9 @@ const Welcome = () => {
     <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
       {[
         { role: 'Faculty', link: '/signin' },
-        { role: 'Dean', link: '/signin' },
         { role: 'HOD', link: '/signin' },
+        { role: 'Dean', link: '/signin' },
+      
         { role: 'Admin', link: '/signin' },
       ].map((option, index) => (
         <li
