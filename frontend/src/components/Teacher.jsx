@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import DisplayCourses from "./DisplayCourses.jsx";
@@ -8,9 +9,10 @@ import ProctoringTable from './DisplayProctoring';
 import ResearchText from './ResearchText';
 import DisplayWorkshops from './DisplayWorkshops';
 import Others from './Others';
+
 const Teacher = ({ faculty }) => {
   const { id } = useParams();
-  const teacher = faculty.find((teacher) => teacher._id === id);
+  const teacher = faculty?.find((teacher) => teacher._id === id);
   const [teacherData, setTeacherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,38 +44,49 @@ const Teacher = ({ faculty }) => {
   return (
     <div style={styles.pageContainer}>
       <Navbar />
-      
-
       <div style={styles.contentContainer}>
-
- 
         {loading && <p>Loading teacher data...</p>}
         {error && <p style={styles.error}>{error}</p>}
         {teacherData && (
           <>
-           
             <DisplayCourses coursesData={teacherData?.classes} />
-            <DisplayFeedback feedbackData={teacherData?.feedback}/>
+            <DisplayFeedback feedbackData={teacherData?.feedback} />
             <ProctoringTable proctoringData={teacherData?.proctoring} />
-            <ResearchText data={ teacherData?.research } />
+            <ResearchText data={teacherData?.research} />
             <DisplayWorkshops
               data={{
                 workshops: teacherData.workshop,
                 totalMarks: 18,
               }}
             />
-           <Others data={teacherData.others}/>
+            <Others data={teacherData?.others} />
           </>
         )}
-
       </div>
     </div>
   );
 };
 
+Teacher.propTypes = {
+  faculty: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string,
+    })
+  ).isRequired,
+};
+
 const styles = {
-
-
+  pageContainer: {
+    padding: '20px',
+  },
+  contentContainer: {
+    marginTop: '20px',
+  },
+  error: {
+    color: 'red',
+    fontWeight: 'bold',
+  },
 };
 
 export default Teacher;

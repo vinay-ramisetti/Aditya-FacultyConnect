@@ -59,6 +59,7 @@ import ProctoringForm from './ProctoringForm';
 import HodTable from './HodTable';
 import FacultyScoreTable from './FacultyScoreTable';
 import UserList from './UserList';
+
 function App() {
   const [faculty, setFaculty] = useState([]);
   const [departments, setDepartments] = useState([]);
@@ -159,6 +160,7 @@ function App() {
           element={<Workshops />}
         />
          <Route path="/partb" element={<DisplayAll/>} />
+         <Route path="/proctoring" element={<ProctoringForm/>} />
         <Route path="/sciarticles" element={<Sciarticles />} />
         <Route path="/wosarticles" element={<Wosarticles />} />
         <Route path="/proposals" element={<Proposals />} />

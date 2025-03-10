@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const ProctoringForm = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -11,6 +10,9 @@ const ProctoringForm = () => {
         eligibleStudents: "",
         passedStudents: "",
     });
+
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState({ type: "", text: "" });
 
     useEffect(() => {
         const fetchUserId = async () => {
@@ -24,15 +26,16 @@ const ProctoringForm = () => {
                         "Content-Type": "application/json",
                     },
                 });
-                if (response.ok) {
-                    const data = await response.json();
-                    setFormData((prevData) => ({
-                        ...prevData,
-                        teacher: data.id,
-                    }));
-                } else {
-                    console.error("Failed to fetch user ID");
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch user ID");
                 }
+
+                const data = await response.json();
+                setFormData((prevData) => ({
+                    ...prevData,
+                    teacher: data.id,
+                }));
             } catch (error) {
                 console.error("Error fetching user ID:", error);
             }
@@ -42,39 +45,58 @@ const ProctoringForm = () => {
     }, []);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: name.includes("Students") ? Number(value) || "" : value,
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setMessage({ type: "", text: "" });
+
         try {
             const token = localStorage.getItem("token");
             const response = await axios.post(
                 "http://localhost:5000/proc/proctoring-data",
                 formData,
                 {
-                    credentials: "include",
                     headers: {
                         "Authorization": `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                 }
             );
-            console.log("Proctoring data submitted successfully:", response.data);
-            navigate("/partb");
+
+            setMessage({ type: "success", text: "Proctoring data submitted successfully!" });
+            console.log("Proctoring data submitted:", response.data);
+            setTimeout(() => navigate("/partb"), 2000);
         } catch (error) {
-            console.error("Error submitting proctoring data:", error);
+            setMessage({ type: "error", text: "Error submitting proctoring data!" });
+            console.error("Submission error:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="number" name="totalStudents" value={formData.totalStudents} onChange={handleChange} placeholder="Total Students" required />
-            <input type="text" name="semesterBranchSec" value={formData.semesterBranchSec} onChange={handleChange} placeholder="Sem-Branch-Sec" required />
-            <input type="number" name="eligibleStudents" value={formData.eligibleStudents} onChange={handleChange} placeholder="Eligible Students" required />
-            <input type="number" name="passedStudents" value={formData.passedStudents} onChange={handleChange} placeholder="Passed Students" required />
-            <button type="submit">Submit</button>
-        </form>
+        <div>
+            <h2>Proctoring Form</h2>
+            {message.text && (
+                <p style={{ color: message.type === "success" ? "green" : "red" }}>
+                    {message.text}
+                </p>
+            )}
+            <form onSubmit={handleSubmit}>
+                <input type="number" name="totalStudents" value={formData.totalStudents} onChange={handleChange} placeholder="Total Students" required />
+                <input type="text" name="semesterBranchSec" value={formData.semesterBranchSec} onChange={handleChange} placeholder="Sem-Branch-Sec" required />
+                <input type="number" name="eligibleStudents" value={formData.eligibleStudents} onChange={handleChange} placeholder="Eligible Students" required />
+                <input type="number" name="passedStudents" value={formData.passedStudents} onChange={handleChange} placeholder="Passed Students" required />
+                <button type="submit" disabled={loading}>{loading ? "Submitting..." : "Submit"}</button>
+            </form>
+        </div>
     );
 };
 
