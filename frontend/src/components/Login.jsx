@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Signin = () => {
    const navigate = useNavigate();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');// HEllo
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
