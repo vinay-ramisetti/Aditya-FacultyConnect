@@ -43,14 +43,17 @@ const Signup = () => {
           body: JSON.stringify(formData),
         });
 
-        if (!response.ok) throw new Error('Signup failed');
+        if (!response.ok) {
+           const errData = await response.json();
+           throw new Error(errData.message);
+        }
 
         const data = await response.json();
         localStorage.setItem('authToken', data.token);
         alert('Signup successful!');
         navigate('/signup/signup');
       } catch (error) {
-        alert('An error occurred. Please try again.');
+          alert(error.message);
       }
     } else {
       setErrors(newErrors);

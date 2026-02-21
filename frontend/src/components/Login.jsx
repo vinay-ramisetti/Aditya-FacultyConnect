@@ -18,8 +18,9 @@ const Signin = () => {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+         const err = await response.json();
+          throw new Error(err.message);
+}
 
         const data = await response.json();
       
@@ -33,9 +34,9 @@ const Signin = () => {
 
 
         navigate("/home");
-    } catch (error) {
-        console.error('fetching fail ra ungmaaa', error.message);
-    }
+    } catch (err) {
+    alert(err.message);
+}
   };
 
   return (

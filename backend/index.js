@@ -31,7 +31,7 @@ const proctoring=require(path.join(__dirname,"routes","proctoring"));
 const users = require(path.join(__dirname,"routes","user"));
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:3000',
     credentials: true,
     exposedHeaders: ['Authorization']
 };
